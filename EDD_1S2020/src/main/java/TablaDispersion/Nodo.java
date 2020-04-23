@@ -4,6 +4,7 @@ package TablaDispersion;
 
 public class Nodo {
 
+    int posicion;
     int numeroCarnet;
     String nombre;
     String apellido;
@@ -11,21 +12,33 @@ public class Nodo {
     String password;
     Nodo anterior;
     Nodo siguiente;
+    Nodo abajo;
     
     
     
     //constructor con asignacion de los los parametros
-    public Nodo(int num, String arg1, String arg2, String arg3, String arg4){//orden del folleto
-        this.numeroCarnet=num;
+    public Nodo(int num1,int num2, String arg1, String arg2, String arg3, String arg4){//orden del folleto
+        this.posicion=num1;
+        this.numeroCarnet=num2;
         this.nombre=arg1;
         this.apellido=arg2;
         this.carrera=arg3;
         this.password=arg4;
         this.anterior=null;
-        this.siguiente=null;        
+        this.siguiente=null;  
+        this.abajo=null;
     }
 
     //metodo get y set para cada variable
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
+    }
+    
+    
     public int getNumeroCarnet() {
         return numeroCarnet;
     }
@@ -80,6 +93,14 @@ public class Nodo {
 
     public void setSiguiente(Nodo siguiente) {
         this.siguiente = siguiente;
+    }
+
+    public Nodo getAbajo() {
+        return abajo;
+    }
+
+    public void setAbajo(Nodo abajo) {
+        this.abajo = abajo;
     }
     
     
