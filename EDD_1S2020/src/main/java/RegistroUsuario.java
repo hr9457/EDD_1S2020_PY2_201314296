@@ -4,6 +4,8 @@ public class RegistroUsuario extends javax.swing.JFrame {
     //varia para saber el estado de mi ventana
     boolean estadoVentana=true;
     
+    
+    //constructor
     public RegistroUsuario() {
         setVisible(true);
         initComponents();
@@ -152,6 +154,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     //evento del boton registar usuario
     private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
         this.estadoVentana = false;//cambio el estado de mi ventana

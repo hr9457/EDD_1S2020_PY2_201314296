@@ -7,7 +7,12 @@ import java.util.Scanner;
 public class main {
     
     public static void main(String[] args) {
+        //estructuras
+        Lista tablaDispersion = new Lista();
+        
+        //ventanas graficas
         inicioSession paginaArranque = new inicioSession();
+        
         /*
         int op=0;
         Scanner entrada = new Scanner(System.in);

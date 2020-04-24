@@ -1,4 +1,4 @@
-
+    
 
 package TablaDispersion;
 
@@ -6,8 +6,8 @@ package TablaDispersion;
 public class Lista {
     
     //elementos de una lista
-    Nodo primero;
-    Nodo ultimo;
+    NodoHash primero;
+    NodoHash ultimo;
     int tamanioTabla;
     int size;
     
@@ -29,27 +29,25 @@ public class Lista {
         return (primero==null && ultimo==null)?true:false;
     }
     
+    
     //metodo para insertar en la lista
-    public void insertar(int posicion,int carne,String nombre,String apellido,
-                     String carrera,String password){//pos,carne..
-        Nodo nuevoNodo = new Nodo(posicion,carne,nombre,apellido,carrera,password);//creacion de un nuevo nodo
+    public void insertar(int carne){
+        int posicionDeNodo = funcionDispersion(carne);
+        NodoHash nuevoNodo = new NodoHash(posicionDeNodo);
         if(estadoLista()==true){//si en la lista no existe ningun elemento            
             this.primero=nuevoNodo;
             this.ultimo=nuevoNodo;
-            size++;
         }else{//la lista ya contien mas de un elemento
-            Nodo auxPrimero = primero;//nodo auxiliar para recorrer la lista
-            while (auxPrimero.getAbajo()!=null && auxPrimero.getAbajo().getPosicion()<posicion){
+            NodoHash auxPrimero = primero;
+            while (auxPrimero.getAbajo()!=null && auxPrimero.getAbajo().getPosicion()<posicionDeNodo){
                 auxPrimero = auxPrimero.getAbajo();//paso al siguiente si no cumple
             }
             //while me deja un nodo atras
-            if(posicion==auxPrimero.getPosicion())
-            {
+            //el while hace que nos quedemos un nodo atras un nodo arriba de 
+            if(posicionDeNodo==auxPrimero.getPosicion()){
                 System.out.println("colision");
-            }
-            else
-            {
-                Nodo auxAbajo = auxPrimero.getAbajo();
+            }else{
+                NodoHash auxAbajo = auxPrimero.getAbajo();
                 auxPrimero.setAbajo(nuevoNodo);
                 nuevoNodo.setAbajo(auxAbajo);
             }
@@ -58,49 +56,35 @@ public class Lista {
     
     
     //metodo para buscar dentro de la lista
-    public boolean buscarUsuario(int carnet,String nombre){
-        Nodo auxPrimero = primero;
-        while(auxPrimero!=null){
-            if(carnet==auxPrimero.getNumeroCarnet() && nombre.equals(auxPrimero.getNombre())){
-                return true;
-            }
-            else{
-                auxPrimero = auxPrimero.getAbajo();
-            }
-        }
-        return false;
-    }
-    
-    
-    
-    //metodo para imprimir la lista
-    public void imprimirLista(){
-        Nodo auxPrimero = primero;
-        while(auxPrimero!=null){
-            System.out.println("Posicion: "+auxPrimero.getPosicion()
-                    +" Estudiante: "+auxPrimero.getNombre());
-            auxPrimero = auxPrimero.getAbajo();//paso al siguiente nodo
-        }
-    }
+    //busqueda cuadratica
     
     
     
     //-------------------------------------------------------------------------------
-    //metodo get y set 
-    public Nodo getPrimero() {
+    //metodo get y set
+    public NodoHash getPrimero() {
         return primero;
     }
 
-    public void setPrimero(Nodo primero) {
+    public void setPrimero(NodoHash primero) {
         this.primero = primero;
     }
 
-    public Nodo getUltimo() {
+    public NodoHash getUltimo() {
         return ultimo;
     }
 
-    public void setUltimo(Nodo ultimo) {
+    public void setUltimo(NodoHash ultimo) {
         this.ultimo = ultimo;
+    }
+
+    public int getTamanioTabla() {
+        return tamanioTabla;
+    }
+
+    
+    public void setTamanioTabla(int tamanioTabla) {    
+        this.tamanioTabla = tamanioTabla;
     }
 
     public int getSize() {
