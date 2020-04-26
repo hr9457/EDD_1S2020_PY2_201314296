@@ -1,9 +1,9 @@
-    
 
 package TablaDispersion;
 
 
 public class Lista {
+    
     
     //elementos de una lista
     NodoHash primero;
@@ -94,5 +94,6 @@ public class Lista {
     public void setSize(int size) {
         this.size = size;
     }
+    
     
 }

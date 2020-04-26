@@ -1,9 +1,9 @@
 
-
 package TablaDispersion;
 
 
 public class NodoHash {
+    
     
     //elementos
     int posicion;
@@ -53,7 +53,4 @@ public class NodoHash {
         this.abajo = abajo;
     }
     
-    
-    
-
 }

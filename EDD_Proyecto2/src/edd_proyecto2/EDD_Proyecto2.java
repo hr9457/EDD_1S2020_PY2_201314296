@@ -1,22 +1,20 @@
 
+package edd_proyecto2;
 import TablaDispersion.Lista;
 import java.util.Scanner;
 
+public class EDD_Proyecto2 {
 
-//nuestra clase principal en java
-public class main {
     
     public static void main(String[] args) {
+        
         //estructuras
         Lista tablaDispersion = new Lista();
         
-        //ventanas graficas
-        inicioSession paginaArranque = new inicioSession();
         
-        /*
         int op=0;
         Scanner entrada = new Scanner(System.in);
-        Lista tablaDispersion = new Lista();
+        //Lista tablaDispersion = new Lista();
         
         
         do{
@@ -39,12 +37,12 @@ public class main {
                     System.out.print("pass: ");
                     String pass = entrada.nextLine();
                     int posicioon = tablaDispersion.funcionDispersion(carnet);
-                    tablaDispersion.insertar(posicioon, carnet, nombre, apellido, carrera, pass);
+                    //tablaDispersion.insertar(posicioon, carnet, nombre, apellido, carrera, pass);
                     System.out.println("");
                     break;
                  
                  case 2:
-                    tablaDispersion.imprimirLista();
+                    //tablaDispersion.imprimirLista();
                      System.out.println("");
                     break;
                     
@@ -53,7 +51,8 @@ public class main {
             }
             
         }while(op!=3);
-        */
+        
         
     }//fin del main
-}//fin de la clase
+    
+}//fin de la clase principal

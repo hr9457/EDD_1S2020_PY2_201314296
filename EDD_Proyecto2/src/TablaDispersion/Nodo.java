@@ -1,9 +1,11 @@
+
 //paquete dond esta mi tabal de dispersion 
 //que es una lista doblemente enlazada
 package TablaDispersion;
 
-public class Nodo {
 
+public class Nodo {
+    
     
     int numeroCarnet;
     String nombre;
@@ -92,8 +94,5 @@ public class Nodo {
     public void setAbajo(Nodo abajo) {
         this.abajo = abajo;
     }
-    
-    
-    
     
 }

@@ -1,9 +1,9 @@
 
-
 package TablaDispersion;
 
 
 public class ListaColision {
+    
     
     //elementos
     Nodo primero;
@@ -40,4 +40,5 @@ public class ListaColision {
         }
     }
 
+    
 }
