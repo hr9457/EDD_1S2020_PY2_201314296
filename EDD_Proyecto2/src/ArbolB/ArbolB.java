@@ -22,6 +22,23 @@ public class ArbolB {
         }
     }
     
+    //metodo para buscar la posicion donde insertar en el arbol
+    public void buscarNodoInsertar(NodoB nodo){
+        
+    }
     
+    //metodo para inserte en el arbol
+    public void insertarEnArbol(int isbn,String titulo,String autor,
+            String editorial,String anio,String edicion,String categoria,
+            String idioma,int carnet){
+        if(estadoArbol()==true){
+            NodoB nuevoNodo = new NodoB();
+            nuevoNodo.insertarElemento(isbn, titulo, autor, editorial, anio, 
+                    edicion, categoria, idioma, carnet);//mando la informacion al nodo B
+            this.root=nuevoNodo;//el nuevo nodo se convierte en la raiz del arbol B
+        }else{
+            
+        }
+    }
     
 }

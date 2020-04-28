@@ -28,8 +28,12 @@ public class NodoB {
     
     
     //metodo para modificar datos en la posiciones del nodo del arbol B
-    public void insertarElemento(){
-        
+    public void insertarElemento(int isbn,String titulo,String autor,
+            String editorial,String anio,String edicion,String categoria,
+            String idioma,int carnet){
+        //una vez se recibe la informacion debo de inserta en la lista de las claves
+        listaClaves.insertarClave(isbn, titulo, autor, editorial, anio, edicion,
+                categoria, idioma, carnet);
     }
     
     //metodo para sber el tamanio de la lista
