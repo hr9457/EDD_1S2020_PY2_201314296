@@ -6,20 +6,50 @@ public class ListaK {
     
     //elementos
     int Claves;
+    int tamanio;
     NodoK primero;
     NodoK ultimo;
     
     //constructor
     public ListaK(){
         this.Claves=4;
+        this.tamanio=1;
         this.primero=null;
         this.ultimo=null;
     }
     
-    
-    //creacion de los 4 nodos
-    private void CreacionEspaciosClaves(){
+    //metodo para saber el estado de la lista
+    public boolean estadoLista(){
+        if(primero==null && ultimo==null){
+            return true;
+        }else{
+            return false;
+        }
     }
+    
+    //metod par insertar una clave
+    public void insertarClave(int isbn,String titulo,String autor,String editorial,
+            String anio,String Edicion,String Categoria,String idioma,int carnet){
+        NodoK nuevoNodo = new NodoK(isbn, titulo, autor, editorial, anio, Edicion, Categoria, idioma);
+        if(estadoLista()==true){
+            this.primero=nuevoNodo;
+            this.ultimo=nuevoNodo;
+            tamanio++;
+        }else{
+            if(getTamanio()<=Claves){
+                //buscar la posicion donde guardar
+                NodoK auxPrimero = this.primero;
+            }
+        }
+    }
+    
+    
+    //metodo para eliminar de primero
+    public void eliminarClavePrimero(){}
+    
+    //metodo para eliminar de ultimo
+    public void eliminarClaveUltimo(){}
+    
     
     //metodo get y set
     public int getClaves() {
@@ -30,6 +60,15 @@ public class ListaK {
         this.Claves = Claves;
     }
 
+    public int getTamanio() {
+        return tamanio;
+    }
+
+    public void setTamanio(int tamanio) {
+        this.tamanio = tamanio;
+    }
+    
+    
     public NodoK getPrimero() {
         return primero;
     }
