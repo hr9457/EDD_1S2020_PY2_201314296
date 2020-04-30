@@ -76,6 +76,20 @@ public class ListaK {
     }
     
     
+    //metodo buscar la posicion dentro de la lista para el puntero del hijo
+    public int buscarPosicionHijo(int isbn){
+        int position=0;
+        NodoK auxPrimero = this.primero;//empiezo buscando desde primer elemento
+        
+        //verifico si el siguiente al primero es null
+        //entoces se que la posicion del hijo es la 0 - le primero hijo
+        if(auxPrimero.getSiguiente()!=null){
+            return 1;
+        }else{
+            return 0;
+        }        
+    }
+    
     //metodo para eliminar de primero
     public void eliminarClavePrimero(){}
     

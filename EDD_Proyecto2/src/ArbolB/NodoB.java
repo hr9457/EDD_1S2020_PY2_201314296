@@ -83,6 +83,25 @@ public class NodoB {
     public void setExistenciaHijos(boolean existenciaHijos) {
         this.existenciaHijos = existenciaHijos;
     }
+
+    //metodos get y set para las listas de las claves y hijos
+    public ListaK getListaClaves() {
+        return listaClaves;
+    }
+
+    public void setListaClaves(ListaK listaClaves) {
+        this.listaClaves = listaClaves;
+    }
+
+    public ListaHijos getListaEnlazesHijos() {
+        return listaEnlazesHijos;
+    }
+
+    public void setListaEnlazesHijos(ListaHijos listaEnlazesHijos) {
+        this.listaEnlazesHijos = listaEnlazesHijos;
+    }
+    
+    
  
     
 }
