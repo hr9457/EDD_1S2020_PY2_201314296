@@ -33,8 +33,25 @@ public class ArbolAVL {
             if (nodo.getIzquierda() == null) {
                 NodoAVL nuevaCategoria = new NodoAVL(categoria);
                 nodo.setIzquierda(nuevaCategoria);
+                //le resto -1 saber que esa mas alto la izquierda
+                nodo.setBalance(nodo.getBalance()-1);//cambio el balance cuando inserto
+                //reviso cual es su balance
+                int FE = nodo.getBalance();
+                if(FE<-1){
+                    NodoAVL nodoDesbalance = nodo;
+                }
+                
             } else {
+                //le resto -1 saber que esa mas alto la izquierda
+                nodo.setBalance(nodo.getBalance()-1);//cambio el balance cuando inserto
+                //reviso cual es su balance
+                int FE = nodo.getBalance();
+                if(FE<-1){
+                    NodoAVL nodoDesbalance = nodo;
+                }
                 nodo = nodo.getIzquierda();
+                
+                //mando recursividad
                 buscarNodo(nodo, categoria);
 
             }
@@ -45,8 +62,25 @@ public class ArbolAVL {
             if(nodo.getDerecha()==null){
                 NodoAVL nuevaCategoria = new NodoAVL(categoria);
                 nodo.setDerecha(nuevaCategoria);
+                //le resto 1 saber que esa mas alto la derecha
+                nodo.setBalance(nodo.getBalance()+1);//cambio el balance cuando inserto
+                //reviso cual es su balance
+                int FE = nodo.getBalance();
+                if(FE>1){
+                    NodoAVL nodoDesbalance = nodo;
+                }
+                
             } else {
+                //le resto 1 saber que esa mas alto la derecha
+                nodo.setBalance(nodo.getBalance()+1);//cambio el balance cuando inserto
+                //reviso cual es su balance
+                int FE = nodo.getBalance();
+                if(FE>1){
+                    NodoAVL nodoDesbalance = nodo;
+                }
+                
                 nodo = nodo.getDerecha();
+                
                 buscarNodo(nodo, categoria);
             }
         }
@@ -62,5 +96,26 @@ public class ArbolAVL {
             buscarNodo(auxRoot, categoria);
         }
     }
+    
+    
+    
+    //metodo para recorrer el arbol e ir enlazado en el archivo dot
+    public void recorrerAVL(){
+        
+    }
+    
+    //metodo para generar el archivo dot
+    public void generarDotAVL(){
+        
+    }
+    
+    //metodo para genera la imagen del AVL
+    public void generarPng(){
+        
+    }
 
+    //metodo para abrir el archivo png
+    public void abrirPngAVL(){
+        
+    }
 }

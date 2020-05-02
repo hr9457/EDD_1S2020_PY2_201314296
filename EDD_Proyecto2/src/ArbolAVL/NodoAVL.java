@@ -15,7 +15,7 @@ public class NodoAVL {
     //constructor
     public NodoAVL(String categoria){
         this.categoria=categoria;
-        this.balance=1;
+        this.balance=0;
         this.derecha=null;
         this.izquierda=null;
     }
