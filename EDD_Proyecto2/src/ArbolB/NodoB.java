@@ -41,6 +41,11 @@ public class NodoB {
         return listaClaves.getTamanio();
     }
     
+    //metodo para eleminar claves
+    public void eliminarClaves(){
+        NodoK primero,segundo;
+        primero= listaClaves.eliminarClaves();
+    }
     
     //metodos get y set
     public int getElementosMinimos() {

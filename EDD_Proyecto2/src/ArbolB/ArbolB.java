@@ -1,6 +1,7 @@
 
 package ArbolB;
 import java.io.*;//para la escritura del archivo dot
+import javax.swing.JOptionPane;
 
 
 public class ArbolB {
@@ -72,6 +73,11 @@ public class ArbolB {
                 //si ya no hay espacio lo inserto para tener en orden la lista de claves
                 nodoEncontrado.insertarElemento(isbn, titulo, autor, editorial, 
                         anio, edicion, categoria, idioma, carnet);
+                //creo un nuevo nodo para agregar arriba
+                NodoK primero,segundo;
+                
+                NodoB nodoArriba = new NodoB();
+                NodoB nodoDerecha = new NodoB();
             }
         }
     }//fin del metodo par insertar en un arbol B
@@ -85,7 +91,7 @@ public class ArbolB {
                     "[ shape=record, label= \" ");
             NodoK auxListaK = nodo.getListaClaves().getPrimero();
             while(auxListaK!=null){
-                archivo.print(""+auxListaK.getISBN()+","+auxListaK.getTitulo());
+                archivo.print(""+auxListaK.getISBN()+";"+auxListaK.getTitulo());
                 if(auxListaK.getSiguiente()!=null){
                     archivo.print("|");
                 }
@@ -104,13 +110,25 @@ public class ArbolB {
             PrintWriter archivo = new PrintWriter("ArchivosDot\\ArbolB.dot");
             archivo.println("digraph arbol{");
             recorreArbol(archivo,auxRoot,numeroNodo);
+            archivo.println("");
             archivo.println("label = \" Arbol B \"; ");
             archivo.println("}");
             archivo.close();
         } catch (Exception error) {
+            JOptionPane.showMessageDialog(null,"Erro en archivo Dot");
         }
     }//fin del metodo
     
+    
+    //metodo para ejecutar comando desde del cmd y genera el grafo
+    public void generarImagen(){
+        try {
+            Runtime ejecuccion = Runtime.getRuntime();
+            ejecuccion.exec("dot.exe -Tpng ArchivosDot\\ArbolB.dot -o Reportes\\ArbolB.png");            
+        }catch (IOException e) {
+            JOptionPane.showMessageDialog(null,"Erro imagen Dot ArbolB");
+        }
+    }
     
     
 }//fin de la clase del arbol B

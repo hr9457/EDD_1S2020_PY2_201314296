@@ -1,6 +1,6 @@
 package edd_proyecto2;
 
-import ArbolB.*;
+import ArbolBV2.*;
 import javax.swing.JOptionPane;
 
 public class IngresoLibros extends javax.swing.JFrame {
@@ -41,10 +41,17 @@ public class IngresoLibros extends javax.swing.JFrame {
         txtCarnet = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
         btnGraficar = new javax.swing.JButton();
+        btnImage = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lbISBN.setText("ISBN");
+
+        txtISBN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtISBNKeyTyped(evt);
+            }
+        });
 
         lbTitulo.setText("Titulo");
 
@@ -73,6 +80,13 @@ public class IngresoLibros extends javax.swing.JFrame {
         btnGraficar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGraficarActionPerformed(evt);
+            }
+        });
+
+        btnImage.setText("jButton1");
+        btnImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImageActionPerformed(evt);
             }
         });
 
@@ -121,9 +135,12 @@ public class IngresoLibros extends javax.swing.JFrame {
                             .addComponent(btnIngresar))
                         .addGap(18, 18, 18)
                         .addGroup(JpanelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnGraficar)
+                            .addGroup(JpanelContenedorLayout.createSequentialGroup()
+                                .addComponent(btnGraficar)
+                                .addGap(38, 38, 38)
+                                .addComponent(btnImage))
                             .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(381, Short.MAX_VALUE))
+                .addContainerGap(350, Short.MAX_VALUE))
         );
         JpanelContenedorLayout.setVerticalGroup(
             JpanelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +184,8 @@ public class IngresoLibros extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(JpanelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIngresar)
-                    .addComponent(btnGraficar))
+                    .addComponent(btnGraficar)
+                    .addComponent(btnImage))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
 
@@ -206,9 +224,11 @@ public class IngresoLibros extends javax.swing.JFrame {
             String idioma = txtIdioma.getText();
             int carnet = Integer.parseInt(txtCarnet.getText());
             //obtengo valores de l ventan y lo mando al arbol
+            //arbol.insertarEnArbol(ISBN, titulo, autor, editorial, anio, edicion, categoria, idioma, carnet);
             arbol.insertarEnArbol(ISBN, titulo, autor, editorial, anio, edicion, categoria, idioma, carnet);
+            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "no se inserto el Nodo");
         }
 
         //limpio las casillas de los cuadros de texto
@@ -234,6 +254,24 @@ public class IngresoLibros extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnGraficarActionPerformed
+
+    //evento para que en el cuadro de texto no se pueda ingresar otra cosa que 
+    //nuemeros
+    private void txtISBNKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtISBNKeyTyped
+        // TODO add your handling code here:
+        char validar=evt.getKeyChar();
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null,"Solo se permite numero");
+        }
+    }//GEN-LAST:event_txtISBNKeyTyped
+
+    //evento para abrir la imagen dot
+    private void btnImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImageActionPerformed
+        // TODO add your handling code here:
+        arbol.generarImagen();
+    }//GEN-LAST:event_btnImageActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -270,6 +308,7 @@ public class IngresoLibros extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JpanelContenedor;
     private javax.swing.JButton btnGraficar;
+    private javax.swing.JButton btnImage;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel lbAnio;
     private javax.swing.JLabel lbAutor;

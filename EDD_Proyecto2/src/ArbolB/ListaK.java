@@ -76,6 +76,17 @@ public class ListaK {
     }
     
     
+    //elminar claves de la lista
+    public NodoK eliminarClaves(){
+        NodoK auxPrimero= this.primero;
+        auxPrimero = auxPrimero.getSiguiente();
+        auxPrimero = auxPrimero.getSiguiente();//coloco en la posicon 3
+        
+        return auxPrimero;
+        
+        
+    }
+    
     //metodo buscar la posicion dentro de la lista para el puntero del hijo
     public int buscarPosicionHijo(int isbn){
         int position=0;
