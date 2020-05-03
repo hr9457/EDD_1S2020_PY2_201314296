@@ -9,13 +9,15 @@ public class NodoAVL {
     int balance;//alamcenar el valor de equilibrio del nodo
     
     //punteros
+    NodoAVL padre;
     NodoAVL derecha;
     NodoAVL izquierda;
     
     //constructor
     public NodoAVL(String categoria){
         this.categoria=categoria;
-        this.balance=0;
+        this.balance=1;
+        this.padre=null;
         this.derecha=null;
         this.izquierda=null;
     }

@@ -33,24 +33,10 @@ public class ArbolAVL {
             if (nodo.getIzquierda() == null) {
                 NodoAVL nuevaCategoria = new NodoAVL(categoria);
                 nodo.setIzquierda(nuevaCategoria);
-                //le resto -1 saber que esa mas alto la izquierda
-                nodo.setBalance(nodo.getBalance()-1);//cambio el balance cuando inserto
-                //reviso cual es su balance
-                int FE = nodo.getBalance();
-                if(FE<-1){
-                    NodoAVL nodoDesbalance = nodo;
-                }
                 
-            } else {
-                //le resto -1 saber que esa mas alto la izquierda
-                nodo.setBalance(nodo.getBalance()-1);//cambio el balance cuando inserto
-                //reviso cual es su balance
-                int FE = nodo.getBalance();
-                if(FE<-1){
-                    NodoAVL nodoDesbalance = nodo;
-                }
+            } else {           
+                //me paso hacia la izquierda
                 nodo = nodo.getIzquierda();
-                
                 //mando recursividad
                 buscarNodo(nodo, categoria);
 
@@ -62,30 +48,17 @@ public class ArbolAVL {
             if(nodo.getDerecha()==null){
                 NodoAVL nuevaCategoria = new NodoAVL(categoria);
                 nodo.setDerecha(nuevaCategoria);
-                //le resto 1 saber que esa mas alto la derecha
-                nodo.setBalance(nodo.getBalance()+1);//cambio el balance cuando inserto
-                //reviso cual es su balance
-                int FE = nodo.getBalance();
-                if(FE>1){
-                    NodoAVL nodoDesbalance = nodo;
-                }
                 
             } else {
-                //le resto 1 saber que esa mas alto la derecha
-                nodo.setBalance(nodo.getBalance()+1);//cambio el balance cuando inserto
-                //reviso cual es su balance
-                int FE = nodo.getBalance();
-                if(FE>1){
-                    NodoAVL nodoDesbalance = nodo;
-                }
-                
+                //me pasao hacia la derecha
                 nodo = nodo.getDerecha();
-                
+                //mando lo que habia en la derecha
                 buscarNodo(nodo, categoria);
             }
         }
     }
 
+    
     //metodo para insertar en el arbol
     public void insertarCategoria(String categoria, int carnet) {
         NodoAVL nuevaCategoria = new NodoAVL(categoria);

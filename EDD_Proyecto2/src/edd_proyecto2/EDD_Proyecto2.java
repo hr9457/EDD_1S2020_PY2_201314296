@@ -13,7 +13,7 @@ public class EDD_Proyecto2 {
         //Lista tablaDispersion = new Lista();
         
         //VENTANAS
-        IngresoLibros ventanaIngresoLibros = new IngresoLibros();
+        //IngresoLibros ventanaIngresoLibros = new IngresoLibros();
         
         
     }//fin del main
