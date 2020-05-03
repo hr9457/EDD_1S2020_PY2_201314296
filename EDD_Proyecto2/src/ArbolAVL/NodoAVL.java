@@ -6,7 +6,7 @@ public class NodoAVL {
     
     //elemtos
     String categoria;
-    int balance;//alamcenar el valor de equilibrio del nodo
+    int balance,FE;//alamcenar el valor de equilibrio del nodo
     
     //punteros
     NodoAVL padre;
@@ -57,5 +57,15 @@ public class NodoAVL {
     public void setIzquierda(NodoAVL izquierda) {
         this.izquierda = izquierda;
     }
+
+    public NodoAVL getPadre() {
+        return padre;
+    }
+
+    public void setPadre(NodoAVL padre) {
+        this.padre = padre;
+    }
+    
+    
     
 }

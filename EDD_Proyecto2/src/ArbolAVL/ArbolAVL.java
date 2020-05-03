@@ -24,49 +24,17 @@ public class ArbolAVL {
     //-1 la primer es menor
     //1 la es mayor
     public void buscarNodo(NodoAVL nodo, String categoria) {
-        if (categoria.compareTo(nodo.getCategoria()) == 0) {
-            //el dato que se esta insertando ya existe
-            
-        } else if (categoria.compareTo(nodo.getCategoria()) < 0) {//si es menor
-
-            //si no tiene nada ala izquierda 
-            if (nodo.getIzquierda() == null) {
-                NodoAVL nuevaCategoria = new NodoAVL(categoria);
-                nodo.setIzquierda(nuevaCategoria);
-                
-            } else {           
-                //me paso hacia la izquierda
-                nodo = nodo.getIzquierda();
-                //mando recursividad
-                buscarNodo(nodo, categoria);
-
-            }
-
-        } else if (categoria.compareTo(nodo.getCategoria()) > 0) {//si es mayor
-
-            //si no tiene nada ala derecha
-            if(nodo.getDerecha()==null){
-                NodoAVL nuevaCategoria = new NodoAVL(categoria);
-                nodo.setDerecha(nuevaCategoria);
-                
-            } else {
-                //me pasao hacia la derecha
-                nodo = nodo.getDerecha();
-                //mando lo que habia en la derecha
-                buscarNodo(nodo, categoria);
-            }
-        }
     }
 
     
+    
     //metodo para insertar en el arbol
-    public void insertarCategoria(String categoria, int carnet) {
-        NodoAVL nuevaCategoria = new NodoAVL(categoria);
+    public void insertarCategoria(String categoria, int carnet) {        
         if (estadoArbol() == true) {
+            NodoAVL nuevaCategoria = new NodoAVL(categoria);
             this.root = nuevaCategoria;
         } else {
-            NodoAVL auxRoot = root;
-            buscarNodo(auxRoot, categoria);
+            buscarNodo(root, categoria);
         }
     }
     
