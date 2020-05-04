@@ -12,9 +12,15 @@ public class EDD_Proyecto2 {
         
         //estructuras
         //Lista tablaDispersion = new Lista();
+        ArbolAVL arbolCategorias = new ArbolAVL();
        
         //VENTANAS
         //IngresoLibros ventanaIngresoLibros = new IngresoLibros();
+        //Principal ventanaArranque = new Principal();
+        IngresoCategoria ventanaCategorias = new IngresoCategoria(arbolCategorias);
+        
+        
+        
         
     }//fin del main
     

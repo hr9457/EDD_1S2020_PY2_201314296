@@ -6,7 +6,8 @@ public class NodoAVL {
     
     //elemtos
     String categoria;
-    int balance,FE;//alamcenar el valor de equilibrio del nodo
+    int carnet;
+    int altura;//alamcenar el valor de equilibrio del nodo
     
     //punteros
     NodoAVL padre;
@@ -16,7 +17,7 @@ public class NodoAVL {
     //constructor
     public NodoAVL(String categoria){
         this.categoria=categoria;
-        this.balance=1;
+        this.altura=1;
         this.padre=null;
         this.derecha=null;
         this.izquierda=null;
@@ -33,12 +34,12 @@ public class NodoAVL {
         this.categoria = categoria;
     }
 
-    public int getBalance() {
-        return balance;
+    public int getAltura() {
+        return altura;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public void setAltura(int altura) {
+        this.altura = altura;
     }
     
 
@@ -64,6 +65,14 @@ public class NodoAVL {
 
     public void setPadre(NodoAVL padre) {
         this.padre = padre;
+    }
+
+    public int getCarnet() {
+        return carnet;
+    }
+
+    public void setCarnet(int carnet) {
+        this.carnet = carnet;
     }
     
     

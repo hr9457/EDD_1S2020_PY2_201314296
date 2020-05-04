@@ -1,0 +1,31 @@
+digraph arbolAVL{
+rankdir=TB;
+nodoc[ label = " c
+6" ];
+nodoc->nodob
+nodob[ label = " b
+2" ];
+nodob->nodoa
+nodoa[ label = " a
+1" ];
+nodoc->nodoe
+nodoe[ label = " e
+5" ];
+nodoe->nodod
+nodod[ label = " d
+1" ];
+nodoe->nodog
+nodog[ label = " g
+4" ];
+nodog->nodoh
+nodoh[ label = " h
+3" ];
+nodoh->nodow
+nodow[ label = " w
+2" ];
+nodow->nodox
+nodox[ label = " x
+1" ];
+
+label = " Arbol AVL "; 
+}
