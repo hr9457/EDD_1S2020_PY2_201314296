@@ -52,6 +52,65 @@ public class ArbolAVL {
         return derecha - izquierda;
     }
 
+    
+    //********************ROTACIONES
+    public NodoAVL simpleDerecha(NodoAVL nodoRaiz){
+        //*******rotacion
+        NodoAVL nodoAux = nodoRaiz.getDerecha();
+        NodoAVL nodoAuxPosible = nodoAux.getIzquierda();
+        nodoAux.setIzquierda(nodoRaiz);
+        nodoRaiz.setDerecha(nodoAuxPosible);
+        //********actualizacion de alturas
+        int NuevaAltura = 1 + alturaMaxima(obtenerAltura(nodoRaiz.getDerecha()), obtenerAltura(nodoRaiz.getIzquierda()));
+        nodoRaiz.setAltura(NuevaAltura);
+        
+        int NuevaAltura2 = 1 + alturaMaxima(obtenerAltura(nodoAux.getDerecha()), obtenerAltura(nodoAux.getIzquierda()));
+        nodoAux.setAltura(NuevaAltura2);
+        
+        return nodoAux;
+    }
+    
+    
+    public NodoAVL simpleIzquierda(NodoAVL nodoRaiz){
+        //*******rotacion
+        NodoAVL nodoAux = nodoRaiz.getIzquierda();
+        NodoAVL nodoAuxPosible = nodoAux.getDerecha();
+        nodoAux.setDerecha(nodoRaiz);
+        nodoRaiz.setIzquierda(nodoAuxPosible);
+        //*************actualizacion de alturas
+        //********actualizacion de alturas
+        int NuevaAltura = 1 + alturaMaxima(obtenerAltura(nodoRaiz.getDerecha()), obtenerAltura(nodoRaiz.getIzquierda()));
+        nodoRaiz.setAltura(NuevaAltura);
+        
+        int NuevaAltura2 = 1 + alturaMaxima(obtenerAltura(nodoAux.getDerecha()), obtenerAltura(nodoAux.getIzquierda()));
+        nodoAux.setAltura(NuevaAltura2);
+        
+        return nodoAux;
+    }
+    
+    public NodoAVL dobleIzquierda(NodoAVL nodoRaiz){
+        //********primera rotacion
+        NodoAVL nodoAux = nodoRaiz.getIzquierda();
+        NodoAVL izquierdaAux = nodoAux.getIzquierda();
+        nodoRaiz.setIzquierda(izquierdaAux);
+        izquierdaAux.setIzquierda(nodoAux);
+        //*******actualizacion de alturas
+        int nuevaAltura = 1 + alturaMaxima(obtenerAltura(nodoAux.getDerecha()), obtenerAltura(nodoAux.getIzquierda()));
+        nodoAux.setAltura(nuevaAltura);
+        
+        int nuevaAltrua2 = 1 + alturaMaxima(obtenerAltura(izquierdaAux.getDerecha()), obtenerAltura(izquierdaAux.getIzquierda()));
+        izquierdaAux.setAltura(nuevaAltrua2);
+        
+        //*******segunda rotacion es una rotacion simple hacia la izqueirda
+        if(nodoRaiz==root){
+            this.root = simpleIzquierda(nodoRaiz);
+        } else {
+            this.root.setDerecha(simpleIzquierda(nodoRaiz));
+        }
+        
+        return nodoRaiz;
+    }
+    
     //buscar el lugar de la insercion
     //0 son iguales
     //-1 la primer es menor
@@ -81,13 +140,37 @@ public class ArbolAVL {
 
         //**********CALCULAR EL FE DE CADA NODO HACIA ARRIBA
         int FE = calcularFE(nodo.getDerecha(), nodo.getIzquierda());
-        if (FE > 2) {
-            JOptionPane.showMessageDialog(null, "" + nodo.getCategoria() + "\ndesequilibrio derecha");
-        } else if (FE < -2) {
-            JOptionPane.showMessageDialog(null, "" + nodo.getCategoria() + "\ndesequilibrio izquierda");
+        nodo.setFE(FE);//mando su fe para saber que signo y ver que caso es
+        
+        if (FE > 1 && nodo.getDerecha().getFE() > 0 ) {//simple a la derecha
+            //verifico si el nodo que voy a rotar es la raiz o un nodo a su derecha
+            if(nodo==root){
+                this.root = simpleDerecha(nodo);
+            } else {
+                this.root.setDerecha(simpleDerecha(nodo));
+            }
+            
+        } else if (FE < -1 && nodo.getIzquierda().getFE() < 0 ) {//simple a la izquierda
+            //verifico si el nodo a rotar es la raiz o un nodo a su izquierda
+            if(nodo==root){
+                this.root = simpleIzquierda(nodo);
+            } else {
+                this.root.setIzquierda(simpleIzquierda(nodo));
+            }
+            
+        } else if (FE > 1 && nodo.getDerecha().getFE() < 0 ) {//doble derecha
+            //verifico si el nodo a rotar es la raiz 
+            
+        } else if (FE < -1 && nodo.getIzquierda().getFE() > 0) {//doble izquierda
+            //verifico si el nodo a rotar es la raiz o es un nodo a su izquierda
+            if(nodo==root){
+                this.root = dobleIzquierda(nodo);
+            } else {
+                this.root.setIzquierda(dobleIzquierda(nodo));
+            }
         }
 
-    }
+    }//fin del metodo insertar nodo
 
     //metodo para insertar en el arbol
     public void insertarCategoria(String categoria) {

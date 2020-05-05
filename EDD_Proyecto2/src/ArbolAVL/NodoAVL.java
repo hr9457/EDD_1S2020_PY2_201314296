@@ -1,31 +1,28 @@
-
 package ArbolAVL;
 
-
 public class NodoAVL {
-    
+
     //elemtos
     String categoria;
     int carnet;
-    int altura;//alamcenar el valor de equilibrio del nodo
-    
+    int altura, FE;//alamcenar el valor de equilibrio del nodo
+
     //punteros
     NodoAVL padre;
     NodoAVL derecha;
     NodoAVL izquierda;
-    
-    //constructor
-    public NodoAVL(String categoria){
-        this.categoria=categoria;
-        this.altura=1;
-        this.padre=null;
-        this.derecha=null;
-        this.izquierda=null;
-    }
-    
-    
-    //metodos get y set
 
+    //constructor
+    public NodoAVL(String categoria) {
+        this.categoria = categoria;
+        this.altura = 1;
+        this.FE = 0;
+        this.padre = null;
+        this.derecha = null;
+        this.izquierda = null;
+    }
+
+    //metodos get y set
     public String getCategoria() {
         return categoria;
     }
@@ -41,7 +38,6 @@ public class NodoAVL {
     public void setAltura(int altura) {
         this.altura = altura;
     }
-    
 
     public NodoAVL getDerecha() {
         return derecha;
@@ -74,7 +70,13 @@ public class NodoAVL {
     public void setCarnet(int carnet) {
         this.carnet = carnet;
     }
-    
-    
-    
+
+    public int getFE() {
+        return FE;
+    }
+
+    public void setFE(int FE) {
+        this.FE = FE;
+    }
+
 }
