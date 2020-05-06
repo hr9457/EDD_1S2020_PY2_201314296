@@ -1,19 +1,10 @@
 digraph arbolAVL{
 rankdir=TB;
-nodoa[ label = " a
-3" ];
-nodoa->nodod
-nodod[ label = " d
-2" ];
-nodod->nodoc
-nodoc[ label = " c
-1" ];
-nodod->nodoe
-nodoe[ label = " e
-1" ];
-nodoa->nodoe
-nodoe[ label = " e
-1" ];
+nodoe[ label = " e;2" ];
+nodoe->nodoa;
+nodoa[ label = " a;1" ];
+nodoe->nodox;
+nodox[ label = " x;1" ];
 
 label = " Arbol AVL "; 
 }
