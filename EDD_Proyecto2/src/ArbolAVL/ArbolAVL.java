@@ -116,6 +116,7 @@ public class ArbolAVL {
     public void buscarInsertar(NodoAVL nodo, String categoria) {
         if (categoria.compareTo(nodo.getCategoria()) == 0) {
             System.out.println("datos iguales");
+            JOptionPane.showMessageDialog(null, "categoria ya existente");
 
         } else if (categoria.compareTo(nodo.getCategoria()) < 0) {
             if (nodo.getIzquierda() == null) {

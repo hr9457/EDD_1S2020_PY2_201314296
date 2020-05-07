@@ -12,8 +12,9 @@ public class IngresoCategoria extends javax.swing.JFrame {
     //constructor
     public IngresoCategoria(ArbolAVL.ArbolAVL arbolCategorias) {
         this.arbolCategorias=arbolCategorias;
-        initComponents();
-        setVisible(true);
+        initComponents();//inicializa componentes
+        setLocationRelativeTo(null);//se sentra en el centro
+        setVisible(true);//hace visible la ventnay 
     }
 
     
@@ -26,6 +27,7 @@ public class IngresoCategoria extends javax.swing.JFrame {
         txtCategoria = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
         btnReporte = new javax.swing.JButton();
+        btnCargaMasiva = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,6 +47,8 @@ public class IngresoCategoria extends javax.swing.JFrame {
             }
         });
 
+        btnCargaMasiva.setText("Carga Archivo");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -57,8 +61,12 @@ public class IngresoCategoria extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReporte))
-                .addContainerGap(294, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(btnReporte)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCargaMasiva)))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -70,7 +78,8 @@ public class IngresoCategoria extends javax.swing.JFrame {
                 .addGap(117, 117, 117)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIngresar)
-                    .addComponent(btnReporte))
+                    .addComponent(btnReporte)
+                    .addComponent(btnCargaMasiva))
                 .addContainerGap(291, Short.MAX_VALUE))
         );
 
@@ -113,6 +122,7 @@ public class IngresoCategoria extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCargaMasiva;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnReporte;
     private javax.swing.JPanel jPanel1;
