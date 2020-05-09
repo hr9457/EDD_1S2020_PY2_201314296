@@ -87,7 +87,7 @@ public class ArbolAVL {
         return nodoAux;
     }
 
-    public NodoAVL dobleIzquierda(NodoAVL nodoRaiz) {
+    public NodoAVL dobleIzquierda(NodoAVL nodoRaiz) {//problema
         NodoAVL nodoAux = nodoRaiz.getIzquierda();
         //********primera rotacion
         //********rotacion simple        
@@ -124,6 +124,7 @@ public class ArbolAVL {
                 NodoAVL nuevaCategoria = new NodoAVL(categoria);
                 nodo.setIzquierda(nuevaCategoria);
                 nuevaCategoria.setPadre(nodo);
+                //JOptionPane.showMessageDialog(null, "padre "+nodo.getCategoria());
             } else {
                 buscarInsertar(nodo.getIzquierda(), categoria);
             }
@@ -133,6 +134,7 @@ public class ArbolAVL {
                 NodoAVL nuevaCategoria = new NodoAVL(categoria);
                 nodo.setDerecha(nuevaCategoria);
                 nuevaCategoria.setPadre(nodo);
+                //JOptionPane.showMessageDialog(null, "padre "+nodo.getCategoria());
             } else {
                 buscarInsertar(nodo.getDerecha(), categoria);
             }
@@ -151,41 +153,64 @@ public class ArbolAVL {
             //verifico si el nodo que voy a rotar es la raiz o un nodo a su derecha
             if (nodo == root) {
                 this.root = simpleDerecha(nodo);
+                
             } else {
                 NodoAVL temp = nodo;
                 nodo = nodo.getPadre();
-                nodo.setDerecha(simpleDerecha(temp));
+                if(nodo.getIzquierda()==temp){
+                   nodo.setIzquierda(simpleDerecha(temp));
+                } else {
+                   nodo.setDerecha(simpleDerecha(temp)); 
+                }                
             }
 
         } else if (FE < -1 && nodo.getIzquierda().getFE() < 0) {//simple a la izquierda
             //verifico si el nodo a rotar es la raiz o un nodo a su izquierda
             if (nodo == root) {
                 this.root = simpleIzquierda(nodo);
+                
             } else {
                 NodoAVL temp = nodo;
                 nodo = nodo.getPadre();
-                nodo.setIzquierda(simpleIzquierda(temp));
+                if(nodo.getIzquierda()==temp){
+                    nodo.setIzquierda(simpleIzquierda(temp));
+                } else {
+                    nodo.setDerecha(simpleIzquierda(temp));
+                }                
             }
 
         } else if (FE > 1 && nodo.getDerecha().getFE() < 0) {//doble derecha
             //verifico si el nodo a rotar es la raiz 
+            
             if (nodo == root) {
                 this.root = dobleDerecha(nodo);
+                
             } else {
                 NodoAVL temp = nodo;
                 nodo = nodo.getPadre();
-                nodo.setDerecha(dobleDerecha(temp));
+                if(nodo.getIzquierda()==temp){
+                    nodo.setIzquierda(dobleDerecha(temp));
+                } else {
+                    nodo.setDerecha(dobleDerecha(temp));
+                }                
             }
-
+            
+            //problema
         } else if (FE < -1 && nodo.getIzquierda().getFE() > 0) {//doble izquierda
             //verifico si el nodo a rotar es la raiz o es un nodo a su izquierda
+            /*
             if (nodo == root) {
                 this.root = dobleIzquierda(nodo);
             } else {
                 NodoAVL temp = nodo;
                 nodo = nodo.getPadre();
-                nodo.setIzquierda(dobleIzquierda(temp));
+                if(nodo.getIzquierda()==temp){
+                    nodo.setIzquierda(dobleIzquierda(temp));
+                } else {
+                   nodo.setDerecha(dobleIzquierda(temp));
+                }                
             }
+            */
         }
 
     }//fin del metodo insertar nodo

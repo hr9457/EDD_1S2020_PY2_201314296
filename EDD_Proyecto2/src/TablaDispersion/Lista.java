@@ -1,65 +1,167 @@
-
 package TablaDispersion;
 
+import java.io.PrintWriter;
+import javax.swing.JOptionPane;
 
 public class Lista {
-    
-    
+
+    //archiov dot
+    PrintWriter archivo;
+
     //elementos de una lista
     NodoHash primero;
     NodoHash ultimo;
     int tamanioTabla;
     int size;
-    
+
     //constructor
-    public Lista(){
-        this.primero=null;
-        this.ultimo=null;
-        this.tamanioTabla=45;
-        this.size=0;
+    public Lista() {
+        this.primero = null;
+        this.ultimo = null;
+        this.tamanioTabla = 45;
+        this.size = 0;
     }
-    
+
     //funcion de dispersion saber la posicion en el se va agregar en la tabla
-    public int funcionDispersion(int carne){
-        return carne%this.tamanioTabla;//funcion= carnet mod size
+    public int funcionDispersion(int carne) {
+        return carne % this.tamanioTabla;//funcion= carnet mod size
     }
-    
+
     //revision de nuestr lista contien algun elemento o no
-    public boolean estadoLista(){
-        return (primero==null && ultimo==null)?true:false;
+    public boolean estadoLista() {
+        return (primero == null && ultimo == null) ? true : false;
     }
-    
-    
+
     //metodo para insertar en la lista
-    public void insertar(int carne){
-        int posicionDeNodo = funcionDispersion(carne);
-        NodoHash nuevoNodo = new NodoHash(posicionDeNodo);
-        if(estadoLista()==true){//si en la lista no existe ningun elemento            
-            this.primero=nuevoNodo;
-            this.ultimo=nuevoNodo;
-        }else{//la lista ya contien mas de un elemento
+    public void insertar(int carne, String nombre, String apellido, String carrera, String password) {
+        int posicionDeNodo = funcionDispersion(carne);//obtengo la posicion que le corresponde en la lista
+        NodoHash nuevoNodo = new NodoHash(posicionDeNodo);//creo el nuevo nodo en la lista dispersion
+
+        if (estadoLista() == true) {//si en la lista no existe ningun elemento            
+            this.primero = nuevoNodo;
+            this.ultimo = nuevoNodo;
+            //insertar en la lista de colision
+            nuevoNodo.agregarUsuario(carne, nombre, apellido, carrera, password);
+
+        } else {//la lista ya contien mas de un elemento
             NodoHash auxPrimero = primero;
-            while (auxPrimero.getAbajo()!=null && auxPrimero.getAbajo().getPosicion()<posicionDeNodo){
+
+            while (auxPrimero.getAbajo() != null && auxPrimero.getAbajo().getPosicion() <= posicionDeNodo) {
                 auxPrimero = auxPrimero.getAbajo();//paso al siguiente si no cumple
             }
             //while me deja un nodo atras
             //el while hace que nos quedemos un nodo atras un nodo arriba de 
-            if(posicionDeNodo==auxPrimero.getPosicion()){
+            //si se va insertar en la primera posicion
+            if (posicionDeNodo == auxPrimero.getPosicion()) {
                 System.out.println("colision");
-            }else{
+                JOptionPane.showMessageDialog(null, "Colision en Posicion: " + nuevoNodo.getPosicion());
+                //insertar en la lista de colision
+                auxPrimero.agregarUsuario(carne, nombre, apellido, carrera, password);
+
+            } else if (posicionDeNodo == ultimo.getPosicion()) {
+                ultimo.setAbajo(nuevoNodo);
+                ultimo = nuevoNodo;
+                //insertar en la lista de colision
+                nuevoNodo.agregarUsuario(carne, nombre, apellido, carrera, password);
+
+            } else {
                 NodoHash auxAbajo = auxPrimero.getAbajo();
                 auxPrimero.setAbajo(nuevoNodo);
                 nuevoNodo.setAbajo(auxAbajo);
+                //insertar en la lista de colision
+                nuevoNodo.agregarUsuario(carne, nombre, apellido, carrera, password);
             }
         }
     }
-    
-    
+
+    //metodo para genera la imagen png
+    public void generarPNG() {
+        try {
+            Runtime ejecuccion = Runtime.getRuntime();
+            ejecuccion.exec("dot.exe -Tpng ArchivosDot\\Hash.dot -o Reportes\\Hash.png");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "no se genero la imagen del reporte");
+        }
+    }
+
+    //metodo para abrir la imgen del archvio dot
+    public void abrirPNG() {
+        try {
+            String archivo = "Reportes\\Hash.png";
+            Runtime ejecuccion = Runtime.getRuntime();
+            ejecuccion.exec("cmd /c start " + archivo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se puede arbir la imagen");
+        }
+    }
+
+    //metodo para recorre todo la tabla de dispersion
+    public void recorreTabla(PrintWriter archivo) {
+        NodoHash auxPrimero = this.primero;
+        int contadorFunciones = 0;
+        int contadorLista = 1;//el siguiente la nodo0
+        archivo.print("nodo0 [label = \" ");
+        while (auxPrimero.getAbajo() != null) {
+            archivo.print(" <f" + contadorFunciones + ">" + auxPrimero.getPosicion() + "|");//creo una funcion en el nodos
+            auxPrimero = auxPrimero.getAbajo();
+            contadorFunciones++;//aumento en uno
+        }
+        archivo.print(" <f" + contadorFunciones + ">" + auxPrimero.getPosicion());
+        archivo.print(" \" , height=2.5];");//alto de separcion del nodo 0
+
+        archivo.println("");
+        //regreso hasta arriba de la tabla
+        auxPrimero = this.primero;
+        //********obtengo el primer los varloes de la lista del primer nodo hash
+        TablaDispersion.Nodo auxPrimeroLista; 
+        //*********primer while sirve para ver la lista hash hacia abajo
+        while (auxPrimero != null) {
+            auxPrimeroLista = auxPrimero.getLista().getPrimero();
+            //******segundo while rebisa la lista dentro del nodo hash
+            archivo.print("nodo" + contadorLista + "[label = \" {");
+            while (auxPrimeroLista != null) {
+                archivo.print("" + auxPrimeroLista.getNumeroCarnet() + "|");
+                auxPrimeroLista = auxPrimeroLista.getSiguiente();
+            }
+            contadorLista++;//aumento en uno
+            archivo.print("}\"];");//cierre del label
+            archivo.println("");
+            //*****paso el siguiente nodo de abajo de la tabla hash
+            auxPrimero = auxPrimero.getAbajo();
+        }
+
+        archivo.println("");
+        //**********anidacion de los nodos
+        //reinicio el contador de funciones
+        for (int i = 0; i < contadorLista-1; i++) {
+            archivo.println("nodo0:f" + i + "->nodo" + (i + 1));
+        }
+
+    }
+
+    //metodo para graficar la tabla hash
+    public void reporteHash() {
+
+        try {
+            archivo = new PrintWriter("ArchivosDot\\Hash.dot");
+            archivo.println("digraph TablaHas{");
+            archivo.println("nodesep=0.08;");
+            archivo.println("rankdir=LR;");
+            archivo.println("node [shape=record,width=0.1,height=0.1];");
+            recorreTabla(archivo);
+            archivo.print("");
+            archivo.println("label = \" Tabla Hash \"; ");
+            archivo.println("}");
+            archivo.close();//cierre del archivo
+            generarPNG();//genero la imagen
+            abrirPNG();//abro la imagen
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "no se genero el reporte");
+        }
+    }
+
     //metodo para buscar dentro de la lista
     //busqueda cuadratica
-    
-    
-    
     //-------------------------------------------------------------------------------
     //metodo get y set
     public NodoHash getPrimero() {
@@ -82,8 +184,7 @@ public class Lista {
         return tamanioTabla;
     }
 
-    
-    public void setTamanioTabla(int tamanioTabla) {    
+    public void setTamanioTabla(int tamanioTabla) {
         this.tamanioTabla = tamanioTabla;
     }
 
@@ -94,6 +195,5 @@ public class Lista {
     public void setSize(int size) {
         this.size = size;
     }
-    
-    
+
 }

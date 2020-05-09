@@ -5,6 +5,7 @@ package TablaDispersion;
 public class NodoHash {
     
     
+    
     //elementos
     int posicion;
     ListaColision lista;
@@ -28,6 +29,7 @@ public class NodoHash {
         lista.agregarElemento(carnet, nombre, apellido, carrera, password);
     }
     
+    //**************************************************************************
     //metodo get y set 
     public int getPosicion() {
         return posicion;
@@ -52,5 +54,15 @@ public class NodoHash {
     public void setAbajo(NodoHash abajo) {
         this.abajo = abajo;
     }
+
+    public ListaColision getLista() {
+        return lista;
+    }
+
+    public void setLista(ListaColision lista) {
+        this.lista = lista;
+    }
+    
+    
     
 }

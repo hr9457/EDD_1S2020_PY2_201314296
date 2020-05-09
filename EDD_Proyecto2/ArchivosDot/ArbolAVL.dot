@@ -1,10 +1,22 @@
 digraph arbolAVL{
 rankdir=TB;
-nodoe[ label = " e;2" ];
-nodoe->nodoa;
-nodoa[ label = " a;1" ];
-nodoe->nodox;
-nodox[ label = " x;1" ];
+nodoanime[ label = " anime;4" ];
+nodoanime->nodoFabula;
+nodoFabula[ label = " Fabula;3" ];
+nodoFabula->nodoEpopeya;
+nodoEpopeya[ label = " Epopeya;1" ];
+nodoFabula->nodoRomance;
+nodoRomance[ label = " Romance;2" ];
+nodoRomance->nodoMelodrama;
+nodoMelodrama[ label = " Melodrama;1" ];
+nodoRomance->nodoTragedia;
+nodoTragedia[ label = " Tragedia;1" ];
+nodoanime->nodoCuento;
+nodoCuento[ label = " Cuento;2" ];
+nodoCuento->nodoComedia;
+nodoComedia[ label = " Comedia;1" ];
+nodoCuento->nodoEpopeya;
+nodoEpopeya[ label = " Epopeya;1" ];
 
 label = " Arbol AVL "; 
 }
