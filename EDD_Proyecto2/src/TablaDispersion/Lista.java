@@ -3,6 +3,15 @@ package TablaDispersion;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
+//*******importaciones para el uso del MD5
+import java.security.MessageDigest;
+import java.util.Arrays;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import javax.swing.JOptionPane;
+import org.apache.commons.codec.binary.Base64;
+
 public class Lista {
 
     //archiov dot
@@ -31,10 +40,38 @@ public class Lista {
     public boolean estadoLista() {
         return (primero == null && ultimo == null) ? true : false;
     }
+    
+    //meteodo para el uso del MD5
+    public String encode(String secretkey, String password){
+        String passwordEncriptado = "";
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] llavePassword = md5.digest(secretkey.getBytes("utf-8"));
+            byte[] BytesKey = Arrays.copyOf(llavePassword, 24);
+            SecretKey key = new SecretKeySpec(BytesKey, "DESede");
+            Cipher cifrado = Cipher.getInstance("DESede");
+            cifrado.init(Cipher.ENCRYPT_MODE, key);            
+            byte[] plainTextBytes = password.getBytes("utf-8");
+            byte[] buf = cifrado.doFinal(plainTextBytes);
+            byte[] base64Bytes = Base64.encodeBase64(buf);
+            passwordEncriptado = new String(base64Bytes);
+        } catch (Exception e) {
+        }
+        return passwordEncriptado;
+    }
+    
+    //*desencriptacion de la contrasenia
+    public void deencode(){
+        
+    }
 
     //metodo para insertar en la lista
     public void insertar(int carne, String nombre, String apellido, String carrera, String password) {
         int posicionDeNodo = funcionDispersion(carne);//obtengo la posicion que le corresponde en la lista
+        //*********encriptando contrasenia
+        password = encode(""+carne, password);//recibe una llave y la contrasenia
+        JOptionPane.showMessageDialog(null, "password"+password);
+        
         NodoHash nuevoNodo = new NodoHash(posicionDeNodo);//creo el nuevo nodo en la lista dispersion
 
         if (estadoLista() == true) {//si en la lista no existe ningun elemento            
@@ -160,6 +197,14 @@ public class Lista {
         }
     }
 
+    
+    
+    //meotod para buscar dentro de la lista
+    //para el uso del login 
+    public void buscarUsuario(){
+        
+    }
+    
     //metodo para buscar dentro de la lista
     //busqueda cuadratica
     //-------------------------------------------------------------------------------
