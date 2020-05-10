@@ -215,6 +215,9 @@ public class IngresoCategoria extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Nos e puedo cargar el archivo");
         }
         
+        //****pruebas de arbol
+        arbolCategorias.prueba();
+        
         //******limpio los campos 
         txtNombreArchivo.setText("");
         txtRutaJSON.setText("");

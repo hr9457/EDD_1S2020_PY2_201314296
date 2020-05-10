@@ -16,8 +16,8 @@ public class EDD_Proyecto2 {
        
         //VENTANAS
         //IngresoLibros ventanaIngresoLibros = new IngresoLibros();
-        Principal ventanaArranque = new Principal(tablaDispersion);
-        //IngresoCategoria ventanaCategorias = new IngresoCategoria(arbolCategorias);
+        //Principal ventanaArranque = new Principal(tablaDispersion);
+        IngresoCategoria ventanaCategorias = new IngresoCategoria(arbolCategorias);
         
         
         

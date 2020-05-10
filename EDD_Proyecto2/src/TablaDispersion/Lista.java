@@ -61,16 +61,30 @@ public class Lista {
     }
     
     //*desencriptacion de la contrasenia
-    public void deencode(){
-        
+    public String deencode(String secretKey, String passwordEncriptado){
+        String paswordDesencriptado = "";
+        try {
+            byte[] message = Base64.decodeBase64(passwordEncriptado.getBytes("utf-8"));
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] digestOfPassword = md5.digest(secretKey.getBytes("utf-80"));
+            byte[] BytesKey = Arrays.copyOf(digestOfPassword, 24);
+            SecretKey key = new SecretKeySpec(BytesKey, "DESede");
+            Cipher decipher = Cipher.getInstance("DESede");
+            decipher.init(Cipher.DECRYPT_MODE, key);
+            byte[] plainText = decipher.doFinal(message);
+            paswordDesencriptado = new String(plainText,"UTF-8");
+        } catch (Exception e) {
+        }
+        return paswordDesencriptado;
     }
-
+    //*********************************
+    
     //metodo para insertar en la lista
     public void insertar(int carne, String nombre, String apellido, String carrera, String password) {
         int posicionDeNodo = funcionDispersion(carne);//obtengo la posicion que le corresponde en la lista
         //*********encriptando contrasenia
         password = encode(""+carne, password);//recibe una llave y la contrasenia
-        JOptionPane.showMessageDialog(null, "password"+password);
+        //JOptionPane.showMessageDialog(null, "password"+password);
         
         NodoHash nuevoNodo = new NodoHash(posicionDeNodo);//creo el nuevo nodo en la lista dispersion
 

@@ -54,28 +54,45 @@ public class ArbolAVL {
     }
 
     //********************ROTACIONES
-    public NodoAVL simpleDerecha(NodoAVL nodoRaiz) {
+    public NodoAVL simpleDerecha(NodoAVL nodoRaiz,NodoAVL nuevoPadre) {
         //*******rotacion
         NodoAVL nodoAux = nodoRaiz.getDerecha();
         NodoAVL nodoAuxPosible = nodoAux.getIzquierda();
+        //******giro
         nodoAux.setIzquierda(nodoRaiz);
+        nodoRaiz.setPadre(nodoAux);
+        nodoAux.setPadre(null);
+        
         nodoRaiz.setDerecha(nodoAuxPosible);
+        if(nodoAuxPosible!=null){
+            nodoAuxPosible.setPadre(nodoRaiz);
+        }
         //********actualizacion de alturas
         int NuevaAltura = 1 + alturaMaxima(obtenerAltura(nodoRaiz.getDerecha()), obtenerAltura(nodoRaiz.getIzquierda()));
         nodoRaiz.setAltura(NuevaAltura);
 
         int NuevaAltura2 = 1 + alturaMaxima(obtenerAltura(nodoAux.getDerecha()), obtenerAltura(nodoAux.getIzquierda()));
         nodoAux.setAltura(NuevaAltura2);
-
+        
+        //**nuevo padre
+        nodoAux.setPadre(nuevoPadre);
         return nodoAux;
     }
 
-    public NodoAVL simpleIzquierda(NodoAVL nodoRaiz) {
+    public NodoAVL simpleIzquierda(NodoAVL nodoRaiz,NodoAVL nuevoPadre) {
         //*******rotacion
         NodoAVL nodoAux = nodoRaiz.getIzquierda();
         NodoAVL nodoAuxPosible = nodoAux.getDerecha();
+        
+        //*****giro
         nodoAux.setDerecha(nodoRaiz);
+        nodoRaiz.setPadre(nodoAux);
+        nodoAux.setPadre(null);
+        
         nodoRaiz.setIzquierda(nodoAuxPosible);
+        if(nodoAuxPosible!=null){
+            nodoAuxPosible.setPadre(nodoRaiz);
+        }
         //*************actualizacion de alturas
         //********actualizacion de alturas
         int NuevaAltura = 1 + alturaMaxima(obtenerAltura(nodoRaiz.getDerecha()), obtenerAltura(nodoRaiz.getIzquierda()));
@@ -84,28 +101,37 @@ public class ArbolAVL {
         int NuevaAltura2 = 1 + alturaMaxima(obtenerAltura(nodoAux.getDerecha()), obtenerAltura(nodoAux.getIzquierda()));
         nodoAux.setAltura(NuevaAltura2);
 
+        //**nuevo padre
+        nodoAux.setPadre(nuevoPadre);
         return nodoAux;
     }
 
-    public NodoAVL dobleIzquierda(NodoAVL nodoRaiz) {//problema
+    public NodoAVL dobleIzquierda(NodoAVL nodoRaiz,NodoAVL padre) {//problema
         NodoAVL nodoAux = nodoRaiz.getIzquierda();
+        //******nuevo padre
+        NodoAVL nuevoPadre = nodoRaiz;
         //********primera rotacion
         //********rotacion simple        
-        nodoRaiz.setIzquierda(simpleDerecha(nodoAux));
+        nodoRaiz.setIzquierda(simpleDerecha(nodoAux,nuevoPadre));
+        //nodoAux.setPadre(nodoRaiz);
 
         //*************rotacion simple izquierda
-        NodoAVL temporal = simpleIzquierda(nodoRaiz);
-
+        NodoAVL temporal = simpleIzquierda(nodoRaiz,padre);
+        //temporal.setPadre(null);
         return temporal;
     }
 
-    public NodoAVL dobleDerecha(NodoAVL nodoRaiz) {
+    public NodoAVL dobleDerecha(NodoAVL nodoRaiz,NodoAVL padre) {
         NodoAVL nodoAux = nodoRaiz.getDerecha();
+        //******nuevo padre
+        NodoAVL nuevoPadre = nodoRaiz;
         //******primera rotacion es rotacion simple a la izquierda
-        nodoRaiz.setDerecha(simpleIzquierda(nodoAux));
+        nodoRaiz.setDerecha(simpleIzquierda(nodoAux,nuevoPadre));
+        //nodoAux.setPadre(nodoRaiz);
 
         //********segunda rotacion rotacion simple izquierda
-        NodoAVL temporal = simpleDerecha(nodoRaiz);
+        NodoAVL temporal = simpleDerecha(nodoRaiz,padre);
+        //temporal.setPadre(null);
         return temporal;
     }
 
@@ -152,30 +178,36 @@ public class ArbolAVL {
         if (FE > 1 && nodo.getDerecha().getFE() > 0) {//simple a la derecha
             //verifico si el nodo que voy a rotar es la raiz o un nodo a su derecha
             if (nodo == root) {
-                this.root = simpleDerecha(nodo);
+                this.root = simpleDerecha(nodo,null);
                 
             } else {
                 NodoAVL temp = nodo;
                 nodo = nodo.getPadre();
-                if(nodo.getIzquierda()==temp){
-                   nodo.setIzquierda(simpleDerecha(temp));
+                NodoAVL nuevoPadre = nodo;
+                if(nodo.getIzquierda()==temp){                   
+                   nodo.setIzquierda(simpleDerecha(temp,nuevoPadre));
+                   //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
                 } else {
-                   nodo.setDerecha(simpleDerecha(temp)); 
+                   nodo.setDerecha(simpleDerecha(temp,nuevoPadre)); 
+                   //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
                 }                
             }
 
         } else if (FE < -1 && nodo.getIzquierda().getFE() < 0) {//simple a la izquierda
             //verifico si el nodo a rotar es la raiz o un nodo a su izquierda
             if (nodo == root) {
-                this.root = simpleIzquierda(nodo);
+                this.root = simpleIzquierda(nodo,null);
                 
             } else {
                 NodoAVL temp = nodo;
                 nodo = nodo.getPadre();
+                NodoAVL nuevoPadre = nodo;
                 if(nodo.getIzquierda()==temp){
-                    nodo.setIzquierda(simpleIzquierda(temp));
+                    nodo.setIzquierda(simpleIzquierda(temp,nuevoPadre));
+                    //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
                 } else {
-                    nodo.setDerecha(simpleIzquierda(temp));
+                    nodo.setDerecha(simpleIzquierda(temp,nuevoPadre));
+                    //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
                 }                
             }
 
@@ -183,34 +215,40 @@ public class ArbolAVL {
             //verifico si el nodo a rotar es la raiz 
             
             if (nodo == root) {
-                this.root = dobleDerecha(nodo);
+                this.root = dobleDerecha(nodo,null);
                 
             } else {
                 NodoAVL temp = nodo;
                 nodo = nodo.getPadre();
+                NodoAVL nuevoPadre = nodo;
                 if(nodo.getIzquierda()==temp){
-                    nodo.setIzquierda(dobleDerecha(temp));
+                    nodo.setIzquierda(dobleDerecha(temp,nuevoPadre));
+                    //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
                 } else {
-                    nodo.setDerecha(dobleDerecha(temp));
+                    nodo.setDerecha(dobleDerecha(temp,nuevoPadre));
+                    //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
                 }                
             }
             
             //problema
         } else if (FE < -1 && nodo.getIzquierda().getFE() > 0) {//doble izquierda
             //verifico si el nodo a rotar es la raiz o es un nodo a su izquierda
-            /*
+            
             if (nodo == root) {
-                this.root = dobleIzquierda(nodo);
+                this.root = dobleIzquierda(nodo,null);
             } else {
                 NodoAVL temp = nodo;
                 nodo = nodo.getPadre();
+                NodoAVL nuevoPadre = nodo;
                 if(nodo.getIzquierda()==temp){
-                    nodo.setIzquierda(dobleIzquierda(temp));
+                    nodo.setIzquierda(dobleIzquierda(temp,nuevoPadre));
+                    //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
                 } else {
-                   nodo.setDerecha(dobleIzquierda(temp));
+                   nodo.setDerecha(dobleIzquierda(temp,nuevoPadre));
+                   //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
                 }                
             }
-            */
+            
         }
 
     }//fin del metodo insertar nodo
@@ -301,7 +339,25 @@ public class ArbolAVL {
                 inorden(root.getIzquierda());
             }
 
-            System.out.print("categoria: " + root.getCategoria() + "->");
+            System.out.print("categoria: " + root.getCategoria()+"----");
+            if(root.getPadre()!=null){
+               System.out.print("PADRE: "+root.getPadre().getCategoria()); 
+            }            
+            System.out.println("");
+
+            if (root.getDerecha() != null) {
+                inorden(root.getDerecha());
+            }
+        }
+    }
+    
+    public void inordenPadres(NodoAVL root){
+        if (estadoArbol() != true) {
+            if (root.getIzquierda() != null) {
+                inorden(root.getIzquierda());
+            }
+
+            System.out.println("categoria: " + root.getCategoria() + " -- Padre: "+root.getPadre().getCategoria());
             System.out.println("");
 
             if (root.getDerecha() != null) {
