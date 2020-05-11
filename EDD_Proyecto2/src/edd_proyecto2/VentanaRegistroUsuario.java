@@ -51,7 +51,7 @@ public class VentanaRegistroUsuario extends javax.swing.JFrame {
         lbPassword = new javax.swing.JLabel();
         txtPAssword = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lbNumeroCarnet.setText("NUMERO CARNET");
 
@@ -202,6 +202,7 @@ public class VentanaRegistroUsuario extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
         dispose();
+        
     }//GEN-LAST:event_btnSalirActionPerformed
 
     

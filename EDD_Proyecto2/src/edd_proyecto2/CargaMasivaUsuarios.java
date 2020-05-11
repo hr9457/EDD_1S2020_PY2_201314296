@@ -53,7 +53,7 @@ public class CargaMasivaUsuarios extends javax.swing.JFrame {
         txtNombreArchivo = new javax.swing.JTextField();
         btnRegistrarDatos = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lbCargaMasiva.setText("realizar carga Masiva ");
 

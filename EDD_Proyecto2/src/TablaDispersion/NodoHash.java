@@ -29,6 +29,11 @@ public class NodoHash {
         lista.agregarElemento(carnet, nombre, apellido, carrera, password);
     }
     
+    //metod para buscar dentor de la list
+    public void buscarUsuarioEnLista(int carnet,String Password){
+        lista.buscarUsuario(carnet, Password);
+    }
+    
     //**************************************************************************
     //metodo get y set 
     public int getPosicion() {

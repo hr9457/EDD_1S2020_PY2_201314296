@@ -86,6 +86,8 @@ public class Lista {
         password = encode(""+carne, password);//recibe una llave y la contrasenia
         //JOptionPane.showMessageDialog(null, "password"+password);
         
+        //JOptionPane.showMessageDialog(null, "pas: "+password);
+        
         NodoHash nuevoNodo = new NodoHash(posicionDeNodo);//creo el nuevo nodo en la lista dispersion
 
         if (estadoLista() == true) {//si en la lista no existe ningun elemento            
@@ -122,6 +124,29 @@ public class Lista {
                 //insertar en la lista de colision
                 nuevoNodo.agregarUsuario(carne, nombre, apellido, carrera, password);
             }
+        }
+    }
+    
+    //metod para buscar usuario dentro de la lista
+    public void buscarUsuario(int carnet,String password){
+        //**********saber que posicion esta el nodo del auxiliar
+        int posicionBuscar = funcionDispersion(carnet);
+        //***********encripoto passwor para la comparacion
+        password = encode(""+carnet, password);
+        
+        //JOptionPane.showMessageDialog(null, "pas: "+password);
+        
+        //********auxiliar del primer nodo
+        NodoHash auxPrimero = this.primero;
+        while (auxPrimero !=null && auxPrimero.getPosicion() !=posicionBuscar){
+            auxPrimero = auxPrimero.getAbajo();
+        }
+        
+        if(auxPrimero!=null){
+            //JOptionPane.showMessageDialog(null, "usuario econtrado");
+            auxPrimero.buscarUsuarioEnLista(carnet, password);
+        } else {
+            JOptionPane.showMessageDialog(null, "El usuario no existe","ERROR",JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -212,13 +237,7 @@ public class Lista {
     }
 
     
-    
-    //meotod para buscar dentro de la lista
-    //para el uso del login 
-    public void buscarUsuario(){
-        
-    }
-    
+       
     //metodo para buscar dentro de la lista
     //busqueda cuadratica
     //-------------------------------------------------------------------------------

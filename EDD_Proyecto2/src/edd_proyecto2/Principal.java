@@ -28,6 +28,7 @@ public class Principal extends javax.swing.JFrame {
     
     public Principal(TablaDispersion.Lista tablaDispersion) {
         this.tablaDispersion = tablaDispersion;//recibo la estructura
+        setLayout(null);
         initComponents();//componentes de la ventana
         //jPanel2.setVisible(false);
         setTitle("Inicio de Session");//titulo de la ventana
@@ -141,7 +142,7 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -150,7 +151,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -161,9 +162,11 @@ public class Principal extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
         int carnet = Integer.parseInt(txtUsuario.getText());
-        int posicion = tablaDispersion.funcionDispersion(carnet);
-        //tablaDispersion.insertar(posicion);
-        
+        String password = txtPassword.getText();
+        tablaDispersion.buscarUsuario(carnet, password);
+        //*******
+        txtUsuario.setText("");
+        txtPassword.setText("");
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     
@@ -182,10 +185,13 @@ public class Principal extends javax.swing.JFrame {
         tablaDispersion.reporteHash();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
+    
     //EVENTO PARA REGISTAR UN USUARIO INDIVIUALMENTE
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
-        VentanaRegistroUsuario registrarUsuario = new VentanaRegistroUsuario(tablaDispersion);
+        VentanaRegistroUsuario registrarUsuario = new VentanaRegistroUsuario(tablaDispersion);       
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     
