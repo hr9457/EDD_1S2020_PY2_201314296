@@ -128,7 +128,8 @@ public class Lista {
     }
     
     //metod para buscar usuario dentro de la lista
-    public void buscarUsuario(int carnet,String password){
+    public boolean buscarUsuario(int carnet,String password){
+        boolean resultado;
         //**********saber que posicion esta el nodo del auxiliar
         int posicionBuscar = funcionDispersion(carnet);
         //***********encripoto passwor para la comparacion
@@ -144,9 +145,12 @@ public class Lista {
         
         if(auxPrimero!=null){
             //JOptionPane.showMessageDialog(null, "usuario econtrado");
-            auxPrimero.buscarUsuarioEnLista(carnet, password);
+            resultado = auxPrimero.buscarUsuarioEnLista(carnet, password);
+            return resultado;
         } else {
             JOptionPane.showMessageDialog(null, "El usuario no existe","ERROR",JOptionPane.ERROR_MESSAGE);
+            resultado = false;
+            return resultado;
         }
     }
 

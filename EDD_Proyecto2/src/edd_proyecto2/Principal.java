@@ -24,10 +24,12 @@ public class Principal extends javax.swing.JFrame {
     
     //ESTRUCTURA
     TablaDispersion.Lista tablaDispersion;
+    ArbolAVL.ArbolAVL arbolCategorias;
     
     
-    public Principal(TablaDispersion.Lista tablaDispersion) {
+    public Principal(TablaDispersion.Lista tablaDispersion,ArbolAVL.ArbolAVL arbolCategorias) {
         this.tablaDispersion = tablaDispersion;//recibo la estructura
+        this.arbolCategorias = arbolCategorias;//recibo la estructura del AVL
         setLayout(null);
         initComponents();//componentes de la ventana
         //jPanel2.setVisible(false);
@@ -100,20 +102,20 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnIngresar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                                 .addComponent(btnRegistrar))
                             .addComponent(txtUsuario)
                             .addComponent(txtPassword))
-                        .addGap(71, 71, 71))
+                        .addGap(22, 22, 22))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnHabilitarCargaMasiva)
-                                .addGap(92, 92, 92))
+                                .addGap(51, 51, 51))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1)
-                                .addGap(132, 132, 132))))))
+                                .addGap(96, 96, 96))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +136,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnHabilitarCargaMasiva)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -148,22 +150,30 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     
-    //EVENTO DEL BOTOTN
+    //EVENTO DEL BOTOTN para ingresar a la plataforma
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
         int carnet = Integer.parseInt(txtUsuario.getText());
         String password = txtPassword.getText();
-        tablaDispersion.buscarUsuario(carnet, password);
+        boolean ingresoValido = tablaDispersion.buscarUsuario(carnet, password);
+        if(ingresoValido==true){
+            JOptionPane.showMessageDialog(null, "resultado: "+ingresoValido);
+            VentanaUsuario usuario = new VentanaUsuario(this,carnet,arbolCategorias);
+            this.setVisible(false);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "resultado: "+ingresoValido);
+        }
         //*******
         txtUsuario.setText("");
         txtPassword.setText("");

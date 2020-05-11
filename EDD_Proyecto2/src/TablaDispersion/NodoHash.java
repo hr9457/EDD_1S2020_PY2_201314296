@@ -30,8 +30,9 @@ public class NodoHash {
     }
     
     //metod para buscar dentor de la list
-    public void buscarUsuarioEnLista(int carnet,String Password){
-        lista.buscarUsuario(carnet, Password);
+    public boolean buscarUsuarioEnLista(int carnet,String Password){
+        boolean resultado = lista.buscarUsuario(carnet, Password);
+        return resultado;
     }
     
     //**************************************************************************

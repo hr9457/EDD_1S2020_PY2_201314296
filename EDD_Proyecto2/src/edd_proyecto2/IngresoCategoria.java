@@ -45,9 +45,9 @@ public class IngresoCategoria extends javax.swing.JFrame {
         txtNombreArchivo = new javax.swing.JTextField();
         lbNombreArchivo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        lbCategoria.setText("Categoria");
+        lbCategoria.setText("Categoria Individual");
 
         btnIngresar.setText("Registrar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {

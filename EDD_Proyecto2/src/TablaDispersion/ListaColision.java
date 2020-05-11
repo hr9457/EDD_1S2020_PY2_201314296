@@ -65,7 +65,7 @@ public class ListaColision {
     }
 
     //metod para que me devuelva la existencia del usuario si fuese positiva
-    public void buscarUsuario(int carnet, String password) {
+    public boolean buscarUsuario(int carnet, String password) {
         Nodo auxPrimero = this.primero;
         while (auxPrimero != null && auxPrimero.getNumeroCarnet() != carnet) {            
             auxPrimero = auxPrimero.getSiguiente();
@@ -74,16 +74,19 @@ public class ListaColision {
         //*********rebiso que los paremetro coincidan
         if(auxPrimero==null){
             JOptionPane.showMessageDialog(null, "El usuario no existe","ERROR",JOptionPane.ERROR_MESSAGE);
+            return false;
         } else {
             //**********usuario encontrado
             //*******comparo la contrasenia
             //String passwordDesencriptado = deencode(""+carnet, auxPrimero.getPassword());
             if(auxPrimero.getPassword().equals(password)){
                 JOptionPane.showMessageDialog(null, "BIENVENIDO: " +auxPrimero.getNombre());
+                return true;
                 //JOptionPane.showMessageDialog(null, "Password no coincide","",JOptionPane.WARNING_MESSAGE);
             } else {
                 //*****dejo entrar al usuario
                 JOptionPane.showMessageDialog(null, "PASSWORD NO COINCIDEN","ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
+                return false;
             }
         }
     }
