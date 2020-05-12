@@ -53,6 +53,9 @@ public class VentanaUsuario extends javax.swing.JFrame {
         btnVerLibros = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lbVisor = new javax.swing.JLabel();
+        btnPreorden = new javax.swing.JButton();
+        btnPostorden = new javax.swing.JButton();
+        btnInorden = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -93,6 +96,27 @@ public class VentanaUsuario extends javax.swing.JFrame {
         lbVisor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         jScrollPane1.setViewportView(lbVisor);
 
+        btnPreorden.setText("Categoras Pre");
+        btnPreorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreordenActionPerformed(evt);
+            }
+        });
+
+        btnPostorden.setText("Categorias Post");
+        btnPostorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPostordenActionPerformed(evt);
+            }
+        });
+
+        btnInorden.setText("Categorias Inor");
+        btnInorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInordenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -118,9 +142,12 @@ public class VentanaUsuario extends javax.swing.JFrame {
                                     .addComponent(btnCrearCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnAgregarLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnVerCategorias)
-                                    .addComponent(btnVerLibros))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnVerCategorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnVerLibros)
+                                    .addComponent(btnPreorden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnPostorden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnInorden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 22, Short.MAX_VALUE)))
@@ -147,11 +174,19 @@ public class VentanaUsuario extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnVerCategorias)
-                        .addGap(35, 35, 35)
-                        .addComponent(btnVerLibros))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnInorden)
+                        .addGap(12, 12, 12)
+                        .addComponent(btnPreorden)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPostorden)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVerLibros)
+                        .addGap(105, 105, 105))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -189,15 +224,41 @@ public class VentanaUsuario extends javax.swing.JFrame {
     //evento para vver el arbol avl ver las categorias
     private void btnVerCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerCategoriasActionPerformed
         // TODO add your handling code here:
+        //arbolCategorias.generarDotAVL();
         imagen = new ImageIcon("Reportes\\ArbolAVL.png");
         lbVisor.setIcon(imagen);
     }//GEN-LAST:event_btnVerCategoriasActionPerformed
+
+    //evento para ver el listado de las categorias en preorden
+    private void btnPreordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreordenActionPerformed
+        // TODO add your handling code here:
+        //arbolCategorias.generarDotPreorden();
+        imagen = new ImageIcon("Reportes\\ArbolPreorden.png");
+        lbVisor.setIcon(imagen);
+    }//GEN-LAST:event_btnPreordenActionPerformed
+
+    //evento para ver reporte de postorden
+    private void btnPostordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostordenActionPerformed
+        // TODO add your handling code here:
+        imagen = new ImageIcon("Reportes\\ArbolPostorden.png");
+        lbVisor.setIcon(imagen);
+    }//GEN-LAST:event_btnPostordenActionPerformed
+
+    //evento para ver el reporte en inorden
+    private void btnInordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInordenActionPerformed
+        // TODO add your handling code here:
+        imagen = new ImageIcon("Reportes\\ArbolInorden.png");
+        lbVisor.setIcon(imagen);
+    }//GEN-LAST:event_btnInordenActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarLibro;
     private javax.swing.JButton btnCrearCategoria;
+    private javax.swing.JButton btnInorden;
+    private javax.swing.JButton btnPostorden;
+    private javax.swing.JButton btnPreorden;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVerCategorias;
     private javax.swing.JButton btnVerLibros;

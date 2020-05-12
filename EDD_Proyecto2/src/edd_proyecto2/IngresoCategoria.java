@@ -222,6 +222,11 @@ public class IngresoCategoria extends javax.swing.JFrame {
         txtNombreArchivo.setText("");
         txtRutaJSON.setText("");
         
+        //**********actualizacion para el visor
+        arbolCategorias.generarDotAVL();
+        arbolCategorias.generarDotInorden();
+        arbolCategorias.generarDotPreorden();
+        arbolCategorias.generarDotPostorden();
     }//GEN-LAST:event_btnRegistroMasivoActionPerformed
 
 

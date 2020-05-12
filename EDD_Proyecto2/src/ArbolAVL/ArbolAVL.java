@@ -12,6 +12,11 @@ public class ArbolAVL {
     NodoAVL root;
     NodoAVL auxRoot;
 
+    //
+    int nodoPreorden = 0;
+    int nodoInorden = 0;
+    int nodoPostorden = 0;
+
     //contructor
     public ArbolAVL() {
         this.root = null;
@@ -54,7 +59,7 @@ public class ArbolAVL {
     }
 
     //********************ROTACIONES
-    public NodoAVL simpleDerecha(NodoAVL nodoRaiz,NodoAVL nuevoPadre) {
+    public NodoAVL simpleDerecha(NodoAVL nodoRaiz, NodoAVL nuevoPadre) {
         //*******rotacion
         NodoAVL nodoAux = nodoRaiz.getDerecha();
         NodoAVL nodoAuxPosible = nodoAux.getIzquierda();
@@ -62,9 +67,9 @@ public class ArbolAVL {
         nodoAux.setIzquierda(nodoRaiz);
         nodoRaiz.setPadre(nodoAux);
         nodoAux.setPadre(null);
-        
+
         nodoRaiz.setDerecha(nodoAuxPosible);
-        if(nodoAuxPosible!=null){
+        if (nodoAuxPosible != null) {
             nodoAuxPosible.setPadre(nodoRaiz);
         }
         //********actualizacion de alturas
@@ -73,24 +78,24 @@ public class ArbolAVL {
 
         int NuevaAltura2 = 1 + alturaMaxima(obtenerAltura(nodoAux.getDerecha()), obtenerAltura(nodoAux.getIzquierda()));
         nodoAux.setAltura(NuevaAltura2);
-        
+
         //**nuevo padre
         nodoAux.setPadre(nuevoPadre);
         return nodoAux;
     }
 
-    public NodoAVL simpleIzquierda(NodoAVL nodoRaiz,NodoAVL nuevoPadre) {
+    public NodoAVL simpleIzquierda(NodoAVL nodoRaiz, NodoAVL nuevoPadre) {
         //*******rotacion
         NodoAVL nodoAux = nodoRaiz.getIzquierda();
         NodoAVL nodoAuxPosible = nodoAux.getDerecha();
-        
+
         //*****giro
         nodoAux.setDerecha(nodoRaiz);
         nodoRaiz.setPadre(nodoAux);
         nodoAux.setPadre(null);
-        
+
         nodoRaiz.setIzquierda(nodoAuxPosible);
-        if(nodoAuxPosible!=null){
+        if (nodoAuxPosible != null) {
             nodoAuxPosible.setPadre(nodoRaiz);
         }
         //*************actualizacion de alturas
@@ -106,31 +111,31 @@ public class ArbolAVL {
         return nodoAux;
     }
 
-    public NodoAVL dobleIzquierda(NodoAVL nodoRaiz,NodoAVL padre) {//problema
+    public NodoAVL dobleIzquierda(NodoAVL nodoRaiz, NodoAVL padre) {//problema
         NodoAVL nodoAux = nodoRaiz.getIzquierda();
         //******nuevo padre
         NodoAVL nuevoPadre = nodoRaiz;
         //********primera rotacion
         //********rotacion simple        
-        nodoRaiz.setIzquierda(simpleDerecha(nodoAux,nuevoPadre));
+        nodoRaiz.setIzquierda(simpleDerecha(nodoAux, nuevoPadre));
         //nodoAux.setPadre(nodoRaiz);
 
         //*************rotacion simple izquierda
-        NodoAVL temporal = simpleIzquierda(nodoRaiz,padre);
+        NodoAVL temporal = simpleIzquierda(nodoRaiz, padre);
         //temporal.setPadre(null);
         return temporal;
     }
 
-    public NodoAVL dobleDerecha(NodoAVL nodoRaiz,NodoAVL padre) {
+    public NodoAVL dobleDerecha(NodoAVL nodoRaiz, NodoAVL padre) {
         NodoAVL nodoAux = nodoRaiz.getDerecha();
         //******nuevo padre
         NodoAVL nuevoPadre = nodoRaiz;
         //******primera rotacion es rotacion simple a la izquierda
-        nodoRaiz.setDerecha(simpleIzquierda(nodoAux,nuevoPadre));
+        nodoRaiz.setDerecha(simpleIzquierda(nodoAux, nuevoPadre));
         //nodoAux.setPadre(nodoRaiz);
 
         //********segunda rotacion rotacion simple izquierda
-        NodoAVL temporal = simpleDerecha(nodoRaiz,padre);
+        NodoAVL temporal = simpleDerecha(nodoRaiz, padre);
         //temporal.setPadre(null);
         return temporal;
     }
@@ -178,77 +183,77 @@ public class ArbolAVL {
         if (FE > 1 && nodo.getDerecha().getFE() > 0) {//simple a la derecha
             //verifico si el nodo que voy a rotar es la raiz o un nodo a su derecha
             if (nodo == root) {
-                this.root = simpleDerecha(nodo,null);
-                
+                this.root = simpleDerecha(nodo, null);
+
             } else {
                 NodoAVL temp = nodo;
                 nodo = nodo.getPadre();
                 NodoAVL nuevoPadre = nodo;
-                if(nodo.getIzquierda()==temp){                   
-                   nodo.setIzquierda(simpleDerecha(temp,nuevoPadre));
-                   //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
+                if (nodo.getIzquierda() == temp) {
+                    nodo.setIzquierda(simpleDerecha(temp, nuevoPadre));
+                    //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
                 } else {
-                   nodo.setDerecha(simpleDerecha(temp,nuevoPadre)); 
-                   //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
-                }                
+                    nodo.setDerecha(simpleDerecha(temp, nuevoPadre));
+                    //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
+                }
             }
 
         } else if (FE < -1 && nodo.getIzquierda().getFE() < 0) {//simple a la izquierda
             //verifico si el nodo a rotar es la raiz o un nodo a su izquierda
             if (nodo == root) {
-                this.root = simpleIzquierda(nodo,null);
-                
+                this.root = simpleIzquierda(nodo, null);
+
             } else {
                 NodoAVL temp = nodo;
                 nodo = nodo.getPadre();
                 NodoAVL nuevoPadre = nodo;
-                if(nodo.getIzquierda()==temp){
-                    nodo.setIzquierda(simpleIzquierda(temp,nuevoPadre));
+                if (nodo.getIzquierda() == temp) {
+                    nodo.setIzquierda(simpleIzquierda(temp, nuevoPadre));
                     //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
                 } else {
-                    nodo.setDerecha(simpleIzquierda(temp,nuevoPadre));
+                    nodo.setDerecha(simpleIzquierda(temp, nuevoPadre));
                     //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
-                }                
+                }
             }
 
         } else if (FE > 1 && nodo.getDerecha().getFE() < 0) {//doble derecha
             //verifico si el nodo a rotar es la raiz 
-            
+
             if (nodo == root) {
-                this.root = dobleDerecha(nodo,null);
-                
+                this.root = dobleDerecha(nodo, null);
+
             } else {
                 NodoAVL temp = nodo;
                 nodo = nodo.getPadre();
                 NodoAVL nuevoPadre = nodo;
-                if(nodo.getIzquierda()==temp){
-                    nodo.setIzquierda(dobleDerecha(temp,nuevoPadre));
+                if (nodo.getIzquierda() == temp) {
+                    nodo.setIzquierda(dobleDerecha(temp, nuevoPadre));
                     //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
                 } else {
-                    nodo.setDerecha(dobleDerecha(temp,nuevoPadre));
+                    nodo.setDerecha(dobleDerecha(temp, nuevoPadre));
                     //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
-                }                
+                }
             }
-            
+
             //problema
         } else if (FE < -1 && nodo.getIzquierda().getFE() > 0) {//doble izquierda
             //verifico si el nodo a rotar es la raiz o es un nodo a su izquierda
-            
+
             if (nodo == root) {
-                this.root = dobleIzquierda(nodo,null);
+                this.root = dobleIzquierda(nodo, null);
             } else {
                 NodoAVL temp = nodo;
                 nodo = nodo.getPadre();
                 NodoAVL nuevoPadre = nodo;
-                if(nodo.getIzquierda()==temp){
-                    nodo.setIzquierda(dobleIzquierda(temp,nuevoPadre));
+                if (nodo.getIzquierda() == temp) {
+                    nodo.setIzquierda(dobleIzquierda(temp, nuevoPadre));
                     //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
                 } else {
-                   nodo.setDerecha(dobleIzquierda(temp,nuevoPadre));
-                   //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
-                }                
+                    nodo.setDerecha(dobleIzquierda(temp, nuevoPadre));
+                    //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
+                }
             }
-            
+
         }
 
     }//fin del metodo insertar nodo
@@ -267,7 +272,7 @@ public class ArbolAVL {
     //*************************************************************************
     //GRAFO DEL ARBOL AVL
     //metodo para genera la imagen del AVL
-    public void generarPng() {
+    private void generarPng() {
         try {
             Runtime ejecuccion = Runtime.getRuntime();
             ejecuccion.exec("dot.exe -Tpng ArchivosDot\\ArbolAVL.dot -o Reportes\\ArbolAVL.png");
@@ -322,7 +327,7 @@ public class ArbolAVL {
             //*************
             //GENERO LA IMAGEN, Y LA ABRO
             generarPng();
-            abrirPngAVL();
+            //abrirPngAVL();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se puede generar el Dot");
         }
@@ -339,10 +344,10 @@ public class ArbolAVL {
                 inorden(root.getIzquierda());
             }
 
-            System.out.print("categoria: " + root.getCategoria()+"----");
-            if(root.getPadre()!=null){
-               System.out.print("PADRE: "+root.getPadre().getCategoria()); 
-            }            
+            System.out.print("categoria: " + root.getCategoria() + "----");
+            if (root.getPadre() != null) {
+                System.out.print("PADRE: " + root.getPadre().getCategoria());
+            }
             System.out.println("");
 
             if (root.getDerecha() != null) {
@@ -350,18 +355,166 @@ public class ArbolAVL {
             }
         }
     }
-    
-    public void inordenPadres(NodoAVL root){
+
+    public void inordenPadres(NodoAVL root) {
         if (estadoArbol() != true) {
             if (root.getIzquierda() != null) {
                 inorden(root.getIzquierda());
             }
 
-            System.out.println("categoria: " + root.getCategoria() + " -- Padre: "+root.getPadre().getCategoria());
+            System.out.println("categoria: " + root.getCategoria() + " -- Padre: " + root.getPadre().getCategoria());
             System.out.println("");
 
             if (root.getDerecha() != null) {
                 inorden(root.getDerecha());
+            }
+        }
+    }
+
+    //****************reportes graficos con los diferente tipo de recorrido para el arbol
+    private void generarPngPreorden() {
+        try {
+            Runtime ejecuccion = Runtime.getRuntime();
+            ejecuccion.exec("dot.exe -Tpng ArchivosDot\\ArbolPreorden.dot -o Reportes\\ArbolPreorden.png");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se genero la imagen pre");
+        }
+    }
+
+    private void Preorden(NodoAVL nodo, PrintWriter archivo) {
+        if (nodo != null) {
+            archivo.println("nodo" + nodoPreorden + "[label=\"" + nodo.getCategoria() + "\"];");
+            nodoPreorden++;
+            Preorden(nodo.getIzquierda(), archivo);
+            Preorden(nodo.getDerecha(), archivo);
+        }
+    }
+
+    public void generarDotPreorden() {
+        NodoAVL auxPrimero = this.root;
+        nodoPreorden = 0;
+        if (estadoArbol() != true) {
+            try {
+                archivo = new PrintWriter("ArchivosDot\\ArbolPreorden.dot");
+                archivo.println("digraph arbolpreorden {");
+                archivo.println("node [shape = record];");
+                archivo.println("rankdir=LR;");
+                //creo los nodos con sub indice 0,1,2,3 etc
+                Preorden(auxPrimero, archivo);
+                //anido los nodos ya creados segun el orden indicado
+                for (int numeroNodo = 0; numeroNodo < nodoPreorden; numeroNodo++) {
+                    archivo.print("nodo" + numeroNodo);
+                    if (numeroNodo + 1 < nodoPreorden) {
+                        archivo.print("->");
+                    }
+                }
+                archivo.print(";");
+                archivo.println("");
+                archivo.println("label = \"Arbol AVL - Preorden \"");
+                archivo.println("}");
+                archivo.close();
+                generarPngPreorden();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error dot preorden");
+            }
+        }
+    }
+    
+    //*********************************
+    private void generarPngInorden() {
+        try {
+            Runtime ejecuccion = Runtime.getRuntime();
+            ejecuccion.exec("dot.exe -Tpng ArchivosDot\\ArbolInorden.dot -o Reportes\\ArbolInorden.png");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se genero la imagen in");
+        }
+    }
+    
+    private void Inorden(NodoAVL nodo, PrintWriter archivo) {
+        if (nodo != null) {
+            Inorden(nodo.getIzquierda(), archivo);
+            archivo.println("nodo" + nodoPreorden + "[label=\"" + nodo.getCategoria() + "\"];");
+            nodoPreorden++;            
+            Inorden(nodo.getDerecha(), archivo);
+        }
+    }
+
+    public void generarDotInorden() {
+        NodoAVL auxPrimero = this.root;
+        nodoPreorden = 0;
+        if (estadoArbol() != true) {
+            try {
+                archivo = new PrintWriter("ArchivosDot\\ArbolInorden.dot");
+                archivo.println("digraph arbolinorden {");
+                archivo.println("node [shape = record];");
+                archivo.println("rankdir=LR;");
+                //creo los nodos con sub indice 0,1,2,3 etc
+                Inorden(auxPrimero, archivo);
+                //anido los nodos ya creados segun el orden indicado
+                for (int numeroNodo = 0; numeroNodo < nodoPreorden; numeroNodo++) {
+                    archivo.print("nodo" + numeroNodo);
+                    if (numeroNodo + 1 < nodoPreorden) {
+                        archivo.print("->");
+                    }
+                }
+                archivo.print(";");
+                archivo.println("");
+                archivo.println("label = \"Arbol AVL - Inorden \"");
+                archivo.println("}");
+                archivo.close();
+                generarPngInorden();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error dot inorden");
+            }
+        }
+    }
+    
+    //********************************
+    private void generarPngPostorden() {
+        try {
+            Runtime ejecuccion = Runtime.getRuntime();
+            ejecuccion.exec("dot.exe -Tpng ArchivosDot\\ArbolPostorden.dot -o Reportes\\ArbolPostorden.png");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se genero la imagen pos");
+        }
+    }
+    
+    private void PostOrden(NodoAVL nodo, PrintWriter archivo) {
+        if (nodo != null) {
+            PostOrden(nodo.getIzquierda(), archivo);
+            PostOrden(nodo.getDerecha(), archivo);
+            archivo.println("nodo" + nodoPreorden + "[label=\"" + nodo.getCategoria() + "\"];");
+            nodoPreorden++;       
+            
+        }
+    }
+
+    public void generarDotPostorden() {
+        NodoAVL auxPrimero = this.root;
+        nodoPreorden = 0;
+        if (estadoArbol() != true) {
+            try {
+                archivo = new PrintWriter("ArchivosDot\\ArbolPostorden.dot");
+                archivo.println("digraph arbolpostorden {");
+                archivo.println("node [shape = record];");
+                archivo.println("rankdir=LR;");
+                //creo los nodos con sub indice 0,1,2,3 etc
+                PostOrden(auxPrimero, archivo);
+                //anido los nodos ya creados segun el orden indicado
+                for (int numeroNodo = 0; numeroNodo < nodoPreorden; numeroNodo++) {
+                    archivo.print("nodo" + numeroNodo);
+                    if (numeroNodo + 1 < nodoPreorden) {
+                        archivo.print("->");
+                    }
+                }
+                archivo.print(";");
+                archivo.println("");
+                archivo.println("label = \"Arbol AVL - Postorden \"");
+                archivo.println("}");
+                archivo.close();
+                generarPngPostorden();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error dot postorden");
             }
         }
     }
