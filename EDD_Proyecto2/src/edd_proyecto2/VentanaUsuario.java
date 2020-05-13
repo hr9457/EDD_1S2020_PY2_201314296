@@ -16,6 +16,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
     
     //estructuras
     ArbolAVL.ArbolAVL arbolCategorias;
+    TablaDispersion.Lista tablaHash;
     
     Principal ventanaInicio;
     int carnet;
@@ -23,10 +24,11 @@ public class VentanaUsuario extends javax.swing.JFrame {
     /**
      * Creates new form VentanaUsuario
      */
-    public VentanaUsuario(Principal ventanaInicio,int carnet,ArbolAVL.ArbolAVL arbolCategorias) {
+    public VentanaUsuario(Principal ventanaInicio,int carnet,ArbolAVL.ArbolAVL arbolCategorias,TablaDispersion.Lista tablaHash) {
         this.ventanaInicio = ventanaInicio;
         this.carnet = carnet;
         this.arbolCategorias = arbolCategorias;
+        this.tablaHash = tablaHash;
         //creacion de scrolbar
         initComponents();
         lbCarnetUsuario.setText(""+carnet);
@@ -56,6 +58,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         btnPreorden = new javax.swing.JButton();
         btnPostorden = new javax.swing.JButton();
         btnInorden = new javax.swing.JButton();
+        btnHashReporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -117,6 +120,13 @@ public class VentanaUsuario extends javax.swing.JFrame {
             }
         });
 
+        btnHashReporte.setText("Usuarios ");
+        btnHashReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHashReporteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -147,7 +157,8 @@ public class VentanaUsuario extends javax.swing.JFrame {
                                     .addComponent(btnVerLibros)
                                     .addComponent(btnPreorden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnPostorden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnInorden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(btnInorden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnHashReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 22, Short.MAX_VALUE)))
@@ -184,6 +195,8 @@ public class VentanaUsuario extends javax.swing.JFrame {
                         .addComponent(btnPreorden)
                         .addGap(18, 18, 18)
                         .addComponent(btnPostorden)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnHashReporte)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnVerLibros)
                         .addGap(105, 105, 105))))
@@ -251,11 +264,19 @@ public class VentanaUsuario extends javax.swing.JFrame {
         lbVisor.setIcon(imagen);
     }//GEN-LAST:event_btnInordenActionPerformed
 
+    //evento para ver a los demas usuarios
+    private void btnHashReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHashReporteActionPerformed
+        // TODO add your handling code here:
+        imagen = new ImageIcon("Reportes\\Hash.png");
+        lbVisor.setIcon(imagen);
+    }//GEN-LAST:event_btnHashReporteActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarLibro;
     private javax.swing.JButton btnCrearCategoria;
+    private javax.swing.JButton btnHashReporte;
     private javax.swing.JButton btnInorden;
     private javax.swing.JButton btnPostorden;
     private javax.swing.JButton btnPreorden;

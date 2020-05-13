@@ -216,7 +216,7 @@ public class IngresoCategoria extends javax.swing.JFrame {
         }
         
         //****pruebas de arbol
-        arbolCategorias.prueba();
+        //arbolCategorias.prueba();
         
         //******limpio los campos 
         txtNombreArchivo.setText("");

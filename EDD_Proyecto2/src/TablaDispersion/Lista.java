@@ -200,7 +200,7 @@ public class Lista {
             //******segundo while rebisa la lista dentro del nodo hash
             archivo.print("nodo" + contadorLista + "[label = \" {");
             while (auxPrimeroLista != null) {
-                archivo.print("" + auxPrimeroLista.getNumeroCarnet() + "|");
+                archivo.print("" + auxPrimeroLista.getNumeroCarnet() +"--" +auxPrimeroLista.getNombre()+"\\n"+auxPrimeroLista.getPassword()+ "|");
                 auxPrimeroLista = auxPrimeroLista.getSiguiente();
             }
             contadorLista++;//aumento en uno
@@ -234,7 +234,7 @@ public class Lista {
             archivo.println("}");
             archivo.close();//cierre del archivo
             generarPNG();//genero la imagen
-            abrirPNG();//abro la imagen
+            //abrirPNG();//abro la imagen
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "no se genero el reporte");
         }

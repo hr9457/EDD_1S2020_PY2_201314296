@@ -1,40 +1,33 @@
+
 package ArbolB2;
 
-public class NodoInformacion {
 
-    //inforamcion del nodo 
-    int ISBN;
-    String titulo, autor, editorial, anio, edicion, categoria, idioma;
-    int carnet;
-    boolean estado;
-
-    //contructor
-    public NodoInformacion(){
-        this.estado=true;
-    }
+public class Informacion {
     
-    public void asignarInforamcion(int ISBN,String titulo, String autor, String editorial, 
-            String anio, String edicion, String categoria, String idioma,int carnet){
-        this.ISBN=ISBN;
-        this.titulo=titulo;
-        this.autor=autor;
-        this.editorial=editorial;
-        this.anio=anio;
-        this.edicion=edicion;
-        this.categoria=categoria;
-        this.idioma=idioma;
-        this.carnet=carnet;
-        this.estado=true;
+    int isbn;
+    String titulo,autor,editorial,anio,edicion,categoria,idioma;
+    int carnet;
+
+    public Informacion(int isbn, String titulo, String autor, String editorial, 
+            String anio, String edicion, String categoria, String idioma, int carnet) {
+        this.isbn = isbn;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.editorial = editorial;
+        this.anio = anio;
+        this.edicion = edicion;
+        this.categoria = categoria;
+        this.idioma = idioma;
+        this.carnet = carnet;
     }
 
-    //************************************
-    //metodo get y set
-    public int getISBN() {
-        return ISBN;
+    //get y set
+    public int getIsbn() {
+        return isbn;
     }
 
-    public void setISBN(int ISBN) {
-        this.ISBN = ISBN;
+    public void setIsbn(int isbn) {
+        this.isbn = isbn;
     }
 
     public String getTitulo() {
@@ -100,14 +93,7 @@ public class NodoInformacion {
     public void setCarnet(int carnet) {
         this.carnet = carnet;
     }
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
+    
+    
     
 }
