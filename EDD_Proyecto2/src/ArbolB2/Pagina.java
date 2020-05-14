@@ -75,4 +75,39 @@ public class Pagina {
         return axuUltimo;
     }
 
+    public Pagina getPadre() {
+        return padre;
+    }
+
+    public void setPadre(Pagina padre) {
+        this.padre = padre;
+    }
+
+    public int getContadorNodo() {
+        return contadorNodo;
+    }
+
+    public void setContadorNodo(int contadorNodo) {
+        this.contadorNodo = contadorNodo;
+    }
+
+    public Nodo getPrimero() {
+        return primero;
+    }
+
+    public void setPrimero(Nodo primero) {
+        this.primero = primero;
+    }
+
+    public Nodo getUltimo() {
+        return ultimo;
+    }
+
+    public void setUltimo(Nodo ultimo) {
+        this.ultimo = ultimo;
+    }
+    
+    
+    
+
 }

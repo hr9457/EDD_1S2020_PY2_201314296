@@ -269,6 +269,98 @@ public class ArbolAVL {
         }
     }
 
+    
+
+    //********************************metodo para eliminar nodo de un arbol avl
+    
+    public void quitraHijos(NodoAVL nodo){
+        nodo.setDerecha(null);
+        nodo.setIzquierda(null);
+    }
+    
+    public void remplazarNodo(NodoAVL nodo,NodoAVL nuevoNodo){
+        if(nodo.getPadre()!=null){
+            //asignacion de su nuevo hijo
+            if(nodo == nodo.getPadre().getIzquierda()){
+                nodo.getPadre().setIzquierda(nuevoNodo);
+                
+            } else if(nodo==nodo.getPadre().getDerecha()){
+                nodo.getPadre().setDerecha(nuevoNodo);
+                
+            }
+        }
+        if(nuevoNodo!=null){
+            //asigna su nuevo padre
+            nuevoNodo.setPadre(nodo.getPadre());
+        } else {
+            nodo.setPadre(null);
+        }
+    }
+    
+    
+    public NodoAVL encontrarMinimo(NodoAVL nodo){
+        if(nodo==null){
+            return null;
+        }
+        if(nodo.getIzquierda()!=null){
+            return encontrarMinimo(nodo.getIzquierda());//buscamos la parte mas izquierda del arbol 
+        } else {
+            return nodo;
+        }
+    }
+        
+    
+    public void elimiarNodo(NodoAVL nodo) {
+        if (nodo.getIzquierda() != null && nodo.getDerecha() != null) {
+            NodoAVL nodoMenor = encontrarMinimo(nodo.getDerecha());
+            nodo.setCategoria(nodoMenor.getCategoria());
+            elimiarNodo(nodoMenor);
+
+        } else if (nodo.getIzquierda() != null && nodo.getDerecha() == null) {//solo hay hijo izquieda
+            remplazarNodo(nodo, nodo.getIzquierda());
+            quitraHijos(nodo);
+
+        } else if (nodo.getDerecha() != null && nodo.getIzquierda() == null) {//solo hay hijo derecha
+            remplazarNodo(nodo, nodo.getDerecha());
+            quitraHijos(nodo);
+            
+        } else {
+            remplazarNodo(nodo, null);
+            quitraHijos(nodo);
+        }
+    }
+    
+    
+    public void buscarNodo(NodoAVL nodo, String categoria) {
+        if (categoria.compareTo(nodo.getCategoria()) == 0) {
+            JOptionPane.showMessageDialog(null, "nodo encontrado");
+            elimiarNodo(nodo);
+        } else if (categoria.compareTo(nodo.getCategoria()) < 0) {
+            if (nodo.getIzquierda() != null) {
+                buscarNodo(nodo.getIzquierda(), categoria);
+            } else {
+                JOptionPane.showMessageDialog(null, "El nodo no existe","ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (categoria.compareTo(nodo.getCategoria()) > 0) {
+            if(nodo.getDerecha()!=null){
+                buscarNodo(nodo.getDerecha(), categoria);
+            } else {
+                JOptionPane.showMessageDialog(null, "El nodo no existe","ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        //**************balanceo
+        
+    }
+
+    public void eliminarCategoria(String categoria) {
+        if (estadoArbol() == true) {
+            JOptionPane.showMessageDialog(null, "Arbol no contiene categoria");
+        } else {
+            NodoAVL auxRoot = root;
+            buscarNodo(auxRoot, categoria);
+        }
+    }
+
     //*************************************************************************
     //GRAFO DEL ARBOL AVL
     //metodo para genera la imagen del AVL
@@ -419,7 +511,7 @@ public class ArbolAVL {
             }
         }
     }
-    
+
     //*********************************
     private void generarPngInorden() {
         try {
@@ -429,12 +521,12 @@ public class ArbolAVL {
             JOptionPane.showMessageDialog(null, "No se genero la imagen in");
         }
     }
-    
+
     private void Inorden(NodoAVL nodo, PrintWriter archivo) {
         if (nodo != null) {
             Inorden(nodo.getIzquierda(), archivo);
             archivo.println("nodo" + nodoPreorden + "[label=\"" + nodo.getCategoria() + "\"];");
-            nodoPreorden++;            
+            nodoPreorden++;
             Inorden(nodo.getDerecha(), archivo);
         }
     }
@@ -468,7 +560,7 @@ public class ArbolAVL {
             }
         }
     }
-    
+
     //********************************
     private void generarPngPostorden() {
         try {
@@ -478,14 +570,14 @@ public class ArbolAVL {
             JOptionPane.showMessageDialog(null, "No se genero la imagen pos");
         }
     }
-    
+
     private void PostOrden(NodoAVL nodo, PrintWriter archivo) {
         if (nodo != null) {
             PostOrden(nodo.getIzquierda(), archivo);
             PostOrden(nodo.getDerecha(), archivo);
             archivo.println("nodo" + nodoPreorden + "[label=\"" + nodo.getCategoria() + "\"];");
-            nodoPreorden++;       
-            
+            nodoPreorden++;
+
         }
     }
 
