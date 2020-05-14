@@ -22,6 +22,31 @@ public class ArbolAVL {
         this.root = null;
     }
 
+    //****************************************************
+    //*********************************************************
+    public void Actualizar(NodoAVL nodo) {
+        if (nodo != null) {
+            Actualizar(nodo.getIzquierda());
+            Actualizar(nodo.getDerecha());
+
+            //raiz
+            //**********ACTUALIZAR ALTURA PARA CADA NODO
+            int NuevaAltura = 1 + alturaMaxima(obtenerAltura(nodo.getDerecha()), obtenerAltura(nodo.getIzquierda()));
+            nodo.setAltura(NuevaAltura);
+            //**********CALCULAR EL FE DE CADA NODO HACIA ARRIBA
+            int FE = calcularFE(nodo.getDerecha(), nodo.getIzquierda());
+            nodo.setFE(FE);//mando su fe para saber que signo y ver que caso es
+
+        }//fin
+    }//fin del metodo
+
+    public void act() {
+        NodoAVL aux = this.root;
+        Actualizar(aux);
+    }
+
+    //********************************************
+    //***********************************************************
     //saber cual es el estado del arbol actual
     public boolean estadoArbol() {
         if (root == null) {
@@ -266,50 +291,46 @@ public class ArbolAVL {
         } else {
             auxRoot = this.root;
             buscarInsertar(auxRoot, categoria);
+            act();
         }
     }
 
-    
-
     //********************************metodo para eliminar nodo de un arbol avl
-    
-    public void quitraHijos(NodoAVL nodo){
+    public void quitraHijos(NodoAVL nodo) {
         nodo.setDerecha(null);
         nodo.setIzquierda(null);
     }
-    
-    public void remplazarNodo(NodoAVL nodo,NodoAVL nuevoNodo){
-        if(nodo.getPadre()!=null){
+
+    public void remplazarNodo(NodoAVL nodo, NodoAVL nuevoNodo) {
+        if (nodo.getPadre() != null) {
             //asignacion de su nuevo hijo
-            if(nodo == nodo.getPadre().getIzquierda()){
+            if (nodo == nodo.getPadre().getIzquierda()) {
                 nodo.getPadre().setIzquierda(nuevoNodo);
-                
-            } else if(nodo==nodo.getPadre().getDerecha()){
+
+            } else if (nodo == nodo.getPadre().getDerecha()) {
                 nodo.getPadre().setDerecha(nuevoNodo);
-                
+
             }
         }
-        if(nuevoNodo!=null){
+        if (nuevoNodo != null) {
             //asigna su nuevo padre
             nuevoNodo.setPadre(nodo.getPadre());
         } else {
             nodo.setPadre(null);
         }
     }
-    
-    
-    public NodoAVL encontrarMinimo(NodoAVL nodo){
-        if(nodo==null){
+
+    public NodoAVL encontrarMinimo(NodoAVL nodo) {
+        if (nodo == null) {
             return null;
         }
-        if(nodo.getIzquierda()!=null){
+        if (nodo.getIzquierda() != null) {
             return encontrarMinimo(nodo.getIzquierda());//buscamos la parte mas izquierda del arbol 
         } else {
             return nodo;
         }
     }
-        
-    
+
     public void elimiarNodo(NodoAVL nodo) {
         if (nodo.getIzquierda() != null && nodo.getDerecha() != null) {
             NodoAVL nodoMenor = encontrarMinimo(nodo.getDerecha());
@@ -323,14 +344,13 @@ public class ArbolAVL {
         } else if (nodo.getDerecha() != null && nodo.getIzquierda() == null) {//solo hay hijo derecha
             remplazarNodo(nodo, nodo.getDerecha());
             quitraHijos(nodo);
-            
+
         } else {
             remplazarNodo(nodo, null);
             quitraHijos(nodo);
         }
     }
-    
-    
+
     public void buscarNodo(NodoAVL nodo, String categoria) {
         if (categoria.compareTo(nodo.getCategoria()) == 0) {
             JOptionPane.showMessageDialog(null, "nodo encontrado");
@@ -339,28 +359,120 @@ public class ArbolAVL {
             if (nodo.getIzquierda() != null) {
                 buscarNodo(nodo.getIzquierda(), categoria);
             } else {
-                JOptionPane.showMessageDialog(null, "El nodo no existe","ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El nodo no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } else if (categoria.compareTo(nodo.getCategoria()) > 0) {
-            if(nodo.getDerecha()!=null){
+            if (nodo.getDerecha() != null) {
                 buscarNodo(nodo.getDerecha(), categoria);
             } else {
-                JOptionPane.showMessageDialog(null, "El nodo no existe","ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El nodo no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         }
-        //**************balanceo
-        
+
     }
 
+    public void balanceo(NodoAVL nodo) {
+        if (nodo != null) {
+
+            balanceo(nodo.getIzquierda());
+
+            balanceo(nodo.getDerecha());
+
+            //**********CALCULAR EL FE DE CADA NODO HACIA ARRIBA
+            int FE = nodo.getFE();
+
+            //*****************ROTACIONES DE LOS ARBOLES AVL
+            if (FE > 1 && nodo.getDerecha().getFE() > 0) {//simple a la derecha
+                //verifico si el nodo que voy a rotar es la raiz o un nodo a su derecha
+                if (nodo == root) {
+                    this.root = simpleDerecha(nodo, null);
+
+                } else {
+                    NodoAVL temp = nodo;
+                    nodo = nodo.getPadre();
+                    NodoAVL nuevoPadre = nodo;
+                    if (nodo.getIzquierda() == temp) {
+                        nodo.setIzquierda(simpleDerecha(temp, nuevoPadre));
+                        //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
+                    } else {
+                        nodo.setDerecha(simpleDerecha(temp, nuevoPadre));
+                        //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
+                    }
+                }
+
+            } else if (FE < -1 && nodo.getIzquierda().getFE() <= 0) {//simple a la izquierda
+                //verifico si el nodo a rotar es la raiz o un nodo a su izquierda
+                if (nodo == root) {
+                    this.root = simpleIzquierda(nodo, null);
+
+                } else {
+                    NodoAVL temp = nodo;
+                    nodo = nodo.getPadre();
+                    NodoAVL nuevoPadre = nodo;
+                    if (nodo.getIzquierda() == temp) {
+                        nodo.setIzquierda(simpleIzquierda(temp, nuevoPadre));
+                        //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
+                    } else {
+                        nodo.setDerecha(simpleIzquierda(temp, nuevoPadre));
+                        //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
+                    }
+                }
+
+            } else if (FE > 1 && nodo.getDerecha().getFE() < 0) {//doble derecha
+                //verifico si el nodo a rotar es la raiz 
+
+                if (nodo == root) {
+                    this.root = dobleDerecha(nodo, null);
+
+                } else {
+                    NodoAVL temp = nodo;
+                    nodo = nodo.getPadre();
+                    NodoAVL nuevoPadre = nodo;
+                    if (nodo.getIzquierda() == temp) {
+                        nodo.setIzquierda(dobleDerecha(temp, nuevoPadre));
+                        //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
+                    } else {
+                        nodo.setDerecha(dobleDerecha(temp, nuevoPadre));
+                        //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
+                    }
+                }
+
+                //problema
+            } else if (FE < -1 && nodo.getIzquierda().getFE() >= 0) {//doble izquierda
+                //verifico si el nodo a rotar es la raiz o es un nodo a su izquierda
+
+                if (nodo == root) {
+                    this.root = dobleIzquierda(nodo, null);
+                } else {
+                    NodoAVL temp = nodo;
+                    nodo = nodo.getPadre();
+                    NodoAVL nuevoPadre = nodo;
+                    if (nodo.getIzquierda() == temp) {
+                        nodo.setIzquierda(dobleIzquierda(temp, nuevoPadre));
+                        //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
+                    } else {
+                        nodo.setDerecha(dobleIzquierda(temp, nuevoPadre));
+                        //JOptionPane.showMessageDialog(null, "nodo "+temp.getCategoria()+"" +"padre "+temp.getPadre());
+                    }
+                }
+
+            }
+
+        }//fin
+    }//fin
+
     public void eliminarCategoria(String categoria) {
+        NodoAVL auxRoot = this.root;
         if (estadoArbol() == true) {
             JOptionPane.showMessageDialog(null, "Arbol no contiene categoria");
         } else {
-            NodoAVL auxRoot = root;
             buscarNodo(auxRoot, categoria);
+            act();//actualizacion de niveles y FE
+            balanceo(auxRoot);
         }
     }
 
+    //*************************************************************************
     //*************************************************************************
     //GRAFO DEL ARBOL AVL
     //metodo para genera la imagen del AVL
@@ -387,7 +499,7 @@ public class ArbolAVL {
     //metodo para recorrer el arbol e ir enlazado en el archivo dot
     public void recorrerAVL(NodoAVL auxRoot) {
         if (auxRoot != null) {
-            archivo.println("nodo" + auxRoot.getCategoria() + "[ label = \" " + auxRoot.getCategoria() + ";" + auxRoot.getAltura() + "\" ];");
+            archivo.println("nodo" + auxRoot.getCategoria() + "[ label = \" " + auxRoot.getCategoria() + "\nN:" + auxRoot.getAltura() + ";\n" + auxRoot.getFE() + "\" ];");
 
             if (auxRoot.getIzquierda() != null) {
                 NodoAVL siguiente = auxRoot.getIzquierda();
