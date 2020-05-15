@@ -66,7 +66,7 @@ public class Lista {
         try {
             byte[] message = Base64.decodeBase64(passwordEncriptado.getBytes("utf-8"));
             MessageDigest md5 = MessageDigest.getInstance("MD5");
-            byte[] digestOfPassword = md5.digest(secretKey.getBytes("utf-80"));
+            byte[] digestOfPassword = md5.digest(secretKey.getBytes("utf-8"));
             byte[] BytesKey = Arrays.copyOf(digestOfPassword, 24);
             SecretKey key = new SecretKeySpec(BytesKey, "DESede");
             Cipher decipher = Cipher.getInstance("DESede");
@@ -153,7 +153,7 @@ public class Lista {
     }
 
     //*************************buscar datos para la ediccion
-    public void retornarDatos(int carnet) {
+    public Nodo retornarDatos(int carnet) {
         //**********saber que posicion esta el nodo del auxiliar
         int posicionBuscar = funcionDispersion(carnet);
 
@@ -167,10 +167,11 @@ public class Lista {
             //JOptionPane.showMessageDialog(null, "usuario econtrado");
             //auxPrimero.buscarUsuarioEnLista(carnet, password);
             Nodo datos = auxPrimero.buscarDatos(carnet);
+            return datos;
 
         } else {
             JOptionPane.showMessageDialog(null, "Erro en la busqueda del usuario", "ERROR", JOptionPane.ERROR_MESSAGE);
-
+            return null;
         }
     }
 

@@ -13,7 +13,6 @@ import javax.swing.ImageIcon;
  */
 public class VentanaUsuario extends javax.swing.JFrame {
 
-    
     //estructuras
     ArbolAVL.ArbolAVL arbolCategorias;
     TablaDispersion.Lista tablaHash;
@@ -21,22 +20,22 @@ public class VentanaUsuario extends javax.swing.JFrame {
     Principal ventanaInicio;
     int carnet;
     ImageIcon imagen = new ImageIcon();
+
     /**
      * Creates new form VentanaUsuario
      */
-    public VentanaUsuario(Principal ventanaInicio,int carnet,ArbolAVL.ArbolAVL arbolCategorias,TablaDispersion.Lista tablaHash) {
+    public VentanaUsuario(Principal ventanaInicio, int carnet, ArbolAVL.ArbolAVL arbolCategorias, TablaDispersion.Lista tablaHash) {
         this.ventanaInicio = ventanaInicio;
         this.carnet = carnet;
         this.arbolCategorias = arbolCategorias;
         this.tablaHash = tablaHash;
         //creacion de scrolbar
         initComponents();
-        lbCarnetUsuario.setText(""+carnet);
+        lbCarnetUsuario.setText("" + carnet);
         
         setVisible(true);
         setLocationRelativeTo(null);
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -65,6 +64,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         btnEliminarCategoria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         btnSalir.setText("Cerrar Session");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +134,11 @@ public class VentanaUsuario extends javax.swing.JFrame {
         jLabel1.setText("Editar Datos");
 
         btnEdit.setText("Editar Datos");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         lbEliminarLibro.setText("Eliminar una Categoria ");
 
@@ -187,7 +192,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
                     .addComponent(lbUsuario)
-                    .addComponent(lbCarnetUsuario))
+                    .addComponent(lbCarnetUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -295,7 +300,14 @@ public class VentanaUsuario extends javax.swing.JFrame {
         lbVisor.setIcon(imagen);
     }//GEN-LAST:event_btnHashReporteActionPerformed
 
-    
+    //edicion de datos
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        int carnetUsuarioDatos = Integer.parseInt(lbCarnetUsuario.getText());
+        TablaDispersion.Nodo datos = tablaHash.retornarDatos(carnetUsuarioDatos);
+        EditarDatos ventanaEdicionDatos = new EditarDatos(datos);
+    }//GEN-LAST:event_btnEditActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarLibro;
