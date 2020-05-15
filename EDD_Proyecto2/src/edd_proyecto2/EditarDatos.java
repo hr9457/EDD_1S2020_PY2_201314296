@@ -31,7 +31,8 @@ public class EditarDatos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         initComponents();
         colocarDatos();
-        //setVisible(true);
+        deshabilitarCampos();
+        setVisible(true);
     }
     
     
@@ -81,16 +82,21 @@ public class EditarDatos extends javax.swing.JFrame {
         txtApellido.setText(datos.getApellido());
         txtCarrera.setText(datos.getCarrera());
         contrasenia = datos.getPassword();
-        
+        //****************desencriptando contrasenia
         int carnet = datos.getNumeroCarnet();
         contrasenia = deencode(""+carnet,contrasenia);
         txtPassword.setText(contrasenia);
-        
-        this.setVisible(true);
     } 
     
     
-    
+    //desabilitar campos de texto
+    public void deshabilitarCampos(){
+        txtNumeroCarent.setEnabled(false);
+        txtNombre.setEnabled(false);
+        txtApellido.setEnabled(false);
+        txtCarrera.setEnabled(false);
+        txtPassword.setEnabled(false);
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -158,6 +164,11 @@ public class EditarDatos extends javax.swing.JFrame {
 
         btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         btnSalir.setText("SALIR");
@@ -255,12 +266,23 @@ public class EditarDatos extends javax.swing.JFrame {
     //para habilitar los campos de ediccion
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        txtNumeroCarent.setEnabled(true);
+        //txtNumeroCarent.setEnabled(true);
         txtNombre.setEnabled(true);
         txtApellido.setEnabled(true);
         txtCarrera.setEnabled(true);
         txtPassword.setEnabled(true);
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    
+    //envio de datos editados
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        datos.setNumeroCarnet(Integer.parseInt(txtNumeroCarent.getText()));
+        datos.setNombre(txtNombre.getText());
+        datos.setApellido(txtApellido.getText());
+        datos.setCarrera(txtCarrera.getText());
+        datos.setPassword(encode(""+txtNumeroCarent.getText(), txtPassword.getText()));
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     
 
