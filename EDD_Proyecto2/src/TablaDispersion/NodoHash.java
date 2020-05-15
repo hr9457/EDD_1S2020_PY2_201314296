@@ -35,6 +35,12 @@ public class NodoHash {
         return resultado;
     }
     
+    //metodo para buscar datos en la lista y obtener sus datos
+    public Nodo buscarDatos(int carnet){
+        Nodo datos = lista.buscarObtener(carnet);
+        return datos;
+    }
+    
     //**************************************************************************
     //metodo get y set 
     public int getPosicion() {

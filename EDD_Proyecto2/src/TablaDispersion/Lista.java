@@ -40,9 +40,9 @@ public class Lista {
     public boolean estadoLista() {
         return (primero == null && ultimo == null) ? true : false;
     }
-    
+
     //meteodo para el uso del MD5
-    public String encode(String secretkey, String password){
+    public String encode(String secretkey, String password) {
         String passwordEncriptado = "";
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
@@ -50,7 +50,7 @@ public class Lista {
             byte[] BytesKey = Arrays.copyOf(llavePassword, 24);
             SecretKey key = new SecretKeySpec(BytesKey, "DESede");
             Cipher cifrado = Cipher.getInstance("DESede");
-            cifrado.init(Cipher.ENCRYPT_MODE, key);            
+            cifrado.init(Cipher.ENCRYPT_MODE, key);
             byte[] plainTextBytes = password.getBytes("utf-8");
             byte[] buf = cifrado.doFinal(plainTextBytes);
             byte[] base64Bytes = Base64.encodeBase64(buf);
@@ -59,9 +59,9 @@ public class Lista {
         }
         return passwordEncriptado;
     }
-    
+
     //*desencriptacion de la contrasenia
-    public String deencode(String secretKey, String passwordEncriptado){
+    public String deencode(String secretKey, String passwordEncriptado) {
         String paswordDesencriptado = "";
         try {
             byte[] message = Base64.decodeBase64(passwordEncriptado.getBytes("utf-8"));
@@ -72,22 +72,21 @@ public class Lista {
             Cipher decipher = Cipher.getInstance("DESede");
             decipher.init(Cipher.DECRYPT_MODE, key);
             byte[] plainText = decipher.doFinal(message);
-            paswordDesencriptado = new String(plainText,"UTF-8");
+            paswordDesencriptado = new String(plainText, "UTF-8");
         } catch (Exception e) {
         }
         return paswordDesencriptado;
     }
     //*********************************
-    
+
     //metodo para insertar en la lista
     public void insertar(int carne, String nombre, String apellido, String carrera, String password) {
         int posicionDeNodo = funcionDispersion(carne);//obtengo la posicion que le corresponde en la lista
         //*********encriptando contrasenia
-        password = encode(""+carne, password);//recibe una llave y la contrasenia
+        password = encode("" + carne, password);//recibe una llave y la contrasenia
         //JOptionPane.showMessageDialog(null, "password"+password);
-        
+
         //JOptionPane.showMessageDialog(null, "pas: "+password);
-        
         NodoHash nuevoNodo = new NodoHash(posicionDeNodo);//creo el nuevo nodo en la lista dispersion
 
         if (estadoLista() == true) {//si en la lista no existe ningun elemento            
@@ -126,31 +125,52 @@ public class Lista {
             }
         }
     }
-    
+
     //metod para buscar usuario dentro de la lista
-    public boolean buscarUsuario(int carnet,String password){
+    public boolean buscarUsuario(int carnet, String password) {
         boolean resultado;
         //**********saber que posicion esta el nodo del auxiliar
         int posicionBuscar = funcionDispersion(carnet);
         //***********encripoto passwor para la comparacion
-        password = encode(""+carnet, password);
-        
+        password = encode("" + carnet, password);
+
         //JOptionPane.showMessageDialog(null, "pas: "+password);
-        
         //********auxiliar del primer nodo
         NodoHash auxPrimero = this.primero;
-        while (auxPrimero !=null && auxPrimero.getPosicion() !=posicionBuscar){
+        while (auxPrimero != null && auxPrimero.getPosicion() != posicionBuscar) {
             auxPrimero = auxPrimero.getAbajo();
         }
-        
-        if(auxPrimero!=null){
+
+        if (auxPrimero != null) {
             //JOptionPane.showMessageDialog(null, "usuario econtrado");
             resultado = auxPrimero.buscarUsuarioEnLista(carnet, password);
             return resultado;
         } else {
-            JOptionPane.showMessageDialog(null, "El usuario no existe","ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El usuario no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             resultado = false;
             return resultado;
+        }
+    }
+
+    //*************************buscar datos para la ediccion
+    public void retornarDatos(int carnet) {
+        //**********saber que posicion esta el nodo del auxiliar
+        int posicionBuscar = funcionDispersion(carnet);
+
+        //********auxiliar del primer nodo
+        NodoHash auxPrimero = this.primero;
+        while (auxPrimero != null && auxPrimero.getPosicion() != posicionBuscar) {
+            auxPrimero = auxPrimero.getAbajo();
+        }
+
+        if (auxPrimero != null) {
+            //JOptionPane.showMessageDialog(null, "usuario econtrado");
+            //auxPrimero.buscarUsuarioEnLista(carnet, password);
+            Nodo datos = auxPrimero.buscarDatos(carnet);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro en la busqueda del usuario", "ERROR", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
@@ -193,14 +213,14 @@ public class Lista {
         //regreso hasta arriba de la tabla
         auxPrimero = this.primero;
         //********obtengo el primer los varloes de la lista del primer nodo hash
-        TablaDispersion.Nodo auxPrimeroLista; 
+        TablaDispersion.Nodo auxPrimeroLista;
         //*********primer while sirve para ver la lista hash hacia abajo
         while (auxPrimero != null) {
             auxPrimeroLista = auxPrimero.getLista().getPrimero();
             //******segundo while rebisa la lista dentro del nodo hash
             archivo.print("nodo" + contadorLista + "[label = \" {");
             while (auxPrimeroLista != null) {
-                archivo.print("" + auxPrimeroLista.getNumeroCarnet() +"--" +auxPrimeroLista.getNombre()+"\\n"+auxPrimeroLista.getPassword()+ "|");
+                archivo.print("" + auxPrimeroLista.getNumeroCarnet() + "--" + auxPrimeroLista.getNombre() + "\\n" + auxPrimeroLista.getPassword() + "|");
                 auxPrimeroLista = auxPrimeroLista.getSiguiente();
             }
             contadorLista++;//aumento en uno
@@ -213,7 +233,7 @@ public class Lista {
         archivo.println("");
         //**********anidacion de los nodos
         //reinicio el contador de funciones
-        for (int i = 0; i < contadorLista-1; i++) {
+        for (int i = 0; i < contadorLista - 1; i++) {
             archivo.println("nodo0:f" + i + "->nodo" + (i + 1));
         }
 
@@ -240,8 +260,6 @@ public class Lista {
         }
     }
 
-    
-       
     //metodo para buscar dentro de la lista
     //busqueda cuadratica
     //-------------------------------------------------------------------------------

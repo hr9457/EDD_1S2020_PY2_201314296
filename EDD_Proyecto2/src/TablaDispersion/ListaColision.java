@@ -20,10 +20,8 @@ public class ListaColision {
         this.ultimo = null;
     }
 
-    
-    
     //*desencriptacion de la contrasenia
-    public String deencode(String secretKey, String passwordEncriptado){
+    public String deencode(String secretKey, String passwordEncriptado) {
         String paswordDesencriptado = "";
         try {
             byte[] message = Base64.decodeBase64(passwordEncriptado.getBytes("utf-8"));
@@ -34,13 +32,12 @@ public class ListaColision {
             Cipher decipher = Cipher.getInstance("DESede");
             decipher.init(Cipher.DECRYPT_MODE, key);
             byte[] plainText = decipher.doFinal(message);
-            paswordDesencriptado = new String(plainText,"UTF-8");
+            paswordDesencriptado = new String(plainText, "UTF-8");
         } catch (Exception e) {
         }
         return paswordDesencriptado;
     }
-    
-    
+
     //estado de la lista
     public boolean estadoLista() {
         if (primero == null && ultimo == null) {
@@ -67,30 +64,64 @@ public class ListaColision {
     //metod para que me devuelva la existencia del usuario si fuese positiva
     public boolean buscarUsuario(int carnet, String password) {
         Nodo auxPrimero = this.primero;
-        while (auxPrimero != null && auxPrimero.getNumeroCarnet() != carnet) {            
+        while (auxPrimero != null && auxPrimero.getNumeroCarnet() != carnet) {
             auxPrimero = auxPrimero.getSiguiente();
         }
 
         //*********rebiso que los paremetro coincidan
-        if(auxPrimero==null){
-            JOptionPane.showMessageDialog(null, "El usuario no existe","ERROR",JOptionPane.ERROR_MESSAGE);
+        if (auxPrimero == null) {
+            JOptionPane.showMessageDialog(null, "El usuario no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
             //**********usuario encontrado
             //*******comparo la contrasenia
             //String passwordDesencriptado = deencode(""+carnet, auxPrimero.getPassword());
-            if(auxPrimero.getPassword().equals(password)){
-                JOptionPane.showMessageDialog(null, "BIENVENIDO: " +auxPrimero.getNombre());
+            if (auxPrimero.getPassword().equals(password)) {
+                JOptionPane.showMessageDialog(null, "BIENVENIDO: " + auxPrimero.getNombre());
                 return true;
                 //JOptionPane.showMessageDialog(null, "Password no coincide","",JOptionPane.WARNING_MESSAGE);
             } else {
                 //*****dejo entrar al usuario
-                JOptionPane.showMessageDialog(null, "PASSWORD NO COINCIDEN","ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "PASSWORD NO COINCIDEN", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
         }
     }
 
+    //buscar y obtener la info
+    //********para la ediccion de la informaicon dentro de la app
+    public Nodo buscarObtener(int carnet) {
+
+        //*********** para la busqueda verifico primero si exite 
+        //**********  algun elemento ya en la lista
+        if (estadoLista() != true) {
+            //busco la existencia del nodo dentro de la lista
+
+            //para empezar a recorrer desde la primera posicion a buscar el usuario
+            Nodo auxPrimero = this.primero;
+
+            while (auxPrimero != null && auxPrimero.getNumeroCarnet() != carnet) {
+                auxPrimero = auxPrimero.getSiguiente();
+            }
+
+            //*********rebiso que los paremetro coincidan
+            if (auxPrimero == null) {
+                JOptionPane.showMessageDialog(null, "Error al editar datos", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return null;
+
+            } else {
+                return auxPrimero;
+
+            }
+
+        } else {
+            return null;
+            
+        }//fin
+
+    }//fin
+
+    
     //*************metodo get y set
     public Nodo getPrimero() {
         return primero;
