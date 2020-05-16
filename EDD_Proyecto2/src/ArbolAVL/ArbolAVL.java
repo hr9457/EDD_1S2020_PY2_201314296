@@ -169,7 +169,7 @@ public class ArbolAVL {
     //0 son iguales
     //-1 la primer es menor
     //1 la es mayor
-    public void buscarInsertar(NodoAVL nodo, String categoria) {
+    public void buscarInsertar(NodoAVL nodo, String categoria,int carnet) {
         if (categoria.compareTo(nodo.getCategoria()) == 0) {
             System.out.println("datos iguales");
             JOptionPane.showMessageDialog(null, "categoria ya existente");
@@ -177,22 +177,22 @@ public class ArbolAVL {
         } else if (categoria.compareTo(nodo.getCategoria()) < 0) {
             if (nodo.getIzquierda() == null) {
                 //**creo categoria con el dato
-                NodoAVL nuevaCategoria = new NodoAVL(categoria);
+                NodoAVL nuevaCategoria = new NodoAVL(categoria,carnet);
                 nodo.setIzquierda(nuevaCategoria);
                 nuevaCategoria.setPadre(nodo);
                 //JOptionPane.showMessageDialog(null, "padre "+nodo.getCategoria());
             } else {
-                buscarInsertar(nodo.getIzquierda(), categoria);
+                buscarInsertar(nodo.getIzquierda(), categoria,carnet);
             }
 
         } else if (categoria.compareTo(nodo.getCategoria()) > 0) {
             if (nodo.getDerecha() == null) {
-                NodoAVL nuevaCategoria = new NodoAVL(categoria);
+                NodoAVL nuevaCategoria = new NodoAVL(categoria,carnet);
                 nodo.setDerecha(nuevaCategoria);
                 nuevaCategoria.setPadre(nodo);
                 //JOptionPane.showMessageDialog(null, "padre "+nodo.getCategoria());
             } else {
-                buscarInsertar(nodo.getDerecha(), categoria);
+                buscarInsertar(nodo.getDerecha(), categoria,carnet);
             }
         }
 
@@ -284,13 +284,13 @@ public class ArbolAVL {
     }//fin del metodo insertar nodo
 
     //metodo para insertar en el arbol
-    public void insertarCategoria(String categoria) {
+    public void insertarCategoria(String categoria,int carnet) {
         if (estadoArbol() == true) {
-            NodoAVL nuevaCategoria = new NodoAVL(categoria);
+            NodoAVL nuevaCategoria = new NodoAVL(categoria,carnet);
             this.root = nuevaCategoria;
         } else {
             auxRoot = this.root;
-            buscarInsertar(auxRoot, categoria);
+            buscarInsertar(auxRoot, categoria,carnet);
             act();
         }
     }
@@ -476,7 +476,7 @@ public class ArbolAVL {
     //*************************************************************************
     //GRAFO DEL ARBOL AVL
     //metodo para genera la imagen del AVL
-    private void generarPng() {
+    public void generarPng() {
         try {
             Runtime ejecuccion = Runtime.getRuntime();
             ejecuccion.exec("dot.exe -Tpng ArchivosDot\\ArbolAVL.dot -o Reportes\\ArbolAVL.png");
@@ -499,7 +499,7 @@ public class ArbolAVL {
     //metodo para recorrer el arbol e ir enlazado en el archivo dot
     public void recorrerAVL(NodoAVL auxRoot) {
         if (auxRoot != null) {
-            archivo.println("nodo" + auxRoot.getCategoria() + "[ label = \" " + auxRoot.getCategoria() + "\nN:" + auxRoot.getAltura() + ";\n" + auxRoot.getFE() + "\" ];");
+            archivo.println("nodo" + auxRoot.getCategoria() + "[ label = \" " + auxRoot.getCategoria() + "\nN:" + auxRoot.getAltura() + "\" ];");
 
             if (auxRoot.getIzquierda() != null) {
                 NodoAVL siguiente = auxRoot.getIzquierda();
@@ -576,7 +576,7 @@ public class ArbolAVL {
     }
 
     //****************reportes graficos con los diferente tipo de recorrido para el arbol
-    private void generarPngPreorden() {
+    public void generarPngPreorden() {
         try {
             Runtime ejecuccion = Runtime.getRuntime();
             ejecuccion.exec("dot.exe -Tpng ArchivosDot\\ArbolPreorden.dot -o Reportes\\ArbolPreorden.png");
@@ -625,7 +625,7 @@ public class ArbolAVL {
     }
 
     //*********************************
-    private void generarPngInorden() {
+    public void generarPngInorden() {
         try {
             Runtime ejecuccion = Runtime.getRuntime();
             ejecuccion.exec("dot.exe -Tpng ArchivosDot\\ArbolInorden.dot -o Reportes\\ArbolInorden.png");
@@ -674,7 +674,7 @@ public class ArbolAVL {
     }
 
     //********************************
-    private void generarPngPostorden() {
+    public void generarPngPostorden() {
         try {
             Runtime ejecuccion = Runtime.getRuntime();
             ejecuccion.exec("dot.exe -Tpng ArchivosDot\\ArbolPostorden.dot -o Reportes\\ArbolPostorden.png");

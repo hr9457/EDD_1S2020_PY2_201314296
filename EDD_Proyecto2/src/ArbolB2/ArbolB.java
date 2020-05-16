@@ -76,14 +76,22 @@ public class ArbolB {
         }//
     }
     
+    public void agregarLibro(){
+        if(raiz==null){// si el libro no tiene paginas
+            
+        } else { //si el libro ya tiene mas de una pagina
+            
+        }
+    }
     
     private void recorrePagina(Pagina nodo,PrintWriter archivo){
         Nodo auxPrimerNodo = nodo.getPrimero();
         int contadofuncion = 0;
         if(auxPrimerNodo!=null){
             archivo.print("nodo"+auxPrimerNodo.getInfo().getIsbn()+"[lable=\"");
+            //************************
             while(auxPrimerNodo!=null){
-                archivo.print("<f"+contadofuncion);
+                
                 auxPrimerNodo = auxPrimerNodo.getSiguiente();
             }
         }

@@ -1,17 +1,7 @@
 digraph arbolpostorden {
 node [shape = record];
 rankdir=LR;
-nodo0[label="Comedia"];
-nodo1[label="Epopeya"];
-nodo2[label="Cuento"];
-nodo3[label="Melodrama"];
-nodo4[label="Tragedia"];
-nodo5[label="Romance"];
-nodo6[label="Fabula"];
-nodo7[label="infantil"];
-nodo8[label="suspenso"];
-nodo9[label="novelas"];
-nodo10[label="anime"];
-nodo0->nodo1->nodo2->nodo3->nodo4->nodo5->nodo6->nodo7->nodo8->nodo9->nodo10;
+nodo0[label="agua"];
+nodo0;
 label = "Arbol AVL - Postorden "
 }

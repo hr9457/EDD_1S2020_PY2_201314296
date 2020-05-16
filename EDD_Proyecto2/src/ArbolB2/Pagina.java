@@ -18,6 +18,7 @@ public class Pagina {
         this.padre = null;
     }
 
+    //agoritmos inserta en orden
     public void insertarNodo(int isbn, String titulo, String autor,
             String editorial, String anio, String edicion, String categoria, String idioma, int carnet) {
         Informacion nevaInfo = new Informacion(isbn, titulo, autor, editorial,
@@ -64,11 +65,42 @@ public class Pagina {
         }
 
     }//fin del metodo
-    
-    
+
+    //inserta libro
+    public Pagina insert(int isbn) {
+        if (this.primero == null && this.ultimo == null) {
+            //insertar nodo
+            return null;
+            
+        } else {
+            //buscar nodo por nodo si hay un hijo
+            Nodo auxPrimero = this.primero;
+            while (auxPrimero != null) {
+                if (auxPrimero != null) {
+                    if (auxPrimero.getHijoIzquierda() != null) {
+                        if (isbn < auxPrimero.getInfo().getIsbn()) {
+                            //retorno la pagina que tenga del lado izquierdo
+                            return auxPrimero.getHijoIzquierda();
+                        }
+
+                    } else if (auxPrimero.getHijoDerecha() != null) {
+                        if (isbn > auxPrimero.getInfo().getIsbn()) {
+                            //retorno la pagina que tenga del lado derecho
+                            return auxPrimero.getHijoDerecha();
+                        }
+
+                    }
+                }
+                auxPrimero = auxPrimero.getSiguiente();
+
+            }//fin del recorrid de la lista
+            return null;
+        }
+    }
+
     //metodo para eliminar de utlimo
-    public Nodo eliminarUltimoNodo(){
-        Nodo axuUltimo=this.ultimo;
+    public Nodo eliminarUltimoNodo() {
+        Nodo axuUltimo = this.ultimo;
         this.ultimo = axuUltimo.getAnterior();
         this.ultimo.setSiguiente(null);
         axuUltimo.setAnterior(null);
@@ -106,8 +138,5 @@ public class Pagina {
     public void setUltimo(Nodo ultimo) {
         this.ultimo = ultimo;
     }
-    
-    
-    
 
 }

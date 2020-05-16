@@ -20,10 +20,13 @@ public class IngresoCategoria extends javax.swing.JFrame {
     private FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos JSON", "json");
 
     ArbolAVL.ArbolAVL arbolCategorias;
+    
+    int carnet;
 
     //constructor
-    public IngresoCategoria(ArbolAVL.ArbolAVL arbolCategorias) {
+    public IngresoCategoria(ArbolAVL.ArbolAVL arbolCategorias,int carnet) {
         this.arbolCategorias = arbolCategorias;
+        this.carnet = carnet;
         initComponents();//inicializa componentes
         setLocationRelativeTo(null);//se sentra en el centro
         setVisible(true);//hace visible la ventnay 
@@ -121,7 +124,7 @@ public class IngresoCategoria extends javax.swing.JFrame {
                                         .addComponent(lbNombreArchivo)
                                         .addGap(18, 18, 18)
                                         .addComponent(txtNombreArchivo)))))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +148,7 @@ public class IngresoCategoria extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombreArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbNombreArchivo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addComponent(btnRegistroMasivo)
                 .addContainerGap())
         );
@@ -154,17 +157,11 @@ public class IngresoCategoria extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -174,9 +171,19 @@ public class IngresoCategoria extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
         String categoria = txtCategoria.getText();
-        arbolCategorias.insertarCategoria(categoria);
+        arbolCategorias.insertarCategoria(categoria,this.carnet);
         categoria = "";
         txtCategoria.setText("");
+        arbolCategorias.generarDotAVL();//creo el dot
+        arbolCategorias.generarPng();
+        arbolCategorias.generarDotInorden();
+        arbolCategorias.generarDotInorden();
+        
+        arbolCategorias.generarDotPostorden();
+        arbolCategorias.generarDotPostorden();
+        
+        arbolCategorias.generarDotPreorden();
+        arbolCategorias.generarPngPreorden();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     //EVENTO PARA VISUALIZAR EL ARBOL
@@ -221,7 +228,7 @@ public class IngresoCategoria extends javax.swing.JFrame {
             for(int i=0;i<lista.size();i++){
                 JSONObject elementoCategoria = (JSONObject) lista.get(i);
                 String nuevaCategoria = "" + elementoCategoria.get("NOMBRE");//obtengo el valor
-                arbolCategorias.insertarCategoria(nuevaCategoria);//insertor en el arbolAVL
+                arbolCategorias.insertarCategoria(nuevaCategoria,this.carnet);//insertor en el arbolAVL
             }
         
         } catch (Exception e) {

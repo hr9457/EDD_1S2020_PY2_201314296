@@ -1,17 +1,7 @@
 digraph arbolpreorden {
 node [shape = record];
 rankdir=LR;
-nodo0[label="anime"];
-nodo1[label="Fabula"];
-nodo2[label="Cuento"];
-nodo3[label="Comedia"];
-nodo4[label="Epopeya"];
-nodo5[label="Romance"];
-nodo6[label="Melodrama"];
-nodo7[label="Tragedia"];
-nodo8[label="novelas"];
-nodo9[label="infantil"];
-nodo10[label="suspenso"];
-nodo0->nodo1->nodo2->nodo3->nodo4->nodo5->nodo6->nodo7->nodo8->nodo9->nodo10;
+nodo0[label="agua"];
+nodo0;
 label = "Arbol AVL - Preorden "
 }

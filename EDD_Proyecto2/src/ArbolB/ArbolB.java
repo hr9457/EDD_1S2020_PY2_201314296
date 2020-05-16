@@ -89,9 +89,12 @@ public class ArbolB {
         if(nodo!=null){
             archivo.print("nodo"+numeroNodo+
                     "[ shape=record, label= \" ");
+            //***************************************************
             NodoK auxListaK = nodo.getListaClaves().getPrimero();
             while(auxListaK!=null){
-                archivo.print(""+auxListaK.getISBN()+";"+auxListaK.getTitulo());
+                archivo.print("{"+auxListaK.getISBN());  
+                //*****si tiene hijos
+                
                 if(auxListaK.getSiguiente()!=null){
                     archivo.print("|");
                 }

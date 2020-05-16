@@ -13,8 +13,9 @@ public class NodoAVL {
     NodoAVL izquierda;
 
     //constructor
-    public NodoAVL(String categoria) {
+    public NodoAVL(String categoria,int carnet) {
         this.categoria = categoria;
+        this.carnet = carnet;
         this.altura = 1;
         this.FE = 0;
         this.padre = null;
