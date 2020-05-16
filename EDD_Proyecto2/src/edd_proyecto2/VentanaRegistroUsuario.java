@@ -185,6 +185,7 @@ public class VentanaRegistroUsuario extends javax.swing.JFrame {
         txtApellido.setText("");
         txtCarrera.setText("");
         txtPAssword.setText("");
+        tablaDispersion.reporteHash();//actualizo el grafo
     }//GEN-LAST:event_btnRegistarActionPerformed
 
     //envento para la validacion de un entero en el cuadro de texto

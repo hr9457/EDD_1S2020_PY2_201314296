@@ -41,6 +41,11 @@ public class NodoHash {
         return datos;
     }
     
+    //metodo para eliminar un dato en la lista
+    public void eliminarDato(int carnet){
+        lista.buscarEliminar(carnet);
+    }
+    
     //**************************************************************************
     //metodo get y set 
     public int getPosicion() {

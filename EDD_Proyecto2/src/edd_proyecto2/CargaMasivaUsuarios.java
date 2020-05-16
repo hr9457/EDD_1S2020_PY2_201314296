@@ -184,6 +184,7 @@ public class CargaMasivaUsuarios extends javax.swing.JFrame {
             //FIN DEL REGISTOR DEL ARCHIV JSON
             //CIERRE DE LA VENTAN
             dispose();
+            tablaDispersion.reporteHash();//actualizacion del grafo
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Nose puedo cargar el archivo \n" + e);

@@ -175,6 +175,29 @@ public class Lista {
         }
     }
 
+    ///eliminacion de un usuario de la tabla has
+    public void buscarEliminar(int carnet) {
+        //**********saber que posicion esta el nodo del auxiliar
+        int posicionBuscar = funcionDispersion(carnet);
+
+        //********auxiliar del primer nodo
+        NodoHash auxPrimero = this.primero;
+        while (auxPrimero != null && auxPrimero.getPosicion() != posicionBuscar) {
+            auxPrimero = auxPrimero.getAbajo();
+        }
+
+        if (auxPrimero != null) {
+            //JOptionPane.showMessageDialog(null, "usuario econtrado");
+            //auxPrimero.buscarUsuarioEnLista(carnet, password);
+            auxPrimero.eliminarDato(carnet);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al eliminar usuario", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+    }
+
     //metodo para genera la imagen png
     public void generarPNG() {
         try {
@@ -199,43 +222,45 @@ public class Lista {
     //metodo para recorre todo la tabla de dispersion
     public void recorreTabla(PrintWriter archivo) {
         NodoHash auxPrimero = this.primero;
-        int contadorFunciones = 0;
-        int contadorLista = 1;//el siguiente la nodo0
-        archivo.print("nodo0 [label = \" ");
-        while (auxPrimero.getAbajo() != null) {
-            archivo.print(" <f" + contadorFunciones + ">" + auxPrimero.getPosicion() + "|");//creo una funcion en el nodos
-            auxPrimero = auxPrimero.getAbajo();
-            contadorFunciones++;//aumento en uno
-        }
-        archivo.print(" <f" + contadorFunciones + ">" + auxPrimero.getPosicion());
-        archivo.print(" \" , height=2.5];");//alto de separcion del nodo 0
-
-        archivo.println("");
-        //regreso hasta arriba de la tabla
-        auxPrimero = this.primero;
-        //********obtengo el primer los varloes de la lista del primer nodo hash
-        TablaDispersion.Nodo auxPrimeroLista;
-        //*********primer while sirve para ver la lista hash hacia abajo
-        while (auxPrimero != null) {
-            auxPrimeroLista = auxPrimero.getLista().getPrimero();
-            //******segundo while rebisa la lista dentro del nodo hash
-            archivo.print("nodo" + contadorLista + "[label = \" {");
-            while (auxPrimeroLista != null) {
-                archivo.print("" + auxPrimeroLista.getNumeroCarnet() + "--" + auxPrimeroLista.getNombre() + "\\n" + auxPrimeroLista.getPassword() + "|");
-                auxPrimeroLista = auxPrimeroLista.getSiguiente();
+        if (auxPrimero != null) {
+            int contadorFunciones = 0;
+            int contadorLista = 1;//el siguiente la nodo0
+            archivo.print("nodo0 [label = \" ");
+            while (auxPrimero.getAbajo() != null) {
+                archivo.print(" <f" + contadorFunciones + ">" + auxPrimero.getPosicion() + "|");//creo una funcion en el nodos
+                auxPrimero = auxPrimero.getAbajo();
+                contadorFunciones++;//aumento en uno
             }
-            contadorLista++;//aumento en uno
-            archivo.print("}\"];");//cierre del label
-            archivo.println("");
-            //*****paso el siguiente nodo de abajo de la tabla hash
-            auxPrimero = auxPrimero.getAbajo();
-        }
+            archivo.print(" <f" + contadorFunciones + ">" + auxPrimero.getPosicion());
+            archivo.print(" \" , height=2.5];");//alto de separcion del nodo 0
 
-        archivo.println("");
-        //**********anidacion de los nodos
-        //reinicio el contador de funciones
-        for (int i = 0; i < contadorLista - 1; i++) {
-            archivo.println("nodo0:f" + i + "->nodo" + (i + 1));
+            archivo.println("");
+            //regreso hasta arriba de la tabla
+            auxPrimero = this.primero;
+            //********obtengo el primer los varloes de la lista del primer nodo hash
+            TablaDispersion.Nodo auxPrimeroLista;
+            //*********primer while sirve para ver la lista hash hacia abajo
+            while (auxPrimero != null) {
+                auxPrimeroLista = auxPrimero.getLista().getPrimero();
+                //******segundo while rebisa la lista dentro del nodo hash
+                archivo.print("nodo" + contadorLista + "[label = \" {");
+                while (auxPrimeroLista != null) {
+                    archivo.print("" + auxPrimeroLista.getNumeroCarnet() + "--" + auxPrimeroLista.getNombre() + "\\n" + auxPrimeroLista.getPassword() + "|");
+                    auxPrimeroLista = auxPrimeroLista.getSiguiente();
+                }
+                contadorLista++;//aumento en uno
+                archivo.print("}\"];");//cierre del label
+                archivo.println("");
+                //*****paso el siguiente nodo de abajo de la tabla hash
+                auxPrimero = auxPrimero.getAbajo();
+            }
+
+            archivo.println("");
+            //**********anidacion de los nodos
+            //reinicio el contador de funciones
+            for (int i = 0; i < contadorLista - 1; i++) {
+                archivo.println("nodo0:f" + i + "->nodo" + (i + 1));
+            }
         }
 
     }

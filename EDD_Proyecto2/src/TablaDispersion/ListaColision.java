@@ -116,12 +116,40 @@ public class ListaColision {
 
         } else {
             return null;
-            
+
         }//fin
 
     }//fin
 
-    
+    //******************buscar y eliminar
+    public void buscarEliminar(int carnet) {
+        Nodo nodoEliminar = buscarObtener(carnet);
+        if (estadoLista() != true) {
+            if (nodoEliminar == this.primero && nodoEliminar == this.ultimo) {
+                this.primero = null;
+                this.ultimo = null;
+
+            } else if (nodoEliminar == this.primero) {
+                Nodo auxSiguiteA = nodoEliminar.getSiguiente();
+                nodoEliminar.setSiguiente(null);
+                auxSiguiteA.setAnterior(null);
+                this.primero = auxSiguiteA;
+            } else if (nodoEliminar == this.ultimo) {
+                Nodo auxAnteriorA = nodoEliminar.getAnterior();
+                nodoEliminar.setAnterior(null);
+                auxAnteriorA.setSiguiente(null);
+                this.ultimo = auxAnteriorA;
+            } else {
+                Nodo auxAnteriorA = nodoEliminar.getAnterior();
+                Nodo auxSiguienteA = nodoEliminar.getSiguiente();
+                nodoEliminar.setAnterior(null);
+                nodoEliminar.setSiguiente(null);
+                auxAnteriorA.setSiguiente(auxSiguienteA);
+                auxSiguienteA.setAnterior(auxAnteriorA);
+            }
+        }
+    }
+
     //*************metodo get y set
     public Nodo getPrimero() {
         return primero;
