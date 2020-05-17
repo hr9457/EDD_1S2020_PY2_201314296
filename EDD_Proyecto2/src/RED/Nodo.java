@@ -5,14 +5,16 @@ public class Nodo {
     
     //elementos 
     String ip;
+    int puerto;
     
     //punteros 
     Nodo siguiente;
     Nodo anterior;
     
     //constructor
-    public Nodo(String ip){
+    public Nodo(String ip,int puerto){
         this.ip = ip;
+        this.puerto = puerto;
     }
 
     //*************metodos get y set
@@ -38,6 +40,14 @@ public class Nodo {
 
     public void setAnterior(Nodo anterior) {
         this.anterior = anterior;
+    }
+
+    public int getPuerto() {
+        return puerto;
+    }
+
+    public void setPuerto(int puerto) {
+        this.puerto = puerto;
     }
     
     

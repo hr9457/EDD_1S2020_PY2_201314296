@@ -7,7 +7,7 @@ package ArbolB2;
 public class Pagina {
 
     Pagina padre;
-    int contadorNodo = 0;
+    int contadorElementos = 0;
 
     Nodo primero;
     Nodo ultimo;
@@ -21,6 +21,7 @@ public class Pagina {
     //agoritmos inserta en orden
     public void insertarNodo(int isbn, String titulo, String autor,
             String editorial, String anio, String edicion, String categoria, String idioma, int carnet) {
+        
         Informacion nevaInfo = new Informacion(isbn, titulo, autor, editorial,
                 anio, edicion, categoria, idioma, carnet);
 
@@ -29,6 +30,8 @@ public class Pagina {
         if (primero == null && ultimo == null) {
             this.primero = nuevoElemento;
             this.ultimo = nuevoElemento;
+            contadorElementos++;
+            
         } else {
             Nodo auxPrimero = this.primero;
             while (auxPrimero.getSiguiente() != null && auxPrimero.getInfo().getIsbn() < isbn) {
@@ -39,11 +42,15 @@ public class Pagina {
                 this.ultimo.setSiguiente(nuevoElemento);
                 nuevoElemento.setAnterior(this.ultimo);
                 this.ultimo = nuevoElemento;
+                contadorElementos++;
+                
             } else if (auxPrimero == this.primero) {
                 if (auxPrimero.getInfo().getIsbn() > isbn) {
                     auxPrimero.setAnterior(nuevoElemento);
                     nuevoElemento.setSiguiente(auxPrimero);
                     this.primero = nuevoElemento;
+                    contadorElementos++;
+                    
                 } else if (auxPrimero.getInfo().getIsbn() < isbn) {
                     Nodo auxAdelante = auxPrimero.getSiguiente();
                     auxPrimero.setSiguiente(nuevoElemento);
@@ -52,6 +59,8 @@ public class Pagina {
                     if (auxAdelante != null) {
                         auxAdelante.setAnterior(nuevoElemento);
                     }
+                    contadorElementos++;
+                    
                 }
             } else {
                 Nodo auxAdelante = auxPrimero.getSiguiente();
@@ -61,21 +70,28 @@ public class Pagina {
                 if (auxAdelante != null) {
                     auxAdelante.setAnterior(nuevoElemento);
                 }
+                contadorElementos++;
+                
             }
         }
 
     }//fin del metodo
 
+    //**************************************************************************
     //inserta libro
-    public Pagina insert(int isbn) {
+    public Pagina navegarEntreHijos(int isbn) {
+        
         if (this.primero == null && this.ultimo == null) {
-            //insertar nodo
+            //no tiene nodos en donde navegar
             return null;
             
         } else {
+            //NAVEGAR ENTRE HIJOS
             //buscar nodo por nodo si hay un hijo
             Nodo auxPrimero = this.primero;
+            
             while (auxPrimero != null) {
+                
                 if (auxPrimero != null) {
                     if (auxPrimero.getHijoIzquierda() != null) {
                         if (isbn < auxPrimero.getInfo().getIsbn()) {
@@ -89,7 +105,8 @@ public class Pagina {
                             return auxPrimero.getHijoDerecha();
                         }
 
-                    }
+                    } 
+                    
                 }
                 auxPrimero = auxPrimero.getSiguiente();
 
@@ -104,7 +121,31 @@ public class Pagina {
         this.ultimo = axuUltimo.getAnterior();
         this.ultimo.setSiguiente(null);
         axuUltimo.setAnterior(null);
+        contadorElementos--;
         return axuUltimo;
+    }
+    
+    public Nodo eliminarTercero(){
+        Nodo auxprimero = this.primero;
+        for(int i=0;i<3;i++){
+            auxprimero = auxprimero.getSiguiente();
+        }
+        Nodo anterior = auxprimero.getAnterior();
+        Nodo siguiente = auxprimero.getSiguiente();
+        anterior.setSiguiente(siguiente);
+        siguiente.setAnterior(anterior);
+        auxprimero.setSiguiente(null);
+        auxprimero.setAnterior(null);
+        return auxprimero;
+    }
+        
+    
+    public Nodo retornarElemento(int isb){
+        Nodo auxPrimero = this.primero;
+        while(auxPrimero!=null && auxPrimero.getInfo().getIsbn()!=isb){
+            auxPrimero = auxPrimero.getSiguiente();
+        }
+        return auxPrimero;
     }
 
     public Pagina getPadre() {
@@ -115,13 +156,15 @@ public class Pagina {
         this.padre = padre;
     }
 
-    public int getContadorNodo() {
-        return contadorNodo;
+    public int getContadorElementos() {
+        return contadorElementos;
     }
 
-    public void setContadorNodo(int contadorNodo) {
-        this.contadorNodo = contadorNodo;
+    public void setContadorElementos(int contadorElementos) {
+        this.contadorElementos = contadorElementos;
     }
+
+    
 
     public Nodo getPrimero() {
         return primero;
