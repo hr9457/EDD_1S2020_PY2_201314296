@@ -52,11 +52,13 @@ public class ListaColision {
     public void agregarElemento(int carnet, String nombre, String apellido,
             String carrera, String password) {
         Nodo nuevoNodo = new Nodo(carnet, nombre, apellido, carrera, password);
+        //****la lista esta vacia
         if (estadoLista() == true) {
             this.primero = nuevoNodo;
             this.ultimo = nuevoNodo;
         } else {
             this.ultimo.setSiguiente(nuevoNodo);
+            nuevoNodo.setAnterior(this.ultimo);
             this.ultimo = nuevoNodo;
         }
     }
@@ -134,11 +136,13 @@ public class ListaColision {
                 nodoEliminar.setSiguiente(null);
                 auxSiguiteA.setAnterior(null);
                 this.primero = auxSiguiteA;
+                
             } else if (nodoEliminar == this.ultimo) {
                 Nodo auxAnteriorA = nodoEliminar.getAnterior();
                 nodoEliminar.setAnterior(null);
                 auxAnteriorA.setSiguiente(null);
                 this.ultimo = auxAnteriorA;
+                
             } else {
                 Nodo auxAnteriorA = nodoEliminar.getAnterior();
                 Nodo auxSiguienteA = nodoEliminar.getSiguiente();

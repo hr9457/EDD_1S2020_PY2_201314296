@@ -359,6 +359,8 @@ public class VentanaUsuario extends javax.swing.JFrame{
         tablaHash.generarPNG();
         dispose();
         //tablaHash.abrirPNG();
+        //hacer visible la ventana otra vez
+        ventanaInicio.setVisible(true);
     }//GEN-LAST:event_btnEliminarCuentaActionPerformed
 
     private void btnAbrirReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirReporteActionPerformed
