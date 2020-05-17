@@ -1,0 +1,10 @@
+digraph arbolAVL{
+rankdir=TB;
+nodoanime[ label = " anime
+N:2" ];
+nodoanime->nodopedro;
+nodopedro[ label = " pedro
+N:1" ];
+
+label = " Arbol AVL "; 
+}
