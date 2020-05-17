@@ -351,25 +351,35 @@ public class ArbolAVL {
         }
     }
 
-    public void buscarNodo(NodoAVL nodo, String categoria) {
+    public void buscarNodo(NodoAVL nodo, String categoria,int carnet) {
         if (categoria.compareTo(nodo.getCategoria()) == 0) {
-            JOptionPane.showMessageDialog(null, "nodo encontrado");
-            elimiarNodo(nodo);
+            //********nodo eonctrado para eliminar
+            //JOptionPane.showMessageDialog(null, "nodo encontrado");
+            //***********verifico si el nodo le pertenece al usuario
+            if(carnet ==  nodo.getCarnet()){
+                elimiarNodo(nodo);
+            } else {
+                JOptionPane.showMessageDialog(null, "Usted no puede eliminar esta categoria","ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
+            }
+            
+            
         } else if (categoria.compareTo(nodo.getCategoria()) < 0) {
             if (nodo.getIzquierda() != null) {
-                buscarNodo(nodo.getIzquierda(), categoria);
+                buscarNodo(nodo.getIzquierda(), categoria,carnet);
             } else {
                 JOptionPane.showMessageDialog(null, "El nodo no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
+            
         } else if (categoria.compareTo(nodo.getCategoria()) > 0) {
             if (nodo.getDerecha() != null) {
-                buscarNodo(nodo.getDerecha(), categoria);
+                buscarNodo(nodo.getDerecha(), categoria,carnet);
             } else {
                 JOptionPane.showMessageDialog(null, "El nodo no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
+            
         }
 
-    }
+    }//finS
 
     public void balanceo(NodoAVL nodo) {
         if (nodo != null) {
@@ -461,12 +471,12 @@ public class ArbolAVL {
         }//fin
     }//fin
 
-    public void eliminarCategoria(String categoria) {
+    public void eliminarCategoria(String categoria,int carnet) {
         NodoAVL auxRoot = this.root;
         if (estadoArbol() == true) {
             JOptionPane.showMessageDialog(null, "Arbol no contiene categoria");
         } else {
-            buscarNodo(auxRoot, categoria);
+            buscarNodo(auxRoot, categoria,carnet);
             act();//actualizacion de niveles y FE
             balanceo(auxRoot);
         }

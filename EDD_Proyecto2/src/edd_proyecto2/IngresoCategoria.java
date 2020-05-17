@@ -47,7 +47,6 @@ public class IngresoCategoria extends javax.swing.JFrame {
         btnRegistroMasivo = new javax.swing.JButton();
         txtNombreArchivo = new javax.swing.JTextField();
         lbNombreArchivo = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -85,13 +84,6 @@ public class IngresoCategoria extends javax.swing.JFrame {
 
         lbNombreArchivo.setText("Nombre del archivo ");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -114,10 +106,7 @@ public class IngresoCategoria extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jButton1))
+                                    .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtRutaJSON, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnRegistroMasivo)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -132,8 +121,7 @@ public class IngresoCategoria extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIngresar)
@@ -148,7 +136,7 @@ public class IngresoCategoria extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombreArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbNombreArchivo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(btnRegistroMasivo)
                 .addContainerGap())
         );
@@ -161,7 +149,9 @@ public class IngresoCategoria extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -175,15 +165,12 @@ public class IngresoCategoria extends javax.swing.JFrame {
         categoria = "";
         txtCategoria.setText("");
         arbolCategorias.generarDotAVL();//creo el dot
-        arbolCategorias.generarPng();
-        arbolCategorias.generarDotInorden();
+        
         arbolCategorias.generarDotInorden();
         
-        arbolCategorias.generarDotPostorden();
         arbolCategorias.generarDotPostorden();
         
         arbolCategorias.generarDotPreorden();
-        arbolCategorias.generarPngPreorden();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     //EVENTO PARA VISUALIZAR EL ARBOL
@@ -249,20 +236,12 @@ public class IngresoCategoria extends javax.swing.JFrame {
         arbolCategorias.generarDotPostorden();
     }//GEN-LAST:event_btnRegistroMasivoActionPerformed
 
-    //evento de prueba para eliminar un nodo en un arbol AVL
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String categoria = txtCategoria.getText();
-        arbolCategorias.eliminarCategoria(categoria);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCargaMasiva;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnRegistroMasivo;
     private javax.swing.JButton btnReporte;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbCategoria;
     private javax.swing.JLabel lbNombreArchivo;

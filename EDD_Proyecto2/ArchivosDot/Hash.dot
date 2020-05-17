@@ -2,9 +2,13 @@ digraph TablaHas{
 nodesep=0.08;
 rankdir=LR;
 node [shape=record,width=0.1,height=0.1];
-nodo0 [label = "  <f0>1 " , height=2.5];
-nodo1[label = " {201314296--a\nSt1NyMAEsLQ=|}"];
+nodo0 [label = "  <f0>1| <f1>2| <f2>23 " , height=2.5];
+nodo1[label = " {201503476--Ricardo\noUwPP2LQTLo=|}"];
+nodo2[label = " {201503477--Juanito\ninZkMJB/tT8=|}"];
+nodo3[label = " {202005878--Antonio\nUpQqunnc9zE=|}"];
 
 nodo0:f0->nodo1
+nodo0:f1->nodo2
+nodo0:f2->nodo3
 label = " Tabla Hash "; 
 }

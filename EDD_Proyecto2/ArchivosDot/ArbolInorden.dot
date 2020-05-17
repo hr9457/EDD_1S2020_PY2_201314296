@@ -1,7 +1,8 @@
 digraph arbolinorden {
 node [shape = record];
 rankdir=LR;
-nodo0[label="agua"];
-nodo0;
+nodo0[label="anime"];
+nodo1[label="novelas"];
+nodo0->nodo1;
 label = "Arbol AVL - Inorden "
 }

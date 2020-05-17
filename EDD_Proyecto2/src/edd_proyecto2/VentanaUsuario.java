@@ -152,6 +152,11 @@ public class VentanaUsuario extends javax.swing.JFrame{
         lbEliminarLibro.setText("Eliminar una Categoria ");
 
         btnEliminarCategoria.setText("Eliminar Categoria");
+        btnEliminarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCategoriaActionPerformed(evt);
+            }
+        });
 
         btnEliminarCuenta.setText("Eliminar Cuenta");
         btnEliminarCuenta.addActionListener(new java.awt.event.ActionListener() {
@@ -368,6 +373,13 @@ public class VentanaUsuario extends javax.swing.JFrame{
             lbVisor.setIcon(new ImageIcon(imagen));
         }
     }//GEN-LAST:event_btnAbrirReporteActionPerformed
+
+    //para eliminar una categoria en el arbol
+    private void btnEliminarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCategoriaActionPerformed
+        // TODO add your handling code here:
+        int carnet = Integer.parseInt(lbCarnetUsuario.getText());
+        VentanaEliminarCategoria ven = new VentanaEliminarCategoria(carnet,arbolCategorias);
+    }//GEN-LAST:event_btnEliminarCategoriaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

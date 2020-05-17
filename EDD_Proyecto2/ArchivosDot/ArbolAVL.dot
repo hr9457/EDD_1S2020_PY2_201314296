@@ -1,8 +1,7 @@
 digraph arbolAVL{
 rankdir=TB;
-nodoagua[ label = " agua
-N:1;
-0" ];
+nodoanime[ label = " anime
+N:1" ];
 
 label = " Arbol AVL "; 
 }
