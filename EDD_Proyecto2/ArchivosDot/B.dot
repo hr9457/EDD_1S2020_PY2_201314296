@@ -1,6 +1,10 @@
 digraph B{
 nodesep=0.08;
 node [shape=record,width=0.1,height=0.1];
-nodo2[label="<h0>| 2| <h1>" ];
+nodo11[label="<h0>| 11| <h1>" ];
+nodo10[label="<h0>| 10| <h1>" ];
+nodo55[label="<h0>| 55| <h1>| 56| <h2>" ];
+nodo11:h0->nodo10;
+nodo11:h1->nodo55;
 label = " ARBOL B "; 
 }

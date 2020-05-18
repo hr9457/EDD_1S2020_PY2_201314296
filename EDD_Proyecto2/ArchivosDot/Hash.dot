@@ -3,7 +3,7 @@ nodesep=0.08;
 rankdir=LR;
 node [shape=record,width=0.1,height=0.1];
 nodo0 [label = "  <f0>1 " , height=2.5];
-nodo1[label = " {201314296--sa\n/qzuz6bd+qc=|}"];
+nodo1[label = " {201314296--hector\nSt1NyMAEsLQ=|}"];
 
 nodo0:f0->nodo1
 label = " Tabla Hash "; 

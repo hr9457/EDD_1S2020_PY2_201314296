@@ -13,10 +13,9 @@ import javax.swing.JOptionPane;
  */
 public class VentanaRegistroUsuario extends javax.swing.JFrame {
 
-    
     //ESTRUCTURA
     TablaDispersion.Lista tablaDispersion;
-    
+
     /**
      * Creates new form VentanaRegistroUsuario
      */
@@ -169,16 +168,22 @@ public class VentanaRegistroUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     //EVENTO PARA EL BONTO Y REGISTAR UN USUARIO
     private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
         // TODO add your handling code here:
-        int carnet = Integer.parseInt(txtNumeroCarnet.getText());
-        String nombre = txtNombre.getText();
-        String apellido = txtApellido.getText();
-        String carrera = txtCarrera.getText();
-        String password = txtPAssword.getText();
-        tablaDispersion.insertar(carnet, nombre, apellido, carrera, password);
+        if (txtNumeroCarnet.getText() != "" && txtNombre.getText() != "" && txtApellido.getText() != ""
+                && txtCarrera.getText() != "" && txtPAssword.getText() != "") {
+            
+            int carnet = Integer.parseInt(txtNumeroCarnet.getText());
+            String nombre = txtNombre.getText();
+            String apellido = txtApellido.getText();
+            String carrera = txtCarrera.getText();
+            String password = txtPAssword.getText();
+            tablaDispersion.insertar(carnet, nombre, apellido, carrera, password);
+        } else {
+            JOptionPane.showMessageDialog(null, "faltan campos para hacer el registo");
+        }
+
         //********limpiando campos de texto
         txtNumeroCarnet.setText("");
         txtNombre.setText("");
@@ -194,7 +199,7 @@ public class VentanaRegistroUsuario extends javax.swing.JFrame {
     private void txtNumeroCarnetKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroCarnetKeyTyped
         // TODO add your handling code here:
         char validar = evt.getKeyChar();
-        if(Character.isLetter(validar)){
+        if (Character.isLetter(validar)) {
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
@@ -205,10 +210,9 @@ public class VentanaRegistroUsuario extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
         dispose();
-        
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistar;
