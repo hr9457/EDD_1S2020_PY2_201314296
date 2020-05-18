@@ -312,44 +312,66 @@ public class VentanaUsuario extends javax.swing.JFrame {
         IngresoCategoria vCategoria = new IngresoCategoria(arbolCategorias, carnet);
     }//GEN-LAST:event_btnCrearCategoriaActionPerformed
 
+    //*********************************************************************************
     //evento para vver el arbol avl ver las categorias
     private void btnVerCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerCategoriasActionPerformed
         // TODO add your handling code here:
-        ImageIcon imagen = new ImageIcon("Reportes\\ArbolAVL.png");
-        lbVisor.setIcon(imagen);
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        String ruta = "Reportes\\ArbolAVL.png";
+        Image imagen = tool.createImage(ruta);
+        lbVisor.setIcon(new ImageIcon(imagen));
+        //ImageIcon imagen = new ImageIcon("Reportes\\ArbolAVL.png");
+        //lbVisor.setIcon(imagen);
     }//GEN-LAST:event_btnVerCategoriasActionPerformed
 
     //evento para ver el listado de las categorias en preorden
     private void btnPreordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreordenActionPerformed
         // TODO add your handling code here:
-        //arbolCategorias.generarDotPreorden();        
-        ImageIcon imagen = new ImageIcon("Reportes\\ArbolPreorden.png");
-        lbVisor.setIcon(imagen);
-        jScrollPane1.repaint();
+        //arbolCategorias.generarDotPreorden();     
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        String ruta = "Reportes\\ArbolPreorden.png";
+        Image imagen = tool.createImage(ruta);
+        lbVisor.setIcon(new ImageIcon(imagen));
+        
+        //ImageIcon imagen = new ImageIcon("Reportes\\ArbolPreorden.png");
+        //lbVisor.setIcon(imagen);
+        //jScrollPane1.repaint();
     }//GEN-LAST:event_btnPreordenActionPerformed
 
     //evento para ver reporte de postorden
     private void btnPostordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostordenActionPerformed
         // TODO add your handling code here:
-        lbVisor.setIcon(null);
-        ImageIcon imagen = new ImageIcon("Reportes\\ArbolPostorden.png");
-        lbVisor.setIcon(imagen);
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        String ruta = "Reportes\\ArbolPostorden.png";
+        Image imagen = tool.createImage(ruta);
+        lbVisor.setIcon(new ImageIcon(imagen));
+        //lbVisor.setIcon(null);
+        //ImageIcon imagen = new ImageIcon("Reportes\\ArbolPostorden.png");
+        //lbVisor.setIcon(imagen);
     }//GEN-LAST:event_btnPostordenActionPerformed
 
     //evento para ver el reporte en inorden
     private void btnInordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInordenActionPerformed
         // TODO add your handling code here:
-        lbVisor.setIcon(null);
-        ImageIcon imagen = new ImageIcon("Reportes\\ArbolInorden.png");
-        lbVisor.setIcon(imagen);
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        String ruta = "Reportes\\ArbolInorden.png";
+        Image imagen = tool.createImage(ruta);
+        lbVisor.setIcon(new ImageIcon(imagen));
+        //lbVisor.setIcon(null);
+        //ImageIcon imagen = new ImageIcon("Reportes\\ArbolInorden.png");
+        //lbVisor.setIcon(imagen);
     }//GEN-LAST:event_btnInordenActionPerformed
 
     //evento para ver a los demas usuarios
     private void btnHashReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHashReporteActionPerformed
         // TODO add your handling code here:
-        lbVisor.setIcon(null);
-        ImageIcon imagen = new ImageIcon("Reportes\\Hash.png");
-        lbVisor.setIcon(imagen);
+        Toolkit tool = Toolkit.getDefaultToolkit();
+        String ruta = "Reportes\\Hash.png";
+        Image imagen = tool.createImage(ruta);
+        lbVisor.setIcon(new ImageIcon(imagen));
+        //lbVisor.setIcon(null);
+        //ImageIcon imagen = new ImageIcon("Reportes\\Hash.png");
+        //lbVisor.setIcon(imagen);
 
     }//GEN-LAST:event_btnHashReporteActionPerformed
 
@@ -405,7 +427,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         try {
             String categoriaBusqueda = JOptionPane.showInputDialog("Ingrese la categoria que desea visualizar");
             ArbolAVL.NodoAVL nodo = arbolCategorias.search(categoriaBusqueda);
-            if(nodo!=null){
+            if (nodo != null) {
                 nodo.report();
             } else {
                 JOptionPane.showMessageDialog(null, "no se econtro el la categoria");
@@ -413,7 +435,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "no se econtro la categoria");
         }
-       
+
     }//GEN-LAST:event_btnVerLibrosActionPerformed
 
 

@@ -1,9 +1,9 @@
 digraph arbolAVL{
 rankdir=TB;
-nodonana[ label = " nana
+nodohola[ label = " hola
 N:2" ];
-nodonana->nodonene;
-nodonene[ label = " nene
+nodohola->nodosuspenso;
+nodosuspenso[ label = " suspenso
 N:1" ];
 
 label = " Arbol AVL "; 

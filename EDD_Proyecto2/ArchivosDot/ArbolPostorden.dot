@@ -1,8 +1,8 @@
 digraph arbolpostorden {
 node [shape = record];
 rankdir=LR;
-nodo0[label="nene"];
-nodo1[label="nana"];
+nodo0[label="suspenso"];
+nodo1[label="hola"];
 nodo0->nodo1;
 label = "Arbol AVL - Postorden "
 }
