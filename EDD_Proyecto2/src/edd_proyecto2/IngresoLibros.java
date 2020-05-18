@@ -12,13 +12,15 @@ package edd_proyecto2;
 public class IngresoLibros extends javax.swing.JFrame {
 
     //ArbolB2.ArbolB b;
-
+    ArbolB2.ArbolB libros;
     /**
      * Creates new form IngresoLibros
      */
-    public IngresoLibros() {
+    public IngresoLibros(ArbolB2.ArbolB libros) {
         //this.b = b;
+        this.libros = libros;
         initComponents();
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
@@ -190,11 +192,13 @@ public class IngresoLibros extends javax.swing.JFrame {
         String idioma = txtIdioma.getText();
         int carnet = Integer.parseInt(txtCarnet.getText());
         //b.insertarLibro(isbn, titulo, autor, editorial, anio, edicion, categoria, idioma, carnet);
+        libros.agregarLibro(isbn, titulo, autor, editorial, anio, edicion, categoria, idioma, carnet);
     }//GEN-LAST:event_btnInsertarActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         // TODO add your handling code here:
         //b.print();
+        libros.reporteB();
     }//GEN-LAST:event_btnReporteActionPerformed
 
 
