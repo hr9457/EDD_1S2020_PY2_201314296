@@ -169,7 +169,7 @@ public class ArbolAVL {
     //0 son iguales
     //-1 la primer es menor
     //1 la es mayor
-    public void buscarInsertar(NodoAVL nodo, String categoria,int carnet) {
+    public void buscarInsertar(NodoAVL nodo, String categoria, int carnet) {
         if (categoria.compareTo(nodo.getCategoria()) == 0) {
             System.out.println("datos iguales");
             JOptionPane.showMessageDialog(null, "categoria ya existente");
@@ -177,22 +177,22 @@ public class ArbolAVL {
         } else if (categoria.compareTo(nodo.getCategoria()) < 0) {
             if (nodo.getIzquierda() == null) {
                 //**creo categoria con el dato
-                NodoAVL nuevaCategoria = new NodoAVL(categoria,carnet);
+                NodoAVL nuevaCategoria = new NodoAVL(categoria, carnet);
                 nodo.setIzquierda(nuevaCategoria);
                 nuevaCategoria.setPadre(nodo);
                 //JOptionPane.showMessageDialog(null, "padre "+nodo.getCategoria());
             } else {
-                buscarInsertar(nodo.getIzquierda(), categoria,carnet);
+                buscarInsertar(nodo.getIzquierda(), categoria, carnet);
             }
 
         } else if (categoria.compareTo(nodo.getCategoria()) > 0) {
             if (nodo.getDerecha() == null) {
-                NodoAVL nuevaCategoria = new NodoAVL(categoria,carnet);
+                NodoAVL nuevaCategoria = new NodoAVL(categoria, carnet);
                 nodo.setDerecha(nuevaCategoria);
                 nuevaCategoria.setPadre(nodo);
                 //JOptionPane.showMessageDialog(null, "padre "+nodo.getCategoria());
             } else {
-                buscarInsertar(nodo.getDerecha(), categoria,carnet);
+                buscarInsertar(nodo.getDerecha(), categoria, carnet);
             }
         }
 
@@ -284,13 +284,13 @@ public class ArbolAVL {
     }//fin del metodo insertar nodo
 
     //metodo para insertar en el arbol
-    public void insertarCategoria(String categoria,int carnet) {
+    public void insertarCategoria(String categoria, int carnet) {
         if (estadoArbol() == true) {
-            NodoAVL nuevaCategoria = new NodoAVL(categoria,carnet);
+            NodoAVL nuevaCategoria = new NodoAVL(categoria, carnet);
             this.root = nuevaCategoria;
         } else {
             auxRoot = this.root;
-            buscarInsertar(auxRoot, categoria,carnet);
+            buscarInsertar(auxRoot, categoria, carnet);
             act();
         }
     }
@@ -351,32 +351,31 @@ public class ArbolAVL {
         }
     }
 
-    public void buscarNodo(NodoAVL nodo, String categoria,int carnet) {
+    public void buscarNodo(NodoAVL nodo, String categoria, int carnet) {
         if (categoria.compareTo(nodo.getCategoria()) == 0) {
             //********nodo eonctrado para eliminar
             //JOptionPane.showMessageDialog(null, "nodo encontrado");
             //***********verifico si el nodo le pertenece al usuario
-            if(carnet ==  nodo.getCarnet()){
+            if (carnet == nodo.getCarnet()) {
                 elimiarNodo(nodo);
             } else {
-                JOptionPane.showMessageDialog(null, "Usted no puede eliminar esta categoria","ADVERTENCIA",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Usted no puede eliminar esta categoria", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
             }
-            
-            
+
         } else if (categoria.compareTo(nodo.getCategoria()) < 0) {
             if (nodo.getIzquierda() != null) {
-                buscarNodo(nodo.getIzquierda(), categoria,carnet);
+                buscarNodo(nodo.getIzquierda(), categoria, carnet);
             } else {
                 JOptionPane.showMessageDialog(null, "El nodo no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
-            
+
         } else if (categoria.compareTo(nodo.getCategoria()) > 0) {
             if (nodo.getDerecha() != null) {
-                buscarNodo(nodo.getDerecha(), categoria,carnet);
+                buscarNodo(nodo.getDerecha(), categoria, carnet);
             } else {
                 JOptionPane.showMessageDialog(null, "El nodo no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
-            
+
         }
 
     }//finS
@@ -471,14 +470,82 @@ public class ArbolAVL {
         }//fin
     }//fin
 
-    public void eliminarCategoria(String categoria,int carnet) {
+    public void eliminarCategoria(String categoria, int carnet) {
         NodoAVL auxRoot = this.root;
         if (estadoArbol() == true) {
             JOptionPane.showMessageDialog(null, "Arbol no contiene categoria");
         } else {
-            buscarNodo(auxRoot, categoria,carnet);
+            buscarNodo(auxRoot, categoria, carnet);
             act();//actualizacion de niveles y FE
             balanceo(auxRoot);
+        }
+    }
+
+    public NodoAVL buscarCategoriaLibros(NodoAVL nodo,String categoria) {
+        if (categoria.compareTo(nodo.getCategoria()) == 0) {
+            JOptionPane.showMessageDialog(null, "nodo encontrado");
+            return nodo;
+
+        } else if (categoria.compareTo(nodo.getCategoria()) < 0) {
+            if (nodo.getIzquierda() != null) {
+                buscarCategoriaLibros(nodo.getIzquierda(), categoria);
+            } else {
+                JOptionPane.showMessageDialog(null, "El nodo no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else if (categoria.compareTo(nodo.getCategoria()) > 0) {
+            if (nodo.getDerecha() != null) {
+                buscarCategoriaLibros(nodo.getDerecha(), categoria);
+            } else {
+                JOptionPane.showMessageDialog(null, "El nodo no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+        return null;
+    }
+
+    public NodoAVL agregarLibroCategoria(String categoria) {
+        NodoAVL auxRoot = this.root;
+        if (estadoArbol() == true) {
+            JOptionPane.showMessageDialog(null, "Arbol  no contiene categorias");
+            return null;
+        } else {
+            NodoAVL nodoEcontrado = buscarCategoriaLibros(auxRoot,categoria);
+            return nodoEcontrado;
+        }
+    }
+    
+    public NodoAVL searchCategoria(NodoAVL nodo,String categoria){
+        if (categoria.compareTo(nodo.getCategoria()) == 0) {
+            JOptionPane.showMessageDialog(null, "nodo encontrado");
+            return nodo;
+
+        } else if (categoria.compareTo(nodo.getCategoria()) < 0) {
+            if (nodo.getIzquierda() != null) {
+                searchCategoria(nodo.getIzquierda(), categoria);
+            } else {
+                JOptionPane.showMessageDialog(null, "El nodo no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else if (categoria.compareTo(nodo.getCategoria()) > 0) {
+            if (nodo.getDerecha() != null) {
+                searchCategoria(nodo.getDerecha(), categoria);
+            } else {
+                JOptionPane.showMessageDialog(null, "El nodo no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+        return null;
+    }
+    
+    public NodoAVL buscarCategoria(String categoria){
+        NodoAVL auxRoot = this.root;
+        if(estadoArbol()==true){
+            JOptionPane.showMessageDialog(null, "Arbol  no contiene categorias");
+            return null;
+        } else {
+            NodoAVL nodoEcontrado = searchCategoria(auxRoot,categoria);
+            return nodoEcontrado;
         }
     }
 

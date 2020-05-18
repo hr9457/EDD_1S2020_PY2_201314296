@@ -98,6 +98,16 @@ public class ArbolB {
 
         }
     }
+    
+    public void abrirImagen(){
+       try {
+            String archivo = "Reportes\\B.png";
+            Runtime ejecuccion = Runtime.getRuntime();
+            ejecuccion.exec("cmd /c start " + archivo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se puede arbir la imagen");
+        } 
+    }
 
     public void crearImagen() {
         try {

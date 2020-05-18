@@ -1,18 +1,6 @@
 digraph B{
 nodesep=0.08;
 node [shape=record,width=0.1,height=0.1];
-nodo28[label="<h0>| 28| <h1>| 35| <h2>| 32| <h3>" ];
-nodo22[label="<h0>| 22| <h1>| 24| <h2>" ];
-nodo29[label="<h0>| 29| <h1>| 30| <h2>" ];
-nodo29[label="<h0>| 29| <h1>| 30| <h2>" ];
-nodo38[label="<h0>| 38| <h1>| 40| <h2>" ];
-nodo29[label="<h0>| 29| <h1>| 30| <h2>" ];
-nodo33[label="<h0>| 33| <h1>| 34| <h2>" ];
-nodo28:h0->nodo22;
-nodo28:h1->nodo29;
-nodo28:h1->nodo29;
-nodo28:h2->nodo38;
-nodo28:h2->nodo29;
-nodo28:h3->nodo33;
+nodo33[label="<h0>| 33| <h1>" ];
 label = " ARBOL B "; 
 }

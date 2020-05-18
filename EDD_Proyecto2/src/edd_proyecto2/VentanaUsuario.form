@@ -198,6 +198,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar Libro"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarLibroActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbBiblioteca">
           <Properties>
@@ -216,6 +219,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Ver libros"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerLibrosActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
 

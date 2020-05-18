@@ -1,6 +1,9 @@
 digraph arbolAVL{
 rankdir=TB;
-nodoanime[ label = " anime
+nodonana[ label = " nana
+N:2" ];
+nodonana->nodonene;
+nodonene[ label = " nene
 N:1" ];
 
 label = " Arbol AVL "; 

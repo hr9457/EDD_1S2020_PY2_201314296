@@ -5,6 +5,8 @@
  */
 package edd_proyecto2;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author joshu
@@ -12,16 +14,46 @@ package edd_proyecto2;
 public class IngresoLibros extends javax.swing.JFrame {
 
     //ArbolB2.ArbolB b;
-    ArbolB2.ArbolB libros;
+    ArbolAVL.ArbolAVL arbolCategorias;
+    int carnet;
+    ArbolAVL.NodoAVL nodoEcontrado;
     /**
      * Creates new form IngresoLibros
      */
-    public IngresoLibros(ArbolB2.ArbolB libros) {
+    public IngresoLibros(ArbolAVL.ArbolAVL libroCategorias,int carnet) {
         //this.b = b;
-        this.libros = libros;
+        this.arbolCategorias = libroCategorias;
+        this.carnet = carnet;
         initComponents();
         setLocationRelativeTo(null);
+        deshabilitarElementos();
+        this.txtCarnet.setText(""+carnet);
         setVisible(true);
+    }
+    
+    public void deshabilitarElementos(){
+        this.txtISBN.setEnabled(false);
+        this.txtTitulo.setEnabled(false);
+        this.txtAutor.setEnabled(false);
+        this.txtEditorial.setEnabled(false);
+        this.txtAnio.setEnabled(false);
+        this.txtEdicion.setEnabled(false);
+        this.txtCategoria.setEnabled(false);
+        this.txtIdioma.setEnabled(false);
+        this.txtCarnet.setEnabled(false);
+        this.btnInsertar.setEnabled(false);
+    }
+    
+    public void habiilitarElementos(){
+        this.txtISBN.setEnabled(true);
+        this.txtTitulo.setEnabled(true);
+        this.txtAutor.setEnabled(true);
+        this.txtEditorial.setEnabled(true);
+        this.txtAnio.setEnabled(true);
+        this.txtEdicion.setEnabled(true);
+        this.txtCategoria.setEnabled(true);
+        this.txtIdioma.setEnabled(true);
+        this.btnInsertar.setEnabled(true);
     }
 
     /**
@@ -54,8 +86,11 @@ public class IngresoLibros extends javax.swing.JFrame {
         txtCarnet = new javax.swing.JTextField();
         btnInsertar = new javax.swing.JButton();
         btnReporte = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtBuscarCategoria = new javax.swing.JTextField();
+        btnBuscarCategoria = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("TITULO");
 
@@ -89,43 +124,65 @@ public class IngresoLibros extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setText("BuscarCategoria");
+
+        btnBuscarCategoria.setText("BUSCAR");
+        btnBuscarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarCategoriaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtISBN)
-                    .addComponent(txtTitulo)
-                    .addComponent(txtAutor)
-                    .addComponent(txtEditorial)
-                    .addComponent(txtAnio)
-                    .addComponent(txtEdicion)
-                    .addComponent(txtCategoria)
-                    .addComponent(txtIdioma)
-                    .addComponent(txtCarnet, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
-                .addGap(84, 84, 84)
-                .addComponent(btnInsertar)
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBuscarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTitulo)
+                            .addComponent(txtAutor)
+                            .addComponent(txtEditorial)
+                            .addComponent(txtAnio)
+                            .addComponent(txtEdicion)
+                            .addComponent(txtCategoria)
+                            .addComponent(txtIdioma)
+                            .addComponent(txtCarnet)
+                            .addComponent(txtISBN))))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnInsertar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnBuscarCategoria, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addComponent(btnReporte)
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addGap(110, 110, 110))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtBuscarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarCategoria))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,7 +220,7 @@ public class IngresoLibros extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,7 +231,9 @@ public class IngresoLibros extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -192,20 +251,38 @@ public class IngresoLibros extends javax.swing.JFrame {
         String idioma = txtIdioma.getText();
         int carnet = Integer.parseInt(txtCarnet.getText());
         //b.insertarLibro(isbn, titulo, autor, editorial, anio, edicion, categoria, idioma, carnet);
-        libros.agregarLibro(isbn, titulo, autor, editorial, anio, edicion, categoria, idioma, carnet);
+        //libros.agregarLibro(isbn, titulo, autor, editorial, anio, edicion, categoria, idioma, carnet);
+        this.nodoEcontrado.insertarLibro(isbn, titulo, autor, editorial, anio, 
+                edicion, categoria, idioma, carnet);
+        this.nodoEcontrado.report();
     }//GEN-LAST:event_btnInsertarActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         // TODO add your handling code here:
         //b.print();
-        libros.reporteB();
+        //libros.reporteB();
     }//GEN-LAST:event_btnReporteActionPerformed
+
+    //buscar en arbol avl
+    private void btnBuscarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCategoriaActionPerformed
+        // TODO add your handling code here:
+        String categoria = txtBuscarCategoria.getText();
+        this.nodoEcontrado = arbolCategorias.agregarLibroCategoria(categoria);
+        if(nodoEcontrado!=null){
+            //JOptionPane.showMessageDialog(null, "Categoria encontrada");
+            habiilitarElementos();
+        } else {
+            //JOptionPane.showMessageDialog(null, "Categoria no existe");
+        }
+    }//GEN-LAST:event_btnBuscarCategoriaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarCategoria;
     private javax.swing.JButton btnInsertar;
     private javax.swing.JButton btnReporte;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -217,6 +294,7 @@ public class IngresoLibros extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtAnio;
     private javax.swing.JTextField txtAutor;
+    private javax.swing.JTextField txtBuscarCategoria;
     private javax.swing.JTextField txtCarnet;
     private javax.swing.JTextField txtCategoria;
     private javax.swing.JTextField txtEdicion;

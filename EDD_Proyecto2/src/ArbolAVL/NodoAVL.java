@@ -1,6 +1,11 @@
 package ArbolAVL;
 
+import ArbolB2.ArbolB;
+
 public class NodoAVL {
+    
+    //cada nodo debe tener un arbol B
+    ArbolB2.ArbolB arbolLibros;
 
     //elemtos
     String categoria;
@@ -21,8 +26,23 @@ public class NodoAVL {
         this.padre = null;
         this.derecha = null;
         this.izquierda = null;
+        arbolLibros = new ArbolB();///creo arbol por nodo
     }
 
+    
+    public void insertarLibro(int isbn, String titulo, String autor,
+            String editorial, String anio, String edicion, String categoria, String idioma, int carnet){
+        arbolLibros.agregarLibro(isbn, titulo, autor, editorial, anio, edicion, 
+                categoria, idioma, carnet);
+        arbolLibros.abrirImagen();
+        
+    }
+    
+    public void report(){
+        arbolLibros.reporteB();
+        arbolLibros.abrirImagen();
+    }
+    
     //metodos get y set
     public String getCategoria() {
         return categoria;

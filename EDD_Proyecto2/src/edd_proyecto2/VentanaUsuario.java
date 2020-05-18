@@ -11,18 +11,19 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author joshu
  */
-public class VentanaUsuario extends javax.swing.JFrame{
+public class VentanaUsuario extends javax.swing.JFrame {
 
     //estructuras
     ArbolAVL.ArbolAVL arbolCategorias;
     TablaDispersion.Lista tablaHash;
-    
+
     Principal ventanaInicio;
     int carnet;
     //ImageIcon imagen;
@@ -43,7 +44,7 @@ public class VentanaUsuario extends javax.swing.JFrame{
         setVisible(true);
         setLocationRelativeTo(null);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -96,6 +97,11 @@ public class VentanaUsuario extends javax.swing.JFrame{
         lbCrearLibro.setText("Agregar un libro a la Biblioteca");
 
         btnAgregarLibro.setText("Agregar Libro");
+        btnAgregarLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarLibroActionPerformed(evt);
+            }
+        });
 
         lbBiblioteca.setText("Biblioteca");
 
@@ -107,6 +113,11 @@ public class VentanaUsuario extends javax.swing.JFrame{
         });
 
         btnVerLibros.setText("Ver libros");
+        btnVerLibros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerLibrosActionPerformed(evt);
+            }
+        });
 
         lbVisor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbVisor.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
@@ -298,7 +309,7 @@ public class VentanaUsuario extends javax.swing.JFrame{
     private void btnCrearCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCategoriaActionPerformed
         // TODO add your handling code here:
         int carnet = Integer.parseInt(lbCarnetUsuario.getText());
-        IngresoCategoria vCategoria = new IngresoCategoria(arbolCategorias,carnet);
+        IngresoCategoria vCategoria = new IngresoCategoria(arbolCategorias, carnet);
     }//GEN-LAST:event_btnCrearCategoriaActionPerformed
 
     //evento para vver el arbol avl ver las categorias
@@ -313,7 +324,7 @@ public class VentanaUsuario extends javax.swing.JFrame{
         // TODO add your handling code here:
         //arbolCategorias.generarDotPreorden();        
         ImageIcon imagen = new ImageIcon("Reportes\\ArbolPreorden.png");
-        lbVisor.setIcon(imagen);        
+        lbVisor.setIcon(imagen);
         jScrollPane1.repaint();
     }//GEN-LAST:event_btnPreordenActionPerformed
 
@@ -339,7 +350,7 @@ public class VentanaUsuario extends javax.swing.JFrame{
         lbVisor.setIcon(null);
         ImageIcon imagen = new ImageIcon("Reportes\\Hash.png");
         lbVisor.setIcon(imagen);
-        
+
     }//GEN-LAST:event_btnHashReporteActionPerformed
 
     //edicion de datos
@@ -350,7 +361,6 @@ public class VentanaUsuario extends javax.swing.JFrame{
         EditarDatos ventanaEdicionDatos = new EditarDatos(datos);
     }//GEN-LAST:event_btnEditActionPerformed
 
-    
     //eliminacion de cuenta
     private void btnEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCuentaActionPerformed
         // TODO add your handling code here:
@@ -366,9 +376,9 @@ public class VentanaUsuario extends javax.swing.JFrame{
     private void btnAbrirReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirReporteActionPerformed
         // TODO add your handling code here:
         JFileChooser buscar = new JFileChooser();
-        FileNameExtensionFilter extension = new FileNameExtensionFilter("selecionar imagen", "jpg","png");
+        FileNameExtensionFilter extension = new FileNameExtensionFilter("selecionar imagen", "jpg", "png");
         buscar.setFileFilter(extension);
-        if(buscar.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){
+        if (buscar.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             Toolkit tool = Toolkit.getDefaultToolkit();
             String ruta = buscar.getSelectedFile().toString();
             Image imagen = tool.createImage(ruta);
@@ -380,8 +390,26 @@ public class VentanaUsuario extends javax.swing.JFrame{
     private void btnEliminarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCategoriaActionPerformed
         // TODO add your handling code here:
         int carnet = Integer.parseInt(lbCarnetUsuario.getText());
-        VentanaEliminarCategoria ven = new VentanaEliminarCategoria(carnet,arbolCategorias);
+        VentanaEliminarCategoria ven = new VentanaEliminarCategoria(carnet, arbolCategorias);
     }//GEN-LAST:event_btnEliminarCategoriaActionPerformed
+
+    private void btnAgregarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarLibroActionPerformed
+        // TODO add your handling code here:
+        int numeroCarnet = Integer.parseInt(lbCarnetUsuario.getText());
+        IngresoLibros libroXCategoria = new IngresoLibros(arbolCategorias, numeroCarnet);
+    }//GEN-LAST:event_btnAgregarLibroActionPerformed
+
+    //evento para ver los libros de una categoria
+    private void btnVerLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerLibrosActionPerformed
+        // TODO add your handling code here:
+        String categoriaVerLibros = JOptionPane.showInputDialog("Ingrese una categoria");
+        ArbolAVL.NodoAVL nodoEcontrado = arbolCategorias.buscarCategoria(categoriaVerLibros);
+        if (nodoEcontrado != null) {
+            nodoEcontrado.report();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al buscar la categoria","ERROR",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnVerLibrosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -408,8 +436,7 @@ public class VentanaUsuario extends javax.swing.JFrame{
     private javax.swing.JLabel lbCrearLibro;
     private javax.swing.JLabel lbEliminarLibro;
     private javax.swing.JLabel lbUsuario;
-    private javax.swing.JLabel lbVisor;
+    public static javax.swing.JLabel lbVisor;
     // End of variables declaration//GEN-END:variables
 
-    
 }

@@ -3,7 +3,7 @@ nodesep=0.08;
 rankdir=LR;
 node [shape=record,width=0.1,height=0.1];
 nodo0 [label = "  <f0>1| <f1>2| <f2>23 " , height=2.5];
-nodo1[label = " {201503476--Ricardo\noUwPP2LQTLo=|}"];
+nodo1[label = " {201503476--Ricardo\noUwPP2LQTLo=|201314296--hector\nSt1NyMAEsLQ=|}"];
 nodo2[label = " {201503477--Juanito\ninZkMJB/tT8=|}"];
 nodo3[label = " {202005878--Antonio\nUpQqunnc9zE=|}"];
 
