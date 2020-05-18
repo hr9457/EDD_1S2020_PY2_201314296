@@ -90,18 +90,13 @@ public class Pagina {
         Nodo auxPrimero = this.primero;
 
         while (auxPrimero != null) {
-            if (auxPrimero.getHijoIzquierda() != null) {
-                if (isbn < auxPrimero.getInfo().getIsbn()) {
-                    //retorno la pagina que tenga del lado izquierdo
-                    return auxPrimero.getHijoIzquierda();
-                }
-
-            } else if (auxPrimero.getHijoDerecha() != null) {
-                if (isbn > auxPrimero.getInfo().getIsbn()) {
-                    //retorno la pagina que tenga del lado derecho
-                    return auxPrimero.getHijoDerecha();
-                }
-
+            if (isbn < auxPrimero.getInfo().getIsbn()) {
+                //retorno la pagina que tenga del lado izquierdo
+                return auxPrimero.getHijoIzquierda();
+            }
+            if (isbn > auxPrimero.getInfo().getIsbn()) {
+                //retorno la pagina que tenga del lado derecho
+                return auxPrimero.getHijoDerecha();
             }
 
             auxPrimero = auxPrimero.getSiguiente();

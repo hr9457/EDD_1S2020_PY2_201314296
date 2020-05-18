@@ -14,15 +14,15 @@ public class EDD_Proyecto2 {
         //estructuras
         Lista tablaDispersion = new Lista();//usuarios tabla hash
         ArbolAVL arbolCategorias = new ArbolAVL();//para categorias arbolAVL
-        ArbolB2.ArbolB libros =  new ArbolB();
+        //ArbolB2.ArbolB libros =  new ArbolB();
        
         //VENTANAS
         //IngresoLibros ventanaIngresoLibros = new IngresoLibros();
-        //Principal ventanaArranque = new Principal(tablaDispersion,arbolCategorias);
+        Principal ventanaArranque = new Principal(tablaDispersion,arbolCategorias);
         
         
         //IngresoCategoria ventanaCategorias = new IngresoCategoria(arbolCategorias);
-        IngresoLibros v = new IngresoLibros(libros);
+        //IngresoLibros v = new IngresoLibros(libros);
         
         
         

@@ -58,23 +58,41 @@ public class ArbolB {
                 } else {
                     raiz.insertarNodo(isbn, titulo, autor, editorial, anio,
                             edicion, categoria, idioma, carnet);
+                    //********pagina hermano
                     Pagina brother = new Pagina();
                     sacarUltimoElmento(raiz, brother);
                     sacarUltimoElmento(raiz, brother);
-
+                    //*********pagina arriba nuevo padre
                     Pagina nuevoPadre = new Pagina();
                     Nodo elementoEnPadre = sacarUltimoElmento(raiz, nuevoPadre);
                     elementoEnPadre.setHijoDerecha(brother);
                     elementoEnPadre.setHijoIzquierda(raiz);
+                    //********************
+                    raiz.setPadre(nuevoPadre);
                     this.raiz = nuevoPadre;
+                    //********************
+                    brother.setPadre(raiz);
                     this.revisoRaiz = false;
                 }
 
             } else {
                 Pagina paginaInsertar = raiz.navegarEntreHijos(isbn);
-                
-                paginaInsertar.insertarNodo(isbn, titulo, autor, editorial,
-                        anio, edicion, categoria, idioma, carnet);
+
+                if (paginaInsertar.getContadorElementos() < 4) {
+                    paginaInsertar.insertarNodo(isbn, titulo, autor, editorial,
+                            anio, edicion, categoria, idioma, carnet);
+                } else {
+                    paginaInsertar.insertarNodo(isbn, titulo, autor, editorial,
+                            anio, edicion, categoria, idioma, carnet);
+                    //***********pagina brother
+                    Pagina newBrother = new Pagina();
+                    sacarUltimoElmento(paginaInsertar, newBrother);
+                    sacarUltimoElmento(paginaInsertar, newBrother);
+                    //****************************
+                    Nodo elemento = sacarUltimoElmento(paginaInsertar, raiz);
+                    elemento.setHijoIzquierda(paginaInsertar);
+                    elemento.setHijoDerecha(newBrother);
+                }
 
             }
 
@@ -101,38 +119,43 @@ public class ArbolB {
                 auxPrimerNodo = auxPrimerNodo.getSiguiente();
                 contadorHijos++;
             }
-            archivo.print("<h"+contadorHijos+">");
+            archivo.print("<h" + contadorHijos + ">");
             archivo.print("\" ];");
             archivo.println("");
         }
         auxPrimerNodo = nodo.getPrimero();
-        if (auxPrimerNodo.getHijoIzquierda() != null) {
-            recorrePagina(auxPrimerNodo.getHijoIzquierda(), archivo);
-        }
-        if (auxPrimerNodo.getHijoDerecha() != null) {
-            recorrePagina(auxPrimerNodo.getHijoDerecha(), archivo);
+        while(auxPrimerNodo!=null){
+            if (auxPrimerNodo.getHijoIzquierda() != null) {
+                recorrePagina(auxPrimerNodo.getHijoIzquierda(), archivo);
+            }
+            if (auxPrimerNodo.getHijoDerecha() != null) {
+                recorrePagina(auxPrimerNodo.getHijoDerecha(), archivo);
+            }
+            auxPrimerNodo = auxPrimerNodo.getSiguiente();
         }
     }
 
     public void apuntadores(Pagina nodo, PrintWriter archivo) {
         int ContadorHijos = 0;
         Nodo auxPrimerNodo = nodo.getPrimero();
+        int numnodo = auxPrimerNodo.getInfo().getIsbn();
         if (nodo != null) {
             while (auxPrimerNodo != null) {
                 if (auxPrimerNodo.getHijoIzquierda() != null) {
-                    archivo.print("nodo"+auxPrimerNodo.getInfo().getIsbn()+":h" + ContadorHijos + "->");
+                    archivo.print("nodo" + numnodo+ ":h" + ContadorHijos + "->");
                     int hijoizq = auxPrimerNodo.getHijoIzquierda().getPrimero().getInfo().getIsbn();
-                    archivo.print("nodo" + hijoizq+";");
+                    archivo.print("nodo" + hijoizq + ";");
                     archivo.println("");
                     ContadorHijos++;
                 }
                 if (auxPrimerNodo.getHijoDerecha() != null) {
-                    archivo.print("nodo"+auxPrimerNodo.getInfo().getIsbn()+":h" + ContadorHijos + "->");
+                    archivo.print("nodo" + numnodo + ":h" + ContadorHijos + "->");
                     int hijoDer = auxPrimerNodo.getHijoDerecha().getPrimero().getInfo().getIsbn();
-                    archivo.print("nodo" + hijoDer+";");
+                    archivo.print("nodo" + hijoDer + ";");
                     archivo.println("");
                     ContadorHijos++;
                 }
+                ContadorHijos--;
                 auxPrimerNodo = auxPrimerNodo.getSiguiente();
             }
         }
@@ -149,7 +172,7 @@ public class ArbolB {
             if (auxRaiz != null) {
                 recorrePagina(auxRaiz, archivo);
             }
-            if(auxRaiz !=null){
+            if (auxRaiz != null) {
                 apuntadores(auxRaiz, archivo);
             }
             archivo.print("");
