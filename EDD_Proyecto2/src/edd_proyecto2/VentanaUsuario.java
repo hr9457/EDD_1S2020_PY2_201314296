@@ -402,13 +402,18 @@ public class VentanaUsuario extends javax.swing.JFrame {
     //evento para ver los libros de una categoria
     private void btnVerLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerLibrosActionPerformed
         // TODO add your handling code here:
-        String categoriaVerLibros = JOptionPane.showInputDialog("Ingrese una categoria");
-        ArbolAVL.NodoAVL nodoEcontrado = arbolCategorias.buscarCategoria(categoriaVerLibros);
-        if (nodoEcontrado != null) {
-            nodoEcontrado.report();
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al buscar la categoria","ERROR",JOptionPane.ERROR_MESSAGE);
+        try {
+            String categoriaBusqueda = JOptionPane.showInputDialog("Ingrese la categoria que desea visualizar");
+            ArbolAVL.NodoAVL nodo = arbolCategorias.search(categoriaBusqueda);
+            if(nodo!=null){
+                nodo.report();
+            } else {
+                JOptionPane.showMessageDialog(null, "no se econtro el la categoria");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "no se econtro la categoria");
         }
+       
     }//GEN-LAST:event_btnVerLibrosActionPerformed
 
 

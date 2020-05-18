@@ -21,13 +21,12 @@ public class Principal extends javax.swing.JFrame {
 
     //***filtro de archivo json
     private FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos JSON", "json");
-    
+
     //ESTRUCTURA
     TablaDispersion.Lista tablaDispersion;
     ArbolAVL.ArbolAVL arbolCategorias;
-    
-    
-    public Principal(TablaDispersion.Lista tablaDispersion,ArbolAVL.ArbolAVL arbolCategorias) {
+
+    public Principal(TablaDispersion.Lista tablaDispersion, ArbolAVL.ArbolAVL arbolCategorias) {
         this.tablaDispersion = tablaDispersion;//recibo la estructura
         this.arbolCategorias = arbolCategorias;//recibo la estructura del AVL
         setLayout(null);
@@ -38,7 +37,6 @@ public class Principal extends javax.swing.JFrame {
         setVisible(true);//visibilidad de la ventana
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -146,23 +144,27 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     //EVENTO DEL BOTOTN para ingresar a la plataforma
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-        int carnet = Integer.parseInt(txtUsuario.getText());
-        String password = txtPassword.getText();
-        boolean ingresoValido = tablaDispersion.buscarUsuario(carnet, password);
-        if(ingresoValido==true){
-            //JOptionPane.showMessageDialog(null, "resultado: "+ingresoValido);
-            tablaDispersion.reporteHash();
-            VentanaUsuario usuario = new VentanaUsuario(this,carnet,arbolCategorias,tablaDispersion);
-            this.setVisible(false);
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "resultado: "+ingresoValido);
+        try {
+            int carnet = Integer.parseInt(txtUsuario.getText());
+            String password = txtPassword.getText();
+
+            boolean ingresoValido = tablaDispersion.buscarUsuario(carnet, password);
+            if (ingresoValido == true) {
+                //JOptionPane.showMessageDialog(null, "resultado: "+ingresoValido);
+                tablaDispersion.reporteHash();
+                VentanaUsuario usuario = new VentanaUsuario(this, carnet, arbolCategorias, tablaDispersion);
+                this.setVisible(false);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "resultado: " + ingresoValido);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "campos incorrectos");
         }
-        //*******
+        //**********************************************************************
         txtUsuario.setText("");
         txtPassword.setText("");
         //*********actualizo el reporte de la tabla hash
@@ -170,7 +172,6 @@ public class Principal extends javax.swing.JFrame {
         tablaDispersion.generarPNG();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
-    
     //evento para habilitar la carga masiva de datos
     //prueba para graficar la tabla dispersa
     private void btnHabilitarCargaMasivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabilitarCargaMasivaActionPerformed
@@ -179,7 +180,6 @@ public class Principal extends javax.swing.JFrame {
         CargaMasivaUsuarios cargaJSON = new CargaMasivaUsuarios(tablaDispersion);
     }//GEN-LAST:event_btnHabilitarCargaMasivaActionPerformed
 
-    
     //pruebas
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -187,17 +187,13 @@ public class Principal extends javax.swing.JFrame {
         tablaDispersion.abrirPNG();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-    
     //EVENTO PARA REGISTAR UN USUARIO INDIVIUALMENTE
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
-        VentanaRegistroUsuario registrarUsuario = new VentanaRegistroUsuario(tablaDispersion);       
-        
+        VentanaRegistroUsuario registrarUsuario = new VentanaRegistroUsuario(tablaDispersion);
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHabilitarCargaMasiva;

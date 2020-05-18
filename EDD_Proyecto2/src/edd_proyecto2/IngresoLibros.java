@@ -17,21 +17,22 @@ public class IngresoLibros extends javax.swing.JFrame {
     ArbolAVL.ArbolAVL arbolCategorias;
     int carnet;
     ArbolAVL.NodoAVL nodoEcontrado;
+
     /**
      * Creates new form IngresoLibros
      */
-    public IngresoLibros(ArbolAVL.ArbolAVL libroCategorias,int carnet) {
+    public IngresoLibros(ArbolAVL.ArbolAVL libroCategorias, int carnet) {
         //this.b = b;
         this.arbolCategorias = libroCategorias;
         this.carnet = carnet;
         initComponents();
         setLocationRelativeTo(null);
         deshabilitarElementos();
-        this.txtCarnet.setText(""+carnet);
+        this.txtCarnet.setText("" + carnet);
         setVisible(true);
     }
-    
-    public void deshabilitarElementos(){
+
+    public void deshabilitarElementos() {
         this.txtISBN.setEnabled(false);
         this.txtTitulo.setEnabled(false);
         this.txtAutor.setEnabled(false);
@@ -43,8 +44,8 @@ public class IngresoLibros extends javax.swing.JFrame {
         this.txtCarnet.setEnabled(false);
         this.btnInsertar.setEnabled(false);
     }
-    
-    public void habiilitarElementos(){
+
+    public void habiilitarElementos() {
         this.txtISBN.setEnabled(true);
         this.txtTitulo.setEnabled(true);
         this.txtAutor.setEnabled(true);
@@ -252,27 +253,33 @@ public class IngresoLibros extends javax.swing.JFrame {
         int carnet = Integer.parseInt(txtCarnet.getText());
         //b.insertarLibro(isbn, titulo, autor, editorial, anio, edicion, categoria, idioma, carnet);
         //libros.agregarLibro(isbn, titulo, autor, editorial, anio, edicion, categoria, idioma, carnet);
-        this.nodoEcontrado.insertarLibro(isbn, titulo, autor, editorial, anio, 
+        this.nodoEcontrado.insertarLibro(isbn, titulo, autor, editorial, anio,
                 edicion, categoria, idioma, carnet);
         this.nodoEcontrado.report();
     }//GEN-LAST:event_btnInsertarActionPerformed
 
+    //reporte del nodo actual
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         // TODO add your handling code here:
-        //b.print();
-        //libros.reporteB();
+        this.nodoEcontrado.report();
     }//GEN-LAST:event_btnReporteActionPerformed
 
     //buscar en arbol avl
     private void btnBuscarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCategoriaActionPerformed
         // TODO add your handling code here:
-        String categoria = txtBuscarCategoria.getText();
-        this.nodoEcontrado = arbolCategorias.agregarLibroCategoria(categoria);
-        if(nodoEcontrado!=null){
-            //JOptionPane.showMessageDialog(null, "Categoria encontrada");
-            habiilitarElementos();
-        } else {
-            //JOptionPane.showMessageDialog(null, "Categoria no existe");
+        try {
+
+            String categoria = txtBuscarCategoria.getText();
+            this.nodoEcontrado = arbolCategorias.search(categoria);
+            if (nodoEcontrado == null) {
+                //System.out.println("no");
+                JOptionPane.showMessageDialog(null, "No se econtro la categoria");
+            } else {
+                //System.out.println("si");
+                habiilitarElementos();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error en la busqueda de la categoria","ERROR",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnBuscarCategoriaActionPerformed
 

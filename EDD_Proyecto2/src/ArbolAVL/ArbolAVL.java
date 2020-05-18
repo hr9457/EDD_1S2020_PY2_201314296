@@ -481,7 +481,7 @@ public class ArbolAVL {
         }
     }
 
-    public NodoAVL buscarCategoriaLibros(NodoAVL nodo,String categoria) {
+    public NodoAVL buscarCategoriaLibros(NodoAVL nodo, String categoria) {
         if (categoria.compareTo(nodo.getCategoria()) == 0) {
             JOptionPane.showMessageDialog(null, "nodo encontrado");
             return nodo;
@@ -510,42 +510,44 @@ public class ArbolAVL {
             JOptionPane.showMessageDialog(null, "Arbol  no contiene categorias");
             return null;
         } else {
-            NodoAVL nodoEcontrado = buscarCategoriaLibros(auxRoot,categoria);
+            NodoAVL nodoEcontrado = buscarCategoriaLibros(auxRoot, categoria);
             return nodoEcontrado;
         }
     }
+
     
-    public NodoAVL searchCategoria(NodoAVL nodo,String categoria){
-        if (categoria.compareTo(nodo.getCategoria()) == 0) {
-            JOptionPane.showMessageDialog(null, "nodo encontrado");
+    //**************************************************************************
+    public NodoAVL buscarCategoriaEnArbol(NodoAVL nodo, String categoria) {
+        if(categoria.compareTo(nodo.getCategoria())==0){
+            System.out.println("nodo encontrado");
+            //respuesta = nodo;
             return nodo;
-
-        } else if (categoria.compareTo(nodo.getCategoria()) < 0) {
-            if (nodo.getIzquierda() != null) {
-                searchCategoria(nodo.getIzquierda(), categoria);
+        } else if (categoria.compareTo(nodo.getCategoria())<0){
+            if(nodo.getIzquierda()!=null){
+                return buscarCategoriaEnArbol(nodo.getIzquierda(), categoria);
             } else {
-                JOptionPane.showMessageDialog(null, "El nodo no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+                System.out.println("la categoria no existe");
+                //respuesta = null;
             }
-
-        } else if (categoria.compareTo(nodo.getCategoria()) > 0) {
-            if (nodo.getDerecha() != null) {
-                searchCategoria(nodo.getDerecha(), categoria);
+        } else if(categoria.compareTo(nodo.getCategoria())>0){
+            if(nodo.getDerecha()!=null){
+                return buscarCategoriaEnArbol(nodo.getDerecha(), categoria);
             } else {
-                JOptionPane.showMessageDialog(null, "El nodo no existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+                System.out.println("la categoria no existe");
+                //respuesta = null;
             }
-
         }
+        //return null;
         return null;
     }
-    
-    public NodoAVL buscarCategoria(String categoria){
-        NodoAVL auxRoot = this.root;
-        if(estadoArbol()==true){
+
+    public NodoAVL search(String categoria) {        
+        if (estadoArbol() == true) {
             JOptionPane.showMessageDialog(null, "Arbol  no contiene categorias");
             return null;
         } else {
-            NodoAVL nodoEcontrado = searchCategoria(auxRoot,categoria);
-            return nodoEcontrado;
+            NodoAVL r = this.root;
+            return buscarCategoriaEnArbol(r, categoria);
         }
     }
 

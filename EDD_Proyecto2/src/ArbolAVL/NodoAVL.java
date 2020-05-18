@@ -34,7 +34,6 @@ public class NodoAVL {
             String editorial, String anio, String edicion, String categoria, String idioma, int carnet){
         arbolLibros.agregarLibro(isbn, titulo, autor, editorial, anio, edicion, 
                 categoria, idioma, carnet);
-        arbolLibros.abrirImagen();
         
     }
     

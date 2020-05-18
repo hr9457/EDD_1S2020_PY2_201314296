@@ -1,8 +1,7 @@
 digraph arbolinorden {
 node [shape = record];
 rankdir=LR;
-nodo0[label="nana"];
-nodo1[label="nene"];
-nodo0->nodo1;
+nodo0[label="nan"];
+nodo0;
 label = "Arbol AVL - Inorden "
 }
