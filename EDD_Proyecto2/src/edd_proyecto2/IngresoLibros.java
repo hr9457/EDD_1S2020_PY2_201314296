@@ -131,6 +131,8 @@ public class IngresoLibros extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("CARNET");
 
+        txtCarnet.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
         btnInsertar.setText("Insertar");
         btnInsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,6 +280,17 @@ public class IngresoLibros extends javax.swing.JFrame {
         this.nodoEcontrado.insertarLibro(isbn, titulo, autor, editorial, anio,
                 edicion, categoria, idioma, carnet);
         this.nodoEcontrado.report();
+        //*************vacio los campos
+        txtISBN.setText("");
+        txtTitulo.setText("");
+        txtAutor.setText("");
+        txtEditorial.setText("");
+        txtAnio.setText("");
+        txtEdicion.setText("");
+        txtCategoria.setText("");
+        txtIdioma.setText("");
+        //****************desabilito 
+        deshabilitarElementos();
     }//GEN-LAST:event_btnInsertarActionPerformed
 
     //reporte del nodo actual
