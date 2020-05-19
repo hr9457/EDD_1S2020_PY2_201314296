@@ -50,6 +50,10 @@ public class IngresoCategoria extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(7, 89, 137));
+
+        lbCategoria.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        lbCategoria.setForeground(new java.awt.Color(255, 255, 255));
         lbCategoria.setText("Categoria Individual");
 
         btnIngresar.setText("Registrar");
@@ -73,6 +77,8 @@ public class IngresoCategoria extends javax.swing.JFrame {
             }
         });
 
+        lbTituloCarga.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        lbTituloCarga.setForeground(new java.awt.Color(255, 255, 255));
         lbTituloCarga.setText("Carga archivo JSON para carga masiva de datos");
 
         btnRegistroMasivo.setText("Ingresar Datos");
@@ -82,6 +88,8 @@ public class IngresoCategoria extends javax.swing.JFrame {
             }
         });
 
+        lbNombreArchivo.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        lbNombreArchivo.setForeground(new java.awt.Color(255, 255, 255));
         lbNombreArchivo.setText("Nombre del archivo ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -94,26 +102,29 @@ public class IngresoCategoria extends javax.swing.JFrame {
                     .addComponent(lbTituloCarga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnIngresar)
-                            .addComponent(lbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnCargaMasiva)
-                                .addGap(10, 10, 10)))
+                                .addGap(10, 10, 10))
+                            .addComponent(lbCategoria))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(btnReporte))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtRutaJSON, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnRegistroMasivo)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(lbNombreArchivo)
                                         .addGap(18, 18, 18)
-                                        .addComponent(txtNombreArchivo)))))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                                        .addComponent(txtNombreArchivo))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnIngresar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnReporte))
+                                    .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -76,6 +76,8 @@ public class VentanaUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(7, 89, 137));
+
         btnSalir.setText("Cerrar Session");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,8 +85,15 @@ public class VentanaUsuario extends javax.swing.JFrame {
             }
         });
 
+        lbUsuario.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        lbUsuario.setForeground(new java.awt.Color(255, 255, 255));
         lbUsuario.setText("USUARIO: ");
 
+        lbCarnetUsuario.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        lbCarnetUsuario.setForeground(new java.awt.Color(255, 255, 255));
+
+        lbCrearCategoria.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        lbCrearCategoria.setForeground(new java.awt.Color(255, 255, 255));
         lbCrearCategoria.setText("Crear una Categoria de Libros");
 
         btnCrearCategoria.setText("Crear Categoria");
@@ -94,6 +103,8 @@ public class VentanaUsuario extends javax.swing.JFrame {
             }
         });
 
+        lbCrearLibro.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        lbCrearLibro.setForeground(new java.awt.Color(255, 255, 255));
         lbCrearLibro.setText("Agregar un libro a la Biblioteca");
 
         btnAgregarLibro.setText("Agregar Libro");
@@ -103,6 +114,8 @@ public class VentanaUsuario extends javax.swing.JFrame {
             }
         });
 
+        lbBiblioteca.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        lbBiblioteca.setForeground(new java.awt.Color(255, 255, 255));
         lbBiblioteca.setText("Biblioteca");
 
         btnVerCategorias.setText("Ver Categorias");
@@ -151,6 +164,8 @@ public class VentanaUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Editar Datos");
 
         btnEdit.setText("Editar Datos");
@@ -160,6 +175,8 @@ public class VentanaUsuario extends javax.swing.JFrame {
             }
         });
 
+        lbEliminarLibro.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
+        lbEliminarLibro.setForeground(new java.awt.Color(255, 255, 255));
         lbEliminarLibro.setText("Eliminar una Categoria ");
 
         btnEliminarCategoria.setText("Eliminar Categoria");
@@ -224,7 +241,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
                                     .addComponent(btnAgregarLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnEliminarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(277, 313, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEliminarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
@@ -236,21 +253,20 @@ public class VentanaUsuario extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbCarnetUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(lbCarnetUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnSalir)
                         .addComponent(lbUsuario)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(btnMinar)
-                        .addGap(18, 18, 18)
+                        .addGap(80, 80, 80)
                         .addComponent(btnEliminarCuenta))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(btnEdit))
+                            .addComponent(btnEdit)
+                            .addComponent(btnMinar))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCrearCategoria)
