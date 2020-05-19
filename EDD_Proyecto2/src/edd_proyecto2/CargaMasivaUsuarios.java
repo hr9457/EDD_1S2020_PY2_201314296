@@ -173,7 +173,7 @@ public class CargaMasivaUsuarios extends javax.swing.JFrame {
             //*********lectura del archivo json
             Object obj = parser.parse(new FileReader(txtRutaArchivo.getText()));
             JSONObject jsonObject = (JSONObject) obj;
-            JSONArray lista = (JSONArray) jsonObject.get("CREAR_USUARIO");//para buscar categorias
+            JSONArray lista = (JSONArray) jsonObject.get("Usuarios");//para buscar categorias
             //**CICLO PARA RECORRE TODO EL ARRAY
             for (int i = 0; i < lista.size(); i++) {
                 JSONObject usuarioNuevo = (JSONObject) lista.get(i);
