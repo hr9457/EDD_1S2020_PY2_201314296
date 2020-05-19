@@ -1,8 +1,7 @@
 digraph arbolpreorden {
 node [shape = record];
 rankdir=LR;
-nodo0[label="hola"];
-nodo1[label="suspenso"];
-nodo0->nodo1;
+nodo0[label="nana"];
+nodo0;
 label = "Arbol AVL - Preorden "
 }

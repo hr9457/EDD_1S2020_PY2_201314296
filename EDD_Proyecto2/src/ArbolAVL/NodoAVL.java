@@ -39,7 +39,7 @@ public class NodoAVL {
     
     public void report(){
         arbolLibros.reporteB();
-        arbolLibros.abrirImagen();
+        //arbolLibros.abrirImagen();
     }
     
     //metodos get y set

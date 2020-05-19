@@ -54,7 +54,12 @@ public class CargaMasivaUsuarios extends javax.swing.JFrame {
         btnRegistrarDatos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(5, 69, 107));
 
+        jPanel1.setBackground(new java.awt.Color(7, 89, 137));
+
+        lbCargaMasiva.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        lbCargaMasiva.setForeground(new java.awt.Color(255, 255, 255));
         lbCargaMasiva.setText("realizar carga Masiva ");
 
         btnCargaArchivo.setText("Cargar Archivo");
@@ -64,6 +69,8 @@ public class CargaMasivaUsuarios extends javax.swing.JFrame {
             }
         });
 
+        lbNombreArchivo.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        lbNombreArchivo.setForeground(new java.awt.Color(255, 255, 255));
         lbNombreArchivo.setText("Nombre Archivo");
 
         btnRegistrarDatos.setText("Registar Datos");
@@ -89,9 +96,7 @@ public class CargaMasivaUsuarios extends javax.swing.JFrame {
                             .addComponent(btnCargaArchivo))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnRegistrarDatos)
-                                .addGap(104, 104, 104))
+                            .addComponent(btnRegistrarDatos)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtNombreArchivo)
                                 .addGap(2, 2, 2))

@@ -241,7 +241,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
                                     .addComponent(btnAgregarLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnEliminarCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(161, 161, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEliminarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
@@ -348,7 +348,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         String ruta = "Reportes\\ArbolPreorden.png";
         Image imagen = tool.createImage(ruta);
         lbVisor.setIcon(new ImageIcon(imagen));
-        
+
         //ImageIcon imagen = new ImageIcon("Reportes\\ArbolPreorden.png");
         //lbVisor.setIcon(imagen);
         //jScrollPane1.repaint();
@@ -445,6 +445,10 @@ public class VentanaUsuario extends javax.swing.JFrame {
             ArbolAVL.NodoAVL nodo = arbolCategorias.search(categoriaBusqueda);
             if (nodo != null) {
                 nodo.report();
+                Toolkit tool = Toolkit.getDefaultToolkit();
+                String ruta = "Reportes\\B.png";
+                Image imagen = tool.createImage(ruta);
+                lbVisor.setIcon(new ImageIcon(imagen));
             } else {
                 JOptionPane.showMessageDialog(null, "no se econtro el la categoria");
             }

@@ -106,7 +106,7 @@ public class Lista {
             //si se va insertar en la primera posicion
             if (posicionDeNodo == auxPrimero.getPosicion()) {
                 System.out.println("colision");
-                JOptionPane.showMessageDialog(null, "Colision en Posicion: " + nuevoNodo.getPosicion());
+                //JOptionPane.showMessageDialog(null, "Colision en Posicion: " + nuevoNodo.getPosicion());
                 //insertar en la lista de colision
                 auxPrimero.agregarUsuario(carne, nombre, apellido, carrera, password);
 
